@@ -1,4 +1,4 @@
-// layouts/UserLayout.tsx
+import styles from "./UserLayout.module.css";
 import { Link, Outlet } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
@@ -7,15 +7,7 @@ export default function UserLayout() {
 
     return (
         <div>
-            <nav
-                style={{
-                    display: "flex",
-                    gap: "1rem",
-                    padding: "1rem",
-                    borderBottom: "1px solid #ccc",
-                    alignItems: "center",
-                }}
-            >
+            <nav className={styles.navbar}>
                 <Link to="/">Home</Link>
                 <Link to="/catalog">Catalogo</Link>
                 <Link to="/top-sellers">Mas vendidos</Link>
@@ -32,18 +24,14 @@ export default function UserLayout() {
 
                 {role ? (
                     <>
-                        <span style={{ marginLeft: "1rem" }}>👤 {role}</span>
-                        <button
-                            onClick={logout}
-                            style={{ marginLeft: "0.5rem" }}
-                        >
-                            Cerrar sesión
-                        </button>
+                        <span>👤 {role}</span>
+                        <button onClick={logout}>Cerrar sesión</button>
                     </>
                 ) : (
-                    <Link to="/login" style={{ marginLeft: "1rem" }}>
-                        Iniciar sesión
-                    </Link>
+                    <>
+                        <Link to="/login">Iniciar sesión</Link>
+                        <Link to="/register">Crea una cuenta</Link>
+                    </>
                 )}
             </nav>
 

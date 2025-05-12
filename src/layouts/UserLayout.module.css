@@ -1,0 +1,25 @@
+.navbar {
+
+    
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    border-bottom: 1px solid #ccc;
+    align-items: "center";
+
+    /* Usuario Logueado */
+
+    & span {
+        margin-left: 1rem;
+    }
+
+    & button {
+        margin-left: 0.5rem;
+    }
+
+    /* Usuario No Logueado */
+
+    & a {
+        margin-left: 1rem;
+    }
+}

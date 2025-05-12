@@ -7,7 +7,7 @@ export default function LoginPage() {
     const { login } = useAuth();
     const navigate = useNavigate();
 
-    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
@@ -20,11 +20,11 @@ export default function LoginPage() {
 
             const matchedUser = users.find(
                 (user: any) =>
-                    user.username === username && user.password === password
+                    user.email === email && user.password === password
             );
 
             if (matchedUser) {
-                login(matchedUser.username);
+                login(matchedUser.email);
                 navigate("/");
             } else {
                 setError("Credenciales incorrectas.");
@@ -40,10 +40,10 @@ export default function LoginPage() {
             <h1>Iniciar Sesion</h1>
             <form onSubmit={handleSubmit}>
                 <input
-                    type="text"
-                    placeholder="Usuario"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    type="email"
+                    placeholder="Correo Electrónico"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     required
                 />
                 <input
@@ -56,6 +56,7 @@ export default function LoginPage() {
                 <button type="submit">Ingresar</button>
             </form>
             <p>¿Olvidaste tu contraseña?</p>
+
             {error && <p style={{ color: "red" }}>{error}</p>}
         </div>
     );
