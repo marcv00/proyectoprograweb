@@ -1,0 +1,11 @@
+.cta {
+    background: #D1C4C4;
+    color: #232323;
+    text-decoration: none;
+    padding: .8rem 1.1rem;
+    border-radius: .5rem;
+}
+
+.cta:hover, .cta:focus {
+    background: #c5b9b9;
+}

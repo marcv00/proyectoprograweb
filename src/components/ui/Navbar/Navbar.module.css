@@ -1,0 +1,62 @@
+.navbar {
+    margin: auto;
+    display: flex;
+    align-items: center; 
+    justify-content: space-between;  
+    padding: 2rem 0;
+}
+
+.leftSection {
+    
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    align-items: center;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+}
+
+.navItems {
+    display: flex;
+    gap: 22px;
+}
+
+.navItem {
+    text-decoration: none;
+    color: #8c8c8c;
+}
+
+.navItem:hover:not(.active), .navItem:focus:not(.active) {
+    color: #b4b4b4;
+    transition: 0.3s;
+}
+
+.active {
+    color: white;
+}
+
+.rightSection {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.loginBtn{
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.loginBtn:hover, .loginBtn:focus {
+    color: #e9e6e6;
+}
+
+.authSection {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
