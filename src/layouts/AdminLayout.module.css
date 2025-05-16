@@ -1,0 +1,8 @@
+.layoutAdmin {
+    display: flex;
+    min-height: 100vh;
+}
+
+.mainAdmin {
+    flex-grow: 1;
+}

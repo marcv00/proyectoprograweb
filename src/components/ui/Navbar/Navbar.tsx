@@ -4,10 +4,12 @@ import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
 import Searchbar from "../Searchbar/Searchbar";
 import CtaButton from "../Buttons/CtaButon/CtaButton";
+import { useCart } from "../../../context/CartContext";
 
 export default function Navbar() {
     const { role, logout } = useAuth();
     const location = useLocation();
+    const { toggleCart } = useCart();
     return (
         <nav className={styles.navbar}>
             <div className={styles.leftSection}>
@@ -68,7 +70,9 @@ export default function Navbar() {
 
             <div className={styles.rightSection}>
                 <Searchbar />
-
+                <button onClick={toggleCart} className={styles.cartBtn}>
+                    Carro
+                </button>
                 <div className={styles.authSection}>
                     {role ? (
                         <>

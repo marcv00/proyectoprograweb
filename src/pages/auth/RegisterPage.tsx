@@ -1,6 +1,7 @@
 // pages/auth/RegisterPage.tsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./RegisterPage.css";
 
 export default function RegisterPage() {
     const navigate = useNavigate();
@@ -49,6 +50,17 @@ export default function RegisterPage() {
     };
 
     return (
+        // Requerimento [2]
+        // Nota:
+        // - Faltaria añadir estilos en RegisterPage.css (ya esta importado)
+        // - Este html es básico solo para mostrar
+        //   un funcionamiento basico de prueba para hacer un registro fake
+        // - No tocar lo de arriba de return ya que es solo logica para el register de prueba.
+        // - Si tu diseño necesata mas html, puedes añadirlo.
+        // - Para ver como va quedando tu diseño, esta es la ruta:
+        //   http://localhost:5173/register
+        // - Cualquier duda, no dudes en preguntar, diciendo que requerimento te toco.
+
         <div>
             <h1>Registrarse</h1>
             <form onSubmit={handleSubmit}>

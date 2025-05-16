@@ -1,6 +1,11 @@
-// pages/admin/AdminNews.tsx
+import "./AdminNews.css";
 export default function AdminNews() {
     return (
+        // Requerimento [24] , Requerimento [25]
+        // Modificar html como se necesite para tu diseño
+        // Estilos en AdminNews.css (ya importado)
+        // Ver resultados en
+        // http://localhost:3000/admin/news
         <div>
             <h1>Gestión de Noticias</h1>
             <p>

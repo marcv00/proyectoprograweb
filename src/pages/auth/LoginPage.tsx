@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import "./LoginPage.css"; // Importa el archivo CSS para estilos
 
 export default function LoginPage() {
     const { login } = useAuth();
@@ -36,6 +37,17 @@ export default function LoginPage() {
     };
 
     return (
+        // Requerimento [1]
+        // Nota:
+        // - Faltaria añadir estilos en LoginPage.css (ya esta importado)
+        // - Este html es básico solo para mostrar
+        //   un funcionamiento basico de prueba para hacer login
+        // - No tocar lo de arriba de return ya que es solo logica para el login de prueba.
+        // - Si tu diseño necesata mas html, puedes añadirlo.
+        // - Para ver como va quedando tu diseño, esta es la ruta:
+        //   http://localhost:5173/login
+        // - Cualquier duda, no dudes en preguntar, diciendo que requerimento te toco.
+
         <div>
             <h1>Iniciar Sesion</h1>
             <form onSubmit={handleSubmit}>
