@@ -8,7 +8,7 @@ export default function CartPanel() {
     return (
         // Requerimento [10] , Requerimento [11]
         // Ver el diseño al presionar boton carro en barra de navegacion
-        // http://localhost:5173/
+        // http://localhost:5173/proyectoprograweb/
         <div className={`cartPanel ${isCartOpen ? "open" : ""}`}>
             Este es el carrito de compras
             <button onClick={closeCart} className="closeBtn">

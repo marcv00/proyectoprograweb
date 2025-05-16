@@ -26,7 +26,7 @@ import AdminStats from "../pages/admin/AdminStats";
 
 export function AppRouter() {
     return (
-        <BrowserRouter>
+        <BrowserRouter basename="/proyectoprograweb/">
             <Routes>
                 {/* Layout para usuarios comunes */}
                 <Route element={<UserLayout />}>

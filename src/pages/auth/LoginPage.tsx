@@ -45,7 +45,7 @@ export default function LoginPage() {
         // - No tocar lo de arriba de return ya que es solo logica para el login de prueba.
         // - Si tu diseño necesata mas html, puedes añadirlo.
         // - Para ver como va quedando tu diseño, esta es la ruta:
-        //   http://localhost:5173/login
+        //   http://localhost:5173/proyectoprograweb/login
         // - Cualquier duda, no dudes en preguntar, diciendo que requerimento te toco.
 
         <div>
