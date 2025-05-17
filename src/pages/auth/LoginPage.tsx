@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import "./LoginPage.css"; // Importa el archivo CSS para estilos
+import { Link } from 'react-router-dom';
+
 
 export default function LoginPage() {
     const { login } = useAuth();
@@ -67,7 +69,9 @@ export default function LoginPage() {
                 />
                 <button type="submit">Ingresar</button>
             </form>
-            <p>¿Olvidaste tu contraseña?</p>
+            <Link to="/forgot-password" className="forgot-password-link">
+            ¿Olvidaste tu contraseña?
+            </Link>
 
             {error && <p style={{ color: "red" }}>{error}</p>}
         </div>
