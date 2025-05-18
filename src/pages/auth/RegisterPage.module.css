@@ -1,0 +1,89 @@
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(90deg,rgba(58, 168, 180, 1) 0%, rgba(0, 0, 0, 1) 50%, rgba(41, 41, 255, 1) 100%);
+}
+
+/* Overlay para oscurecer la imagen de fondo */
+
+
+.card {
+    position: relative;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 1rem;
+    padding: 2.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    width: 100px;
+    margin-bottom: 1rem;
+}
+
+.title {
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    color: #ffffff;
+    font-weight: 400;
+    
+}
+
+.form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.input {
+    padding: 0.75rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 0.5rem;
+    font-size: 15px;
+    background: rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.input::placeholder {
+    color: #e5e5e5;
+    font-size: 14px;
+}
+
+.input:focus {
+    border-color: #93c5fd;
+}
+
+.button {
+    background-color: #9D36D0;
+    color: white;
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+}
+
+.button:hover {
+    background-color: #a24bcd;
+}
+
+.error {
+    color: #f87171;
+    margin-top: 1rem;
+    text-align: center;
+}
