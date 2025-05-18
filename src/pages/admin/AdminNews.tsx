@@ -5,7 +5,7 @@ export default function AdminNews() {
         // Modificar html como se necesite para tu diseño
         // Estilos en AdminNews.css (ya importado)
         // Ver resultados en
-        // http://localhost:5173/proyectoprograweb/admin/news
+        // http://localhost:5173/proyectoprograweb/#/admin/news
         <div>
             <h1>Gestión de Noticias</h1>
             <p>

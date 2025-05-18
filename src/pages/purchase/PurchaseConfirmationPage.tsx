@@ -6,7 +6,7 @@ export default function PurchaseConfirmationPage() {
         // Nota:
         // - Faltaria añadir estilos en ConfirmationPage.css (ya esta importado)
         // - Para ver como va quedando tu diseño, esta es la ruta:
-        //  http://localhost:5173/proyectoprograweb/purchase-confirmation
+        //  http://localhost:5173/proyectoprograweb/#/purchase-confirmation
         <div>PurchaseConfirmationPage</div>
     );
 }

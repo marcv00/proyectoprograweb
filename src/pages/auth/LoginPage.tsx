@@ -3,8 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import "./LoginPage.css"; // Importa el archivo CSS para estilos
-import { Link } from 'react-router-dom';
-
+import { Link } from "react-router-dom";
 
 export default function LoginPage() {
     const { login } = useAuth();
@@ -47,7 +46,7 @@ export default function LoginPage() {
         // - No tocar lo de arriba de return ya que es solo logica para el login de prueba.
         // - Si tu diseño necesata mas html, puedes añadirlo.
         // - Para ver como va quedando tu diseño, esta es la ruta:
-        //   http://localhost:5173/proyectoprograweb/login
+        //   http://localhost:5173/proyectoprograweb/#/login
         // - Cualquier duda, no dudes en preguntar, diciendo que requerimento te toco.
 
         <div>
@@ -70,7 +69,7 @@ export default function LoginPage() {
                 <button type="submit">Ingresar</button>
             </form>
             <Link to="/forgot-password" className="forgot-password-link">
-            ¿Olvidaste tu contraseña?
+                ¿Olvidaste tu contraseña?
             </Link>
 
             {error && <p style={{ color: "red" }}>{error}</p>}

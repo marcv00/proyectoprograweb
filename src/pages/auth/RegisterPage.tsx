@@ -58,7 +58,7 @@ export default function RegisterPage() {
         // - No tocar lo de arriba de return ya que es solo logica para el register de prueba.
         // - Si tu diseño necesata mas html, puedes añadirlo.
         // - Para ver como va quedando tu diseño, esta es la ruta:
-        //   http://localhost:5173/proyectoprograweb/register
+        //   http://localhost:5173/proyectoprograweb/#/register
         // - Cualquier duda, no dudes en preguntar, diciendo que requerimento te toco.
 
         <div>

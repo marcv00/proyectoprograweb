@@ -43,5 +43,5 @@ export default function ForgotPasswordPage() {
 // Nota:
 // - Faltaria añadir estilos en ForgotPasswordPage.css (ya esta importado)
 // - Para ver como va quedando tu diseño, esta es la ruta:
-//   http://localhost:5173/proyectoprograweb/forgot-password
+//   http://localhost:5173/proyectoprograweb/#/forgot-password
 // - Cualquier duda, no dudes en preguntar, diciendo que requerimento te toco.

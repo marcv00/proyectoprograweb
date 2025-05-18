@@ -6,7 +6,7 @@ export default function NavbarAdmin() {
         // Requerimento [26]
         // Los estilos de este componente estan en el archivo NavbarAdmin.css (ya importado)
         // Ver el diseño en la ruta
-        // http://localhost:5173/proyectoprograweb/admin
+        // http://localhost:5173/proyectoprograweb/#/admin
 
         <aside className="navbar-admin">
             <h2 className="navbar-admin-title">Admin</h2>
