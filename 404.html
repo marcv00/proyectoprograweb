@@ -1,14 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
     <head>
+        <meta charset="UTF-8" />
+        <title>Redirigiendo...</title>
         <script>
-            // Redirige manteniendo la ruta original completa sin duplicar la base
-            window.location.replace(
-                location.pathname + location.search + location.hash
-            );
+            const hasHash = location.hash.length > 0;
+
+            if (!hasHash) {
+                const newUrl =
+                    location.origin +
+                    location.pathname.replace(/\/$/, "") + // sin trailing slash
+                    "/#" +
+                    location.pathname.replace(/^\/[^/]+/, "") + // quita "/proyectoprograweb"
+                    location.search +
+                    location.hash;
+
+                window.location.replace(newUrl);
+            }
         </script>
+        <style>
+            body {
+                font-family: sans-serif;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+                background-color: #f8f8f8;
+                color: #333;
+            }
+        </style>
     </head>
     <body>
-        <p>Redirigiendo...</p>
+        <p>Esta pagina no existe.</p>
     </body>
 </html>
