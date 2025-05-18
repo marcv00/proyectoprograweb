@@ -4,16 +4,28 @@
         <meta charset="UTF-8" />
         <title>Redirigiendo...</title>
         <script>
-            const hasHash = location.hash.length > 0;
+            const base = "/proyectoprograweb/";
+            const path = location.pathname;
+            const search = location.search;
+            const hash = location.hash;
 
-            if (!hasHash) {
+            // Si ya tiene "#/", no hacemos nada (dejar que el SPA maneje el error)
+            const isHashed = location.href.includes("#/");
+
+            if (!isHashed) {
+                // Ruta relativa dentro del proyecto (sin el base path)
+                const relativePath = path.startsWith(base)
+                    ? path.slice(base.length)
+                    : path;
+
+                // Nueva URL con hash routing
                 const newUrl =
                     location.origin +
-                    location.pathname.replace(/\/$/, "") + // sin trailing slash
+                    base +
                     "/#" +
-                    location.pathname.replace(/^\/[^/]+/, "") + // quita "/proyectoprograweb"
-                    location.search +
-                    location.hash;
+                    relativePath +
+                    search +
+                    hash;
 
                 window.location.replace(newUrl);
             }
