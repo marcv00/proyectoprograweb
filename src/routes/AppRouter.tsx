@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import UserLayout from "../layouts/UserLayout";
 import AdminLayout from "../layouts/AdminLayout";
 
@@ -26,7 +26,7 @@ import AdminStats from "../pages/admin/AdminStats";
 
 export function AppRouter() {
     return (
-        <BrowserRouter basename="/proyectoprograweb/">
+        <HashRouter>
             <Routes>
                 {/* Layout para usuarios comunes */}
                 <Route element={<UserLayout />}>
@@ -70,6 +70,6 @@ export function AppRouter() {
                     <Route path="stats" element={<AdminStats />} />
                 </Route>
             </Routes>
-        </BrowserRouter>
+        </HashRouter>
     );
 }
