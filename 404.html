@@ -2,13 +2,10 @@
 <html>
     <head>
         <script>
-            // Redirige manteniendo la ruta original
-            const redirectTo =
-                "/proyectoprograweb" +
-                location.pathname +
-                location.search +
-                location.hash;
-            window.location.replace(redirectTo);
+            // Redirige manteniendo la ruta original completa sin duplicar la base
+            window.location.replace(
+                location.pathname + location.search + location.hash
+            );
         </script>
     </head>
     <body>
