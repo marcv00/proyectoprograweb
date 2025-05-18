@@ -24,6 +24,8 @@ import AdminGames from "../pages/admin/AdminGames";
 import AdminNews from "../pages/admin/AdminNews";
 import AdminStats from "../pages/admin/AdminStats";
 
+import NotFoundPage from "../pages/NotFoundPage";
+
 export function AppRouter() {
     return (
         <HashRouter>
@@ -61,6 +63,8 @@ export function AppRouter() {
                     path="/forgot-password"
                     element={<ForgotPasswordPage />}
                 />
+
+                <Route path="*" element={<NotFoundPage />} />
 
                 {/* Layout para administrador */}
                 <Route path="/admin" element={<AdminLayout />}>

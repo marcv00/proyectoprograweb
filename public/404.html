@@ -1,14 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
     <head>
+        <meta charset="UTF-8" />
+        <title>Redirigiendo...</title>
         <script>
-            // Redirige manteniendo la ruta original completa sin duplicar la base
-            window.location.replace(
-                location.pathname + location.search + location.hash
-            );
+            const base = "/proyectoprograweb";
+            const path = location.pathname;
+            const search = location.search;
+            const hash = location.hash;
+
+            // Si ya tiene "#/", no hacemos nada (dejar que el SPA maneje el error)
+            const isHashed = location.href.includes("#/");
+
+            if (!isHashed) {
+                // Ruta relativa dentro del proyecto (sin el base path)
+                const relativePath = path.startsWith(base)
+                    ? path.slice(base.length)
+                    : path;
+
+                // Nueva URL con hash routing
+                const newUrl =
+                    location.origin +
+                    base +
+                    "/#" +
+                    relativePath +
+                    search +
+                    hash;
+
+                window.location.replace(newUrl);
+            }
         </script>
+        <style>
+            body {
+                font-family: sans-serif;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+                background-color: #f8f8f8;
+                color: #333;
+            }
+        </style>
     </head>
     <body>
-        <p>Redirigiendo...</p>
+        <p>Esta pagina no existe.</p>
     </body>
 </html>
