@@ -46,22 +46,22 @@ export function AppRouter() {
                     <Route path="/game/:id" element={<GameDetailPage />} />
                     <Route path="/checkout" element={<CheckoutPage />} />
                     <Route
-                        path="/purchase-confirmation"
-                        element={<PurchaseConfirmationPage />}
-                    />
-                    <Route
                         path="/configuracion"
                         element={<EditProfilePage />}
                     />
                 </Route>
 
-                {/* Rutas de autenticación sin layout */}
+                {/* Rutas sin layout */}
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/confirmation" element={<ConfirmationPage />} />
                 <Route
                     path="/forgot-password"
                     element={<ForgotPasswordPage />}
+                />
+                <Route
+                    path="/purchase-confirmation"
+                    element={<PurchaseConfirmationPage />}
                 />
 
                 <Route path="*" element={<NotFoundPage />} />
