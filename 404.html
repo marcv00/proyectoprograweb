@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            // Redirige manteniendo la ruta original
+            const redirectTo =
+                "/proyectoprograweb" +
+                location.pathname +
+                location.search +
+                location.hash;
+            window.location.replace(redirectTo);
+        </script>
+    </head>
+    <body>
+        <p>Redirigiendo...</p>
+    </body>
+</html>
