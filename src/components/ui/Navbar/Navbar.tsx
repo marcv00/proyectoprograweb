@@ -1,15 +1,40 @@
 import styles from "./Navbar.module.css";
 import logo from "/logo.svg";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
 import Searchbar from "../Searchbar/Searchbar";
 import CtaButton from "../Buttons/CtaButon/CtaButton";
 import { useCart } from "../../../context/CartContext";
+import { useEffect, useState, useRef } from "react";
 
 export default function Navbar() {
-    const { role, logout } = useAuth();
+    const { role, logout, name } = useAuth();
     const location = useLocation();
     const { toggleCart } = useCart();
+    const navigate = useNavigate();
+    const [menuOpen, setMenuOpen] = useState<boolean>(false);
+    const dropdownRef = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+        if (role === "admin") {
+            navigate("/admin");
+        }
+    }, [role, navigate]);
+
+    useEffect(() => {
+        const handleClickOutside = (e: MouseEvent) => {
+            if (
+                dropdownRef.current &&
+                !dropdownRef.current.contains(e.target as Node)
+            ) {
+                setMenuOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () =>
+            document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
+
     return (
         <nav className={styles.navbar}>
             <div className={styles.leftSection}>
@@ -70,29 +95,67 @@ export default function Navbar() {
 
             <div className={styles.rightSection}>
                 <Searchbar />
-                <button onClick={toggleCart} className={styles.cartBtn}>
-                    Carro
-                </button>
-                <div className={styles.authSection}>
-                    {role ? (
-                        <>
-                            <span className={styles.username}>👤 {role}</span>
+                {role === "user" ? (
+                    <div className={styles.userMenuContainer} ref={dropdownRef}>
+                        <div
+                            className={styles.profileSection}
+                            onClick={() => setMenuOpen((prev) => !prev)}
+                        >
+                            <div className={styles.profilePic}></div>
+                            <span className={styles.username}>{name}</span>
                             <button
-                                onClick={logout}
-                                className={styles.logoutBtn}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    toggleCart();
+                                }}
+                                className={styles.cartBtn}
                             >
-                                Cerrar sesión
+                                <img src="./shopping-bag.svg" alt="Carro" />
                             </button>
-                        </>
-                    ) : (
-                        <>
-                            <Link to="/login" className={styles.loginBtn}>
-                                Ingresar
-                            </Link>
-                            <CtaButton to="/register">Registrarme</CtaButton>
-                        </>
-                    )}
-                </div>
+                        </div>
+                        {menuOpen && (
+                            <div className={styles.dropdownMenu}>
+                                <Link
+                                    to="/mis-juegos"
+                                    className={styles.dropdownItem}
+                                >
+                                    <img
+                                        src="./game-controller.svg"
+                                        alt="Mis Juegos"
+                                    />
+                                    Mis Juegos
+                                </Link>
+                                <Link
+                                    to="/perfil"
+                                    className={styles.dropdownItem}
+                                >
+                                    <img
+                                        src="./pencil.svg"
+                                        alt="Editar perfil"
+                                    />
+                                    Editar mi perfil
+                                </Link>
+                                <button
+                                    onClick={logout}
+                                    className={styles.dropdownItem}
+                                >
+                                    <img
+                                        src="./logout.svg"
+                                        alt="Cerrar sesion"
+                                    />
+                                    Cerrar sesión
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                ) : (
+                    <div className={styles.authSection}>
+                        <Link to="/login" className={styles.loginBtn}>
+                            Ingresar
+                        </Link>
+                        <CtaButton to="/register">Registrarme</CtaButton>
+                    </div>
+                )}
             </div>
         </nav>
     );

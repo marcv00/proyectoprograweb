@@ -17,7 +17,7 @@ export default function LoginPage() {
         e.preventDefault();
 
         try {
-            const res = await fetch("src/data/users.json");
+            const res = await fetch("./data/users.json");
             const users = await res.json();
 
             const matchedUser = users.find(
@@ -26,7 +26,7 @@ export default function LoginPage() {
             );
 
             if (matchedUser) {
-                login(matchedUser.email);
+                login(matchedUser.role, matchedUser.name);
                 navigate("/");
             } else {
                 setError("Credenciales incorrectas.");

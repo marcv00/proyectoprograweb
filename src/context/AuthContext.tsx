@@ -5,7 +5,8 @@ type Role = "admin" | "user" | null;
 
 interface AuthContextType {
     role: Role;
-    login: (role: Role) => void;
+    name: string | null;
+    login: (role: Role, name: string | null) => void;
     logout: () => void;
 }
 
@@ -13,12 +14,20 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
     const [role, setRole] = useState<Role>(null);
+    const [name, setName] = useState<string | null>(null);
 
-    const login = (newRole: Role) => setRole(newRole);
-    const logout = () => setRole(null);
+    const login = (newRole: Role, name: string | null) => {
+        setRole(newRole);
+        setName(name);
+    };
+
+    const logout = () => {
+        setRole(null);
+        setName(null);
+    };
 
     return (
-        <AuthContext.Provider value={{ role, login, logout }}>
+        <AuthContext.Provider value={{ role, login, logout, name }}>
             {children}
         </AuthContext.Provider>
     );
