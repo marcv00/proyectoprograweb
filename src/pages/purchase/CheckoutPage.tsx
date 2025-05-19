@@ -2,7 +2,7 @@ import "./CheckoutPage.css";
 
 export default function CheckoutPage() {
     return (
-        // Requerimento [12]
+        // Requerimento [13]
         // Nota:
         // - Faltaria añadir estilos en CheckoutPage.css (ya esta importado)
         // - Para ver como va quedando tu diseño, esta es la ruta:

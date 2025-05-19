@@ -5,7 +5,7 @@ export default function GameDetailPage() {
     const { id } = useParams();
 
     return (
-        // Requerimento [9] , Requerimento [14]
+        // Requerimento [10] , Requerimento [15]
         // Nota:
         // - Faltaria añadir estilos en GameDetailPage.css (ya esta importado)
         // - Para ver como va quedando tu diseño, esta es la ruta:
