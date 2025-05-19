@@ -1,0 +1,401 @@
+[
+  {
+    "title": "The Witcher 3: Wild Hunt",
+    "category": ["Action", "RPG", "Open World"],
+    "description": "An epic tale of a monster hunter searching for his adopted daughter in a war-torn world.",
+    "price": 39.99,
+    "discount": 50,
+    "rating": 4.9,
+    "reviews": [
+      "A masterpiece of storytelling and gameplay.",
+      "Immersive world and deep characters.",
+      "Best RPG I've ever played."
+    ],
+    "images": [
+      "https://images.gog-statics.com/71d71c40052877a42c096b8230c71856a560d42132208cfa8e719243b5c6626b_product_card_v2_mobile_slider_639.jpg",
+      "https://i.bo3.no/image/373494/Denne%20utsikta%20kan%20dei%20neppe%20skryte%20av%20i%20Elverum.jpg?c=0&h=562&w=999",
+      "https://i.ytimg.com/vi/TZ_G6XiHoUA/maxresdefault.jpg",
+      "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/292030/ss_dc55eeb409d6e187456a8e159018e8da098fa468.1920x1080.jpg?t=1746612330",
+      "https://gaming-age.com/wp-content/uploads/2019/06/The-Witcher-3-Wild-Hunt_Switch-1280x720.png"
+    ],
+    "trailer": "https://www.youtube.com/watch?v=c0i88t0Kacs&ab_channel=TheWitcher"
+  },
+  {
+    "title": "Elden Ring",
+    "category": ["Action", "RPG", "Fantasy"],
+    "description": "Venture into a fantastical world created by Hidetaka Miyazaki and George R. R. Martin.",
+    "price": 59.99,
+    "discount": 30,
+    "rating": 4.8,
+    "reviews": [
+      "Tough but rewarding.",
+      "Incredible open-world exploration.",
+      "Epic boss fights."
+    ],
+    "images": [
+      "https://steamforged.com/cdn/shop/collections/ER-collection-2000x1125-780428.png?v=1743077065",
+      "https://i.guim.co.uk/img/media/579318570c74cd4dbc08f82db78e8291f3977f9b/0_100_3305_1983/master/3305.jpg?width=1200&quality=85&auto=format&fit=max&s=6d06ad98f7ef3314064d50ca7293a709",
+      "https://media.npr.org/assets/img/2022/02/23/eldenring_21_4k-25120461292d0c3a0414.08944875_wide-e8f10694d264c26b3b42b65774ea218344b2286e.jpg?s=1100&c=50&f=jpeg",
+      "https://i.kinja-img.com/image/upload/c_fill,h_900,q_60,w_1600/55fd8575740aa19200131037c3b74a4a.jpg",
+      "https://i.blogs.es/70c9cf/elden-ring-has-been-designed-to-reduce-player-stress-without_bu7p/1366_2000.png"
+    ],
+    "trailer": "https://www.youtube.com/watch?v=E3Huy2cdih0&t=5s&ab_channel=BANDAINAMCOEurope"
+  },
+  {
+    "title": "God of War (2018)",
+    "category": ["Action", "Adventure"],
+    "description": "A brutal and emotional journey of Kratos and his son in Norse mythology.",
+    "price": 49.99,
+    "discount": null,
+    "rating": 4.9,
+    "reviews": [
+      "Stunning visuals and storytelling.",
+      "Great character development.",
+      "Best combat system on PS4."
+    ],
+    "images": [
+      "https://image.api.playstation.com/vulcan/img/rnd/202010/2217/LsaRVLF2IU2L1FNtu9d3MKLq.jpg",
+      "https://gmedia.playstation.com/is/image/SIEPDC/god-of-war-pc-screenshot-03-en-12oct21?$800px$",
+      "https://www.superjumpmagazine.com/content/images/2022/04/god-of-war-2018-featured-image.jpg",
+      "https://cdn-3.expansion.mx/dims4/default/227c11d/2147483647/strip/true/crop/1920x1080+0+0/resize/1200x675!/format/webp/quality/60/?url=https%3A%2F%2Fcherry-brightspot.s3.amazonaws.com%2F33%2Fb0%2F74a9090346bd858eba68b6f71741%2Fgod-of-war.jpg",
+      "https://cdn.mos.cms.futurecdn.net/3u8ViUJsgQFtZtt86ij42Z-1200-80.jpg"
+    ],
+    "trailer": "https://www.youtube.com/watch?v=K0u_kAWLJOA&ab_channel=PlayStation"
+  },
+  {
+    "title": "Red Dead Redemption 2",
+    "category": ["Action", "Adventure", "Open World"],
+    "description": "Experience life as an outlaw in the dying days of the Wild West.",
+    "price": 59.99,
+    "discount": 25,
+    "rating": 4.8,
+    "reviews": [
+      "An emotional masterpiece.",
+      "Beautiful open world.",
+      "Immersive storytelling."
+    ],
+    "images": [
+      "https://i.blogs.es/169695/red0/1366_2000.jpg",
+      "https://media.npr.org/assets/img/2018/12/31/rdr2_screenshot-014_wide-71d02434782cc887366ba9767260080bb73fa207.jpg?s=1400&c=100&f=jpeg",
+      "https://img.redbull.com/images/c_crop,w_1280,h_640,x_0,y_0/c_auto,w_1200,h_630/f_auto,q_auto/redbullcom/2018/12/05/e5039b5f-da68-4106-afe6-233106b21e59/red-dead-redemption-2-post-epilogo",
+      "https://variety.com/wp-content/uploads/2018/05/red-dead-2.png?w=1000&h=667&crop=1",
+      "https://imageio.forbes.com/blogs-images/davidthier/files/2018/10/Capture4-1-1200x669.jpg?height=396&width=711&fit=bounds"
+    ],
+    "trailer": "https://www.youtube.com/watch?v=gmA6MrX81z4&ab_channel=RockstarGames"
+  },
+  {
+    "title": "Minecraft",
+    "category": ["Sandbox", "Survival", "Creative"],
+    "description": "A blocky world with infinite possibilities for building and exploring.",
+    "price": 26.95,
+    "discount": null,
+    "rating": 4.7,
+    "reviews": [
+      "Endless creativity.",
+      "Fun for all ages.",
+      "Great multiplayer experience."
+    ],
+    "images": [
+      "https://www.infobae.com/resizer/v2/EXPB4AGS2ZA7VKTZKFMVELDHQU.jpg?auth=7b5dfca07a45f13226dc58f5c8e0b1d431b42d02dd699b6358a79aeaac84cf71&smart=true&width=1200&height=675&quality=85",
+      "https://ichef.bbci.co.uk/ace/standard/976/cpsprodpb/5AEC/production/_95567232_index-hero-og.0757cc783ca4-1.jpg",
+      "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2025/03/minecraft-spring-to-life-update-promo-gameplay-screenshot-7.jpg",
+      "https://www.minecraft.net/content/dam/minecraftnet/games/badger/key-art/PDP-Gallery_Legends_5_16x9.jpg",
+      "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2025/03/minecraft-spring-to-life-update-promo-gameplay-screenshot-1.jpg"
+    ],
+    "trailer": "https://www.youtube.com/watch?v=MmB9b5njVbA&ab_channel=Minecraft"
+  },
+  {
+    "title": "Cyberpunk 2077",
+    "category": ["RPG", "Open World", "Sci-Fi"],
+    "description": "A futuristic open-world RPG set in the city of Night City.",
+    "price": 59.99,
+    "discount": 40,
+    "rating": 3.9,
+    "reviews": [
+      "Beautiful but buggy at launch.",
+      "Great story and characters.",
+      "Lots of potential."
+    ],
+    "images": [
+      "https://alfabetajuega.com/hero/2025/03/cyberpunk-2077.1742391158.2388.jpg?width=768&aspect_ratio=16:9&format=nowebp",
+      "https://images.gog-statics.com/1c660db41f82ea22de02cf718057121050103306dca9b1bb48aaf0fe0c355eee_product_card_v2_mobile_slider_639.jpg",
+      "https://www.techspot.com/images2/news/bigimage/2020/12/2020-12-07-image-16.jpg",
+      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1091500/ss_ae4465fa8a44dd330dbeb7992ba196c2f32cabb1.1920x1080.jpg?t=1746519355",
+      "https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2019/06/cyberpunk-2077.png?tf=3840x"
+    ],
+    "trailer": "https://www.youtube.com/watch?v=8X2kIfS6fb8&ab_channel=Cyberpunk2077"
+  },
+  {
+    "title": "Among Us",
+    "category": ["Multiplayer", "Party", "Casual"],
+    "description": "Social deduction game where crewmates try to find the impostors.",
+    "price": 4.99,
+    "discount": null,
+    "rating": 4.3,
+    "reviews": [
+      "Great party game.",
+      "Very addictive.",
+      "Simple yet fun gameplay."
+    ],
+    "images": [
+      "https://cdn1.epicgames.com/salesEvent/salesEvent/amoguslandscape_2560x1440-3fac17e8bb45d81ec9b2c24655758075",
+      "https://imgproxy.domestika.org/unsafe/s:1200:630/rs:fill/ex:true/el:true/plain/src://blog-post-open-graph-covers/000/005/644/5644-original.jpg?1605057525",
+      "https://escuelaestech.es/wp-content/uploads/2021/04/among-us_1920x1080_xtrafondos.com_.jpg",
+      "https://gaming-cdn.com/images/news/articles/10885/cover/anunciado-among-us-3d-para-pc-cover67b7af3ed1a66.jpg",
+      "https://www.enteratenoticias.com.ar/files/image/23/23521/67b892a87fa80_700_394!.png?s=a951dc881e6ac7c5b21da636e8dc735d&d=1740149390"
+    ],
+    "trailer": "https://www.youtube.com/watch?v=9pyYq9lpjls&ab_channel=GameSpotTrailers"
+  },
+  {
+    "title": "Fortnite",
+    "category": ["Battle Royale", "Shooter", "Multiplayer"],
+    "description": "A fast-paced battle royale game with building mechanics.",
+    "price": 0,
+    "discount": null,
+    "rating": 4.1,
+    "reviews": [
+      "Highly competitive.",
+      "Frequent updates and events.",
+      "Great for streaming."
+    ],
+    "images": [
+      "https://cdn1.epicgames.com/offer/fn/FNBR_35-00_C6MS1_EGS_Launcher_KeyArt_FN_Blade_2560x1440_2560x1440-8fd35061502b51f1df276474d28e7f59",
+      "https://cdn-0001.qstv.on.epicgames.com/RDFbbSzbAFQuelARyV/image/landscape_comp.jpeg",
+      "https://phantom-marca.unidadeditorial.es/9ff9942da13df4a5ab7ce20782355e92/resize/828/f/jpg/assets/multimedia/imagenes/2020/08/06/15967214517398.jpg",
+      "https://img.redbull.com/images/c_limit,w_1500,h_1000/f_auto,q_auto/redbullcom/2018/03/12/6cfe02af-5700-4808-bd91-40ab0636902b/fornite-paracaidas",
+      "https://cdn2.unrealengine.com/fortnite-battle-royale-chapter-2-remix-social-1920x1080-d13648f5d4e3.jpg"
+    ],
+    "trailer": "https://www.youtube.com/watch?v=iDzAmxY2i6Q&ab_channel=Fortnite"
+  },
+  {
+    "title": "Halo Infinite",
+    "category": ["Shooter", "Sci-Fi", "Multiplayer"],
+    "description": "The latest in the Halo franchise, continuing Master Chief's journey.",
+    "price": 59.99,
+    "discount": 15,
+    "rating": 4.5,
+    "reviews": [
+      "Classic Halo gameplay.",
+      "Great multiplayer modes.",
+      "Beautiful graphics."
+    ],
+    "images": [
+      "https://generacionxbox.com/wp-content/uploads/2023/10/halo-infinite.jpg",
+      "https://wpassets.halowaypoint.com/wp-content/2021/11/Halo_Infinite_Multiplayer_S1_KeyArt_1920x1080_Clean.jpg",
+      "https://media.tycsports.com/files/2021/03/03/183214/halo-infinite_862x485.jpg",
+      "https://msftstories.thesourcemediaassets.com/sites/61/2024/01/Operation_SpiritOfFire-1.jpg",
+      "https://cdn.mos.cms.futurecdn.net/Pj2KVuACbxTmonwk34VGoe.jpg"
+    ],
+    "trailer": "https://www.youtube.com/watch?v=PyMlV5_HRWk&ab_channel=HALO"
+  },
+  {
+    "title": "Dark Souls III",
+    "category": ["Action", "RPG", "Fantasy"],
+    "description": "Challenging RPG with deep lore and punishing difficulty.",
+    "price": 39.99,
+    "discount": 60,
+    "rating": 4.7,
+    "reviews": [
+      "Hard but fair.",
+      "Amazing world design.",
+      "Best souls game to date."
+    ],
+    "images": [
+      "https://i0.wp.com/imgs.hipertextual.com/wp-content/uploads/2016/04/Dark-Souls-III-3.jpg?fit=1920%2C1080&quality=50&strip=all&ssl=1",
+      "https://static.bandainamcoent.eu/high/dark-souls/dark-souls-3/00-page-setup/ds3_game-thumbnail.jpg",
+      "https://assets1.ignimgs.com/2015/06/15/darksouls3jpg-a3f0d9.jpg",
+      "https://ixbt.online/gametech/covers/2025/03/12/nova-filepond-AHXcKX.png",
+      "https://www.pluggedin.com/wp-content/uploads/2020/01/Dark-Souls-III-review-image638x366-1024x587.jpeg"
+    ],
+    "trailer": "https://www.youtube.com/watch?v=cWBwFhUv1-8&ab_channel=PlayStation"
+  },
+  {
+    "title": "Overwatch 2",
+    "category": ["Shooter", "Multiplayer", "Team-based"],
+    "description": "Team-based shooter with unique heroes and abilities.",
+    "price": 39.99,
+    "discount": null,
+    "rating": 4.2,
+    "reviews": [
+      "Fun and strategic.",
+      "Diverse hero roster.",
+      "Great for team play."
+    ],
+    "images": [
+      "https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2022/10/overwatch-2-2833297.jpg?tf=3840x",
+      "https://es.egw.news/_next/image?url=https%3A%2F%2Fegw.news%2Fuploads%2Fnews%2F1%2F17%2F1740604567005_1740604567005.webp&w=1920&q=75",
+      "https://platform.polygon.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/23631556/Polygon_Exclusive___JQ_First_Person.jpg?quality=90&strip=all&crop=7.8125%2C0%2C84.375%2C100&w=2400",
+      "https://i.blogs.es/d0d2c4/overwatch-2-apuntado-problemas/840_560.jpeg",
+      "https://cdn.mos.cms.futurecdn.net/RSPyuAEeziwY6TMfjvPHoJ-1200-80.jpg"
+    ],
+    "trailer": "https://www.youtube.com/watch?v=Owp-FNypyZI&ab_channel=OverwatchLatAm"
+  },
+  {
+    "title": "Apex Legends",
+    "category": ["Battle Royale", "Shooter", "Multiplayer"],
+    "description": "Fast-paced free-to-play battle royale with unique characters.",
+    "price": 0,
+    "discount": null,
+    "rating": 4.4,
+    "reviews": [
+      "Smooth gameplay.",
+      "Unique legend abilities.",
+      "Good balance of strategy and action."
+    ],
+    "images": [
+      "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1172470/fd7463f2f03a75fdc9d4d32971ae6a41e4beaddc/capsule_616x353.jpg?t=1746554828",
+      "https://i.blogs.es/e67904/apex-legends/500_333.jpeg",
+      "https://assets.xboxservices.com/assets/20/8d/208d0429-02fc-45d7-92f5-0ca469c83b77.jpg?n=Apex-Legends_Feature-Image-Priority-Full-Width-0_S13-Strategic-Combat_1248x702.jpg",
+      "https://platform.polygon.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/15969990/apex_legends_octane_celebration_2048.jpg?quality=90&strip=all&crop=7.8125,0,84.375,100",
+      "https://gaming-cdn.com/images/news/articles/10532/cover/1000x563/la-proxima-gran-actualizacion-para-apex-legends-saldra-despues-de-battlefield-cover67a2aa6d39386.jpg"
+    ],
+    "trailer": "https://www.youtube.com/watch?v=hg0_PBw1OMI&ab_channel=ApexLegends"
+  },
+  {
+    "title": "Resident Evil Village",
+    "category": ["Horror", "Action", "Adventure"],
+    "description": "Survive the horrors in a mysterious village full of dark secrets.",
+    "price": 59.99,
+    "discount": 20,
+    "rating": 4.5,
+    "reviews": [
+      "Great atmosphere and scares.",
+      "Interesting story.",
+      "Fun gameplay mechanics."
+    ],
+    "images": [
+      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1196590/capsule_616x353.jpg?t=1741142800",
+      "https://cdn.mos.cms.futurecdn.net/vXmZzxnSTfMuoCzETCmcFi.jpg",
+      "https://sm.ign.com/ign_latam/news/r/resident-e/resident-evil-village-sets-new-series-record-with-100000-con_r71z.jpg",
+      "https://captown.capcom.com/uploads/museum_image/image/93/02_BHVillege_%E3%82%AB%E3%82%AB%E3%82%B7.jpg",
+      "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/1196590/ss_5cba45b96c65e0209c269e8d1d8865537927af33.1920x1080.jpg?t=1741142800"
+    ],
+    "trailer": "https://www.youtube.com/watch?v=ztj8fv6Ttp8&ab_channel=PlayStationEspa%C3%B1a"
+  },
+  {
+    "title": "Call of Duty: Warzone",
+    "category": ["Battle Royale", "Shooter", "Multiplayer"],
+    "description": "Free-to-play battle royale with high-intensity combat and strategy.",
+    "price": 0,
+    "discount": null,
+    "rating": 4.3,
+    "reviews": [
+      "Very competitive gameplay.",
+      "Great maps and weapons.",
+      "Fast-paced action."
+    ],
+    "images": [
+      "https://nosdicengamers.com/wp-content/uploads/2024/08/warzone-temporada-3.jpg",
+      "https://larazon.pe/wp-content/uploads/2022/03/Warzone.jpg",
+      "https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2024/04/call-duty-warzone-mobile-3294375.jpg?tf=3840x",
+      "https://blz-contentstack-images.akamaized.net/v3/assets/bltf408a0557f4e4998/blt2ab47249ce55a937/63b5c3606c86a810a0551eef/call-of-duty-warzone-2-section1-feature4.jpg?imwidth=1920&imdensity=2.625",
+      "https://media.es.wired.com/photos/65e22793b3ff9be2fe890ef1/16:9/w_1280,c_limit/image006.jpg"
+    ],
+    "trailer": "https://www.youtube.com/watch?v=qiR3AAnwSmo&ab_channel=CallofDutyEspa%C3%B1ol"
+  },
+  {
+    "title": "Stardew Valley",
+    "category": ["Simulation", "RPG", "Casual"],
+    "description": "Farm, mine, and build relationships in a charming country town.",
+    "price": 14.99,
+    "discount": 50,
+    "rating": 4.8,
+    "reviews": [
+      "Relaxing and addictive.",
+      "Lots to do and explore.",
+      "Perfect casual game."
+    ],
+    "images": [
+      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/413150/capsule_616x353.jpg?t=1711128146",
+      "https://games-b26f.kxcdn.com/wp-content/uploads/2018/10/farm_day_1920x1080-770x470.png",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTGIQWHljPobtTmxFXlXxMYwki7iIDEyY2IA&s",
+      "https://sm.ign.com/ign_es/gallery/s/stardew-va/stardew-valley-gameplay-screenshots-16-update_jyfh.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXUxVEb3lBi6jSRZJEKqgOxbUNEfqx1w880A&s"
+    ],
+    "trailer": "https://www.youtube.com/watch?v=ot7uXNQskhs&ab_channel=ConcernedApe"
+  },
+  {
+    "title": "Hades",
+    "category": ["Roguelike", "Action", "Indie"],
+    "description": "Fight your way out of the underworld in this fast-paced roguelike.",
+    "price": 24.99,
+    "discount": 20,
+    "rating": 4.9,
+    "reviews": [
+      "Super fun combat.",
+      "Great story and characters.",
+      "Addictive gameplay loop."
+    ],
+    "images": [
+      "https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1240/b_white/f_auto/q_auto/ncom/software/switch/70010000033131/dbc8c55a21688b446a5c57711b726956483a14ef8c5ddb861f897c0595ccb6b5",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOYYL1Q7RoyR1xxaoooY39OXgiacx_t6xnyw&s",
+      "https://oyster.ignimgs.com/mediawiki/apis.ign.com/hades/3/31/HadesWeapons.jpg",
+      "https://i.ytimg.com/vi/1V-g2Xd70A0/maxresdefault.jpg",
+      "https://c1-ebgames.eb-cdn.com.au/merchandising/images/screenshots/b3de32feb6e6401eb5fdbdf3601591ea_l.jpg"
+    ],
+    "trailer": "https://www.youtube.com/watch?v=91t0ha9x0AE&ab_channel=IGN"
+  },
+  {
+    "title": "Sekiro: Shadows Die Twice",
+    "category": ["Action", "Adventure", "Stealth"],
+    "description": "A samurai's quest for revenge and redemption in a dark fantasy Japan.",
+    "price": 59.99,
+    "discount": 50,
+    "rating": 4.7,
+    "reviews": [
+      "Difficult but rewarding.",
+      "Innovative combat mechanics.",
+      "Beautifully designed world."
+    ],
+    "images": [
+      "https://alfabetajuega.com/hero/2021/01/Sekiro-Shadows-Die-Twice.jpg?width=1200",
+      "https://sm.ign.com/t/ign_ap/review/s/sekiro-sha/sekiro-shadows-die-twice-review_3sf1.1200.jpg",
+      "https://www.pcgamesn.com/wp-content/sites/pcgamesn/2019/01/sekiro-shadows-die-twice.jpg",
+      "https://bloody-disgusting.com/wp-content/uploads/2019/01/sekiro.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKdMQFVIf0LesiUkXlRQiwjfkgcerZ6eixmA&s"
+    ],
+    "trailer": "https://www.youtube.com/watch?v=rXMX4YJ7Lks&ab_channel=PlayStation"
+  },
+  {
+    "title": "The Legend of Zelda: Breath of the Wild",
+    "category": ["Adventure", "Open World", "Action"],
+    "description": "Explore the vast kingdom of Hyrule and uncover its secrets.",
+    "price": 59.99,
+    "discount": null,
+    "rating": 4.9,
+    "reviews": [
+      "One of the best games ever made.",
+      "Freedom to explore everywhere.",
+      "Beautiful art style."
+    ],
+    "images": [
+      "https://assets.nintendo.com/image/upload/q_auto/f_auto/ncom/software/switch/70010000000025/7137262b5a64d921e193653f8aa0b722925abc5680380ca0e18a5cfd91697f58",
+      "https://i.blogs.es/7f3935/zelda-breath-of-the-wild-01/1366_2000.jpg",
+      "https://i.blogs.es/80c49d/breath-of-the-wild/1366_2000.jpeg",
+      "https://www.nintenderos.com/wp-content/uploads/2017/01/legend-zelda-breath-wild-5.jpg",
+      "https://platform.polygon.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/8710173/the_legend_of_zelda_breath_of_the_wild_hard_mode_battle_1920.jpg?quality=90&strip=all&crop=7.8125,0,84.375,100"
+    ],
+    "trailer": "https://www.youtube.com/watch?v=zw47_q9wbBE&ab_channel=NintendoofAmerica"
+  },
+  {
+    "title": "Death Stranding",
+    "category": ["Action", "Adventure", "Sci-Fi"],
+    "description": "Deliver packages across a fractured America and reconnect isolated cities.",
+    "price": 59.99,
+    "discount": 40,
+    "rating": 4.0,
+    "reviews": [
+      "Unique and emotional.",
+      "Beautiful landscapes.",
+      "Pace may be slow for some."
+    ],
+    "images": [
+      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1850570/3b0d071a89844ffc8062edbb36bc0b6a7ab3f7ce/capsule_616x353.jpg?t=1728989088",
+      "https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2019/10/principal-death-stranding.jpg?tf=3840x",
+      "https://theaureview.com/wp-content/uploads/2020/01/death-stranding-mountains-e1574113081507.jpg",
+      "https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/19710764/ArtofDEATHSTRANDING_246.jpg?quality=90&strip=all&crop=0,2.3169208174787,100,95.366158365043",
+      "https://sm.mashable.com/mashable_me/article/d/death-stra/death-stranding-just-dropped-on-xbox-heres-why-the-internet_2g1r.jpg"
+    ],
+    "trailer": "https://www.youtube.com/watch?v=t6baMXP10aM"
+  }
+]
