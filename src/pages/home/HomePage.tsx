@@ -1,21 +1,102 @@
+import { useEffect, useRef, useState } from "react";
+import GameCard from "../../components/ui/GameCard/GameCard";
 import styles from "./HomePage.module.css";
-import { useAuth } from "../../context/AuthContext";
+
+type Game = {
+    title: string;
+    category: string[];
+    description: string;
+    price: number;
+    discount: number | null;
+    rating: number;
+    reviews: string[];
+    images: string[];
+    trailer: string;
+};
 
 export default function HomePage() {
-    const { role, logout } = useAuth();
+    const [games, setGames] = useState<Game[] | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [canScrollLeft, setCanScrollLeft] = useState(false);
+    const [canScrollRight, setCanScrollRight] = useState(false);
 
-    if (!role) {
-        return (
-            <h2 className={styles["main-title--error"]}>
-                Please log in to access your dashboard
-            </h2>
-        );
-    }
+    const sliderRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        fetch("./data/games.json")
+            .then((res) => res.json())
+            .then((data) => {
+                setGames(data);
+                setLoading(false);
+            })
+            .catch((err) => {
+                console.error("Failed to fetch games.json:", err);
+                setLoading(false);
+            });
+    }, []);
+
+    const updateScrollButtons = () => {
+        const el = sliderRef.current;
+        if (el) {
+            setCanScrollLeft(el.scrollLeft > 0);
+            setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth);
+        }
+    };
+
+    const scroll = (direction: "left" | "right") => {
+        const el = sliderRef.current;
+        if (!el) return;
+        const scrollAmount = 450 + 24; // width + gap
+        el.scrollBy({
+            left: direction === "left" ? -scrollAmount : scrollAmount,
+            behavior: "smooth",
+        });
+    };
+
+    useEffect(() => {
+        const el = sliderRef.current;
+        if (!el) return;
+        updateScrollButtons();
+        el.addEventListener("scroll", updateScrollButtons);
+        window.addEventListener("resize", updateScrollButtons);
+        return () => {
+            el.removeEventListener("scroll", updateScrollButtons);
+            window.removeEventListener("resize", updateScrollButtons);
+        };
+    }, [games]);
 
     return (
-        <div>
-            <h2 className={styles["main-title"]}>Welcome, {role}</h2>
-            <button onClick={logout}>Logout</button>
-        </div>
+        <section className={styles["section"]}>
+            <h2 className={styles["section-title"]}>Añadidos recientemente</h2>
+            <div className={styles.sliderWrapper}>
+                {canScrollLeft && (
+                    <button
+                        className={`${styles.arrow} ${styles.leftArrow}`}
+                        onClick={() => scroll("left")}
+                        aria-label="Scroll Left"
+                    >
+                        <img src="./left-arrow.svg" alt="Flecha izquierda" />
+                    </button>
+                )}
+                {canScrollRight && (
+                    <button
+                        className={`${styles.arrow} ${styles.rightArrow}`}
+                        onClick={() => scroll("right")}
+                        aria-label="Scroll Right"
+                    >
+                        <img src="./right-arrow.svg" alt="Flecha derecha" />
+                    </button>
+                )}
+
+                <div className={styles.slider} ref={sliderRef}>
+                    {loading && <p>Cargando juegos...</p>}
+                    {!loading &&
+                        games?.map((game, index) => (
+                            <GameCard key={index} game={game} index={index} />
+                        ))}
+                </div>
+                <div className={styles.rightOverlay} />
+            </div>
+        </section>
     );
 }

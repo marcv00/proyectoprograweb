@@ -1,0 +1,128 @@
+.card {
+  position: relative;
+  border-radius: 12px 12px 12px 12px;
+  overflow: hidden;
+  color: white;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+  width: 420px; /* o el ancho que quieras */
+  display: flex;
+  flex-direction: column;
+}
+
+
+.card:hover .image {
+  transform: scale(1.04);
+}
+
+.image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.imageWrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.imageWrapper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent 60%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.description {
+  font-size: 0.85rem;
+  color: #ccc;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;  /* navegadores basados en WebKit/Blink */
+  line-clamp: 2;          /* especificación futura */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+
+.pricing {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+  font-size: 0.85rem;
+}
+
+.discount {
+  background-color: #49E2DD;
+  color: black;
+  padding: 2px 6px;
+  font-size: 0.75rem;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.oldPrice {
+  text-decoration: line-through;
+  color: #888;
+}
+.newPrice {
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.plusButton {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  color: black;
+  border: none;
+  padding: 6px;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease-in-out;
+  z-index: 2;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.card:hover .details {
+  background-color: #252525;
+}
+
+.card:hover .plusButton {
+  opacity: 1;
+}
+
+.plusButton:hover {
+  transform: scale(1.2);
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* clave */
+  padding: .7rem;
+  background-color: transparent;
+  transition: background-color 0.2s ease;
+}
+
+.text {
+  flex-grow: 1; /* empuja el pricing hacia abajo */
+  display: flex;
+  flex-direction: column;
+}
