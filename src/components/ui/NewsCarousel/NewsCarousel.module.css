@@ -1,0 +1,77 @@
+.container {
+    display: flex;
+    height: 500px;
+    gap: 1rem;
+}
+
+.mainNews {
+    flex: 3;
+    background-size: cover;
+    background-position: center;
+    border-radius: 12px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.overlay {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    color: white;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 2rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.overlay h2 {
+    color: white;
+    font-size: 2rem;
+    font-weight: 500;
+    margin: 0;
+    line-height: 1em;
+}
+
+.overlay p {
+    margin-top: .8rem;
+    font-weight: 300;
+    font-size: 16px;
+    width: 80%;
+}
+
+.progressBar {
+    margin-top: 1.5rem;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background-color: white;
+    transition: width 0.1s linear;
+}
+
+.sideNews {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.sideItem {
+    flex: 1;
+    border-radius: 12px;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.sideItem:hover {
+    transform: scale(1.02);
+}

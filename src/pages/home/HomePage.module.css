@@ -1,8 +1,14 @@
+.section {
+  margin-bottom: 5rem;
+  
+}
+
 .section-title {
     margin-top: 1.78rem;
     margin-bottom: 1rem;
     font-weight: 500;
     font-size: 1.8rem;
+    color: white;
 }
 
 
