@@ -1,6 +1,96 @@
 /* Requerimento [11] , Requerimento [12] */
 /* Estilos basicos para la aparicion de carrito desde la derecha */
 /* No modificar tanto, añadir nuevos estilos normal */
+
+.cartPanel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 350px;
+  height: 100vh;
+  background-color: #fff;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  padding: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  color: black;
+}
+
+.cartPanel.open {
+  transform: translateX(0);
+}
+
+.cartHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.cartItems {
+  flex-grow: 1;
+  overflow-y: auto;
+  margin-top: 20px;
+}
+
+.cartItem {
+  display: flex;
+  justify-content: space-between; /* Imagen a la izquierda, texto a la derecha */
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.cartItem img {
+
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 10px;
+}
+
+.cartInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Esto los pega a la derecha */
+  text-align: right;
+  flex: 1;
+}
+
+.cartTitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cartTotal {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+.checkoutBtn {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #7f00ff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
 .cartPanel {
     position: fixed;
     top: 0;
@@ -26,5 +116,15 @@
     background: none;
     border: none;
     cursor: pointer;
+}
+
+.shopcart-icon{
+  width: 50px;
+  height: 50px;
+  margin-bottom: 16px;
+}
+
+h2{
+    color: black;
 }
 
