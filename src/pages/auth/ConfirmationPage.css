@@ -1,1 +1,24 @@
 /* Requerimento [3] */
+
+.confirmation-container {
+  max-width: 600px;
+  margin: 6rem auto;
+  padding: 2rem 3rem;
+  background-color: #e6f0ff; /* azul muy suave */
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 81, 255, 0.2);
+  text-align: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #0041cc; /* azul oscuro para texto */
+}
+
+.confirmation-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.confirmation-container p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin: 0.8rem 0;
+}
