@@ -1,6 +1,6 @@
 import styles from "./Navbar.module.css";
 import logo from "/logo.svg";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
 import Searchbar from "../Searchbar/Searchbar";
 import CtaButton from "../Buttons/CtaButon/CtaButton";
@@ -11,15 +11,8 @@ export default function Navbar() {
     const { role, logout, name } = useAuth();
     const location = useLocation();
     const { toggleCart } = useCart();
-    const navigate = useNavigate();
     const [menuOpen, setMenuOpen] = useState<boolean>(false);
     const dropdownRef = useRef<HTMLDivElement | null>(null);
-
-    useEffect(() => {
-        if (role === "admin") {
-            navigate("/admin");
-        }
-    }, [role, navigate]);
 
     useEffect(() => {
         const handleClickOutside = (e: MouseEvent) => {

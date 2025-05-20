@@ -27,9 +27,12 @@ export default function LoginPage() {
 
             if (matchedUser) {
                 login(matchedUser.role, matchedUser.name);
-                navigate("/");
-            } else {
-                setError("Credenciales incorrectas.");
+
+                if (matchedUser.role === "admin") {
+                    navigate("/admin");
+                } else {
+                    navigate("/");
+                }
             }
         } catch (err) {
             console.error(err);

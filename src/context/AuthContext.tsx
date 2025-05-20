@@ -1,5 +1,10 @@
-// src/context/AuthContext.tsx
-import { createContext, useContext, useState, type ReactNode } from "react";
+import {
+    createContext,
+    useContext,
+    useEffect,
+    useState,
+    type ReactNode,
+} from "react";
 
 type Role = "admin" | "user" | null;
 
@@ -16,18 +21,29 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const [role, setRole] = useState<Role>(null);
     const [name, setName] = useState<string | null>(null);
 
-    const login = (newRole: Role, name: string | null) => {
+    useEffect(() => {
+        const storedRole = localStorage.getItem("authRole") as Role;
+        const storedName = localStorage.getItem("authName");
+        if (storedRole) setRole(storedRole);
+        if (storedName) setName(storedName);
+    }, []);
+
+    const login = (newRole: Role, newName: string | null) => {
         setRole(newRole);
-        setName(name);
+        setName(newName);
+        localStorage.setItem("authRole", newRole || "");
+        localStorage.setItem("authName", newName || "");
     };
 
     const logout = () => {
         setRole(null);
         setName(null);
+        localStorage.removeItem("authRole");
+        localStorage.removeItem("authName");
     };
 
     return (
-        <AuthContext.Provider value={{ role, login, logout, name }}>
+        <AuthContext.Provider value={{ role, name, login, logout }}>
             {children}
         </AuthContext.Provider>
     );
