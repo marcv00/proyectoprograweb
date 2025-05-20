@@ -23,7 +23,72 @@ export default function CartPanel() {
             title: "God of War (2018)",
             price: 49.99,
             img: "https://image.api.playstation.com/vulcan/img/rnd/202010/2217/LsaRVLF2IU2L1FNtu9d3MKLq.jpg"
+        },
+        {
+            title: "Outlast",
+            price: 29.99,
+            img: "https://cdn.akamai.steamstatic.com/steam/apps/238320/header.jpg"
+        },
+        {
+            title: "Counter-Strike: Global Offensive",
+            price: 50.99,
+            img: "https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg"
+        },
+        {
+            title: "Left 4 Dead",
+            price: 69.99,
+            img: "https://cdn.akamai.steamstatic.com/steam/apps/500/header.jpg"
+        },
+        {
+            title: "GTA V",
+            price: 19.99,
+            img: "https://cdn.akamai.steamstatic.com/steam/apps/271590/header.jpg"
+        },
+        {
+            title: "Counter-Strike: Source",
+            price: 9.99,
+            img: "https://cdn.akamai.steamstatic.com/steam/apps/240/header.jpg"
+        },
+        {
+            title: "PES 2025",
+            price: 59.99,
+            img: "https://cdn.cloudflare.steamstatic.com/steam/apps/1665460/header.jpg"
+        },
+        {
+            title: "Resident Evil",
+            price: 46.99,
+            img: "https://cdn.akamai.steamstatic.com/steam/apps/304240/header.jpg"
+        },
+            {
+
+            title: "Call of Duty: Modern Warfare II",
+            price: 59.99,
+            img: "https://cdn.cloudflare.steamstatic.com/steam/apps/1938090/header.jpg"
+
+        },
+         {
+
+            title: "DiRT Rally 2.0",
+            price: 39.99,
+            img: "https://cdn.akamai.steamstatic.com/steam/apps/690790/header.jpg"
+            
+        },
+
+         {
+
+            title: "Batman: Arkham Knight",
+            price: 29.99,
+            img: "https://cdn.akamai.steamstatic.com/steam/apps/208650/header.jpg"
+            
+        },
+
+         {
+
+            title: "Rise of the Tomb Raider",
+            price: 19.99,
+            img:"https://cdn.akamai.steamstatic.com/steam/apps/391220/header.jpg"
         }
+
 
 
 
