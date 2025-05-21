@@ -43,7 +43,7 @@ export function AppRouter() {
                         path="/mejor-valorados"
                         element={<BestReviewedPage />}
                     />
-                    <Route path="/game/:id" element={<GameDetailPage />} />
+                    <Route path="/mis-juegos" element={<GameDetailPage />} />
                     <Route path="/checkout" element={<CheckoutPage />} />
                     <Route
                         path="/config/editar-perfil"
