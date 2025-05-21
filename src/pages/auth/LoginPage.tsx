@@ -1,9 +1,7 @@
-// pages/auth/LoginPage.tsx
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import "./LoginPage.css"; // Importa el archivo CSS para estilos
-import { Link } from "react-router-dom";
+import "./LoginPage.css";
 
 export default function LoginPage() {
     const { login } = useAuth();
@@ -33,6 +31,8 @@ export default function LoginPage() {
                 } else {
                     navigate("/");
                 }
+            } else {
+                setError("Credenciales inválidas.");
             }
         } catch (err) {
             console.error(err);
@@ -41,41 +41,33 @@ export default function LoginPage() {
     };
 
     return (
-        // Requerimento [1]
-        // Nota:
-        // - Faltaria añadir estilos en LoginPage.css (ya esta importado)
-        // - Este html es básico solo para mostrar
-        //   un funcionamiento basico de prueba para hacer login
-        // - No tocar lo de arriba de return ya que es solo logica para el login de prueba.
-        // - Si tu diseño necesata mas html, puedes añadirlo.
-        // - Para ver como va quedando tu diseño, esta es la ruta:
-        //   http://localhost:5173/proyectoprograweb/#/login
-        // - Cualquier duda, no dudes en preguntar, diciendo que requerimento te toco.
-
-        <div>
-            <h1>Iniciar Sesion</h1>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="email"
-                    placeholder="Correo Electrónico"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-                <input
-                    type="password"
-                    placeholder="Contraseña"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-                <button type="submit">Ingresar</button>
-            </form>
-            <Link to="/forgot-password" className="forgot-password-link">
-                ¿Olvidaste tu contraseña?
-            </Link>
-
-            {error && <p style={{ color: "red" }}>{error}</p>}
+        <div className="container">
+            <div className="card">
+                <h1 className="title">Iniciar Sesión</h1>
+                <form onSubmit={handleSubmit} className="form">
+                    <input
+                        type="email"
+                        placeholder="Correo Electrónico"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        className="input"
+                    />
+                    <input
+                        type="password"
+                        placeholder="Contraseña"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                        className="input"
+                    />
+                    <button type="submit" className="button">Ingresar</button>
+                </form>
+                <Link to="/forgot-password" className="forgot-password-link">
+                    ¿Olvidaste tu contraseña?
+                </Link>
+                {error && <p className="error">{error}</p>}
+            </div>
         </div>
     );
 }
