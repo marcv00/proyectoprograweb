@@ -1,1 +1,132 @@
 /* Requerimento [10] , Requerimento [15] */
+.purchased-games-container {
+    padding: 30px;
+    background-color: #1a1a1a;
+    color: #fff;
+}
+
+.purchased-games-container h1 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.game-card {
+    background-color: #323232;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    position: relative; /* necesario para posicionar el ícono */
+}
+
+.game-image {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.game-info {
+    margin-top: 12px;
+    text-align: center;
+}
+
+.review-button {
+    background-color: blueviolet;
+    border: none;
+    padding: 8px 16px;
+    margin-top: 10px;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.review-button:hover {
+    background-color: rgb(138, 43, 226);
+}
+
+.purschased-games-icon {
+    display: block;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 16px auto;
+}
+
+/* Eliminar (tachito) */
+.delete-icon-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.trash-icon {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.2s ease;
+    filter: brightness(0) invert(1);
+}
+
+.trash-icon:hover {
+    transform: scale(1.2);
+}
+
+/* Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modal {
+    background-color: #2a2a2a;
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
+    color: #fff;
+    max-width: 400px;
+    width: 100%;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.confirm-button {
+    background-color: crimson;
+    border: none;
+    padding: 8px 16px;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.cancel-button {
+    background-color: gray;
+    border: none;
+    padding: 8px 16px;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
