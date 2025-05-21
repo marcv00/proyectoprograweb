@@ -46,7 +46,7 @@ export function AppRouter() {
                     <Route path="/game/:id" element={<GameDetailPage />} />
                     <Route path="/checkout" element={<CheckoutPage />} />
                     <Route
-                        path="/configuracion"
+                        path="/config/editar-perfil"
                         element={<EditProfilePage />}
                     />
                 </Route>

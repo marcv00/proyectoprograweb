@@ -121,7 +121,7 @@ export default function Navbar() {
                                     Mis Juegos
                                 </Link>
                                 <Link
-                                    to="/editar-perfil"
+                                    to="config/editar-perfil"
                                     className={styles.dropdownItem}
                                 >
                                     <img

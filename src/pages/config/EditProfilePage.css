@@ -3,14 +3,22 @@
     margin: 40px auto;
     padding: 30px;
     border-radius: 10px;
-    background-color: #f4f4f4;
+    background-color: #302f2f;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    color: white;
 }
 
 .edit-profile-container h2 {
     text-align: center;
     margin-bottom: 20px;
-    color: #333;
+    color: white;
+}
+
+.edit-profile-icon {
+    display: block;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 16px auto;
 }
 
 .edit-profile-form {
@@ -23,7 +31,7 @@
     display: flex;
     flex-direction: column;
     font-weight: 500;
-    color: #444;
+    color: rgb(255, 255, 255);
 }
 
 .edit-profile-form input {
@@ -36,7 +44,7 @@
 
 .edit-profile-form button {
     padding: 10px;
-    background-color: #007bff;
+    background-color:blueviolet;
     color: white;
     font-size: 16px;
     border: none;

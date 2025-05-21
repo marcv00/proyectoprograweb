@@ -1,9 +1,15 @@
 import "./EditProfilePage.css";
+import EditProfileIcon from "/EditProfileIcon.svg";
 
 export default function EditProfilePage() {
     return (
         <div className="edit-profile-container">
-            <h2>Editar Perfil</h2>
+            <img
+                src={EditProfileIcon}
+                alt="EditProfileIcon"
+                className="edit-profile-icon"
+            />
+            <h2>Editar mi perfil</h2>
             <form className="edit-profile-form">
                 <label>
                     Nombre de usuario:
