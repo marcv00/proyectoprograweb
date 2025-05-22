@@ -1,139 +1,178 @@
-// pages/admin/AdminGames.tsx
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import styles from "./AdminGames.module.css";
-import AdminEditGameCard from "../../components/ui/AdminEditGameCard/AdminEditGameCard";
-
-type Game = {
-  id: number;
-  title: string;
-  category: string;
-  releaseDate: string;
-  price: number;
-  discount?: number;
-};
 
 export default function AdminGames() {
-  const [games, setGames] = useState<Game[]>([]);
-  const [filteredGames, setFilteredGames] = useState<Game[]>([]);
-  const [filters, setFilters] = useState({
-    category: "",
-    releaseDate: "",
-    maxPrice: 100,
-  });
-  const [editingGame, setEditingGame] = useState<Game | null>(null);
+    const [sidebarWidth, setSidebarWidth] = useState(220);
 
-  useEffect(() => {
-    const fakeData: Game[] = [
-      { id: 1, title: "Elden Ring", category: "RPG", releaseDate: "2022-02-25", price: 59.99 },
-      { id: 2, title: "FIFA 24", category: "Sports", releaseDate: "2023-09-29", price: 69.99 },
-      { id: 3, title: "The Witcher 3", category: "RPG", releaseDate: "2015-05-19", price: 39.99 },
-      { id: 4, title: "Call of Duty: Modern Warfare II", category: "Shooter", releaseDate: "2022-10-28", price: 69.99 },
-      { id: 5, title: "Minecraft", category: "Sandbox", releaseDate: "2011-11-18", price: 26.95 },
-      { id: 6, title: "Cyberpunk 2077", category: "RPG", releaseDate: "2020-12-10", price: 49.99 },
-      { id: 7, title: "Hogwarts Legacy", category: "Adventure", releaseDate: "2023-02-10", price: 59.99 },
-      { id: 8, title: "Gran Turismo 7", category: "Racing", releaseDate: "2022-03-04", price: 69.99 },
-      { id: 9, title: "Animal Crossing: New Horizons", category: "Simulation", releaseDate: "2020-03-20", price: 59.99 },
-      { id: 10, title: "Fortnite", category: "Battle Royale", releaseDate: "2017-07-21", price: 0.0 },
-    ];
-    setGames(fakeData);
-    setFilteredGames(fakeData);
-  }, []);
+    const [filters, setFilters] = useState({ category: "", price: "", date: "" });
 
-  useEffect(() => {
-    const filtered = games.filter((game) => {
-      return (
-        (filters.category === "" || game.category === filters.category) &&
-        (filters.releaseDate === "" || game.releaseDate >= filters.releaseDate) &&
-        game.price <= filters.maxPrice
-      );
-    });
-    setFilteredGames(filtered);
-  }, [filters, games]);
+    const [games] = useState([
+        {
+            title: "Elden Ring",
+            category: "RPG",
+            releaseDate: "2022-02-25",
+            price: 59.99,
+            image: "https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg",
+        },
+        {
+            title: "Cyberpunk 2077",
+            category: "Acción",
+            releaseDate: "2020-12-10",
+            price: 39.99,
+            image: "https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg",
+        },
+        {
+            title: "The Witcher 3",
+            category: "RPG",
+            releaseDate: "2015-05-18",
+            price: 29.99,
+            image: "https://cdn.cloudflare.steamstatic.com/steam/apps/292030/header.jpg",
+        },
+        {
+            title: "FIFA 24",
+            category: "Deportes",
+            releaseDate: "2023-09-29",
+            price: 49.99,
+            image: "https://cdn.cloudflare.steamstatic.com/steam/apps/2195250/header.jpg",
+        },
+        {
+            title: "Rocket League",
+            category: "Deportes",
+            releaseDate: "2015-07-07",
+            price: 0.0,
+            image: "https://cdn.cloudflare.steamstatic.com/steam/apps/252950/header.jpg",
+        },
+        {
+            title: "Red Dead Redemption 2",
+            category: "Acción",
+            releaseDate: "2018-10-26",
+            price: 59.99,
+            image: "https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/header.jpg",
+        },
+        {
+            title: "God of War",
+            category: "Acción",
+            releaseDate: "2018-04-20",
+            price: 49.99,
+            image: "https://cdn.cloudflare.steamstatic.com/steam/apps/1593500/header.jpg",
+        },
+        {
+            title: "Hogwarts Legacy",
+            category: "Aventura",
+            releaseDate: "2023-02-10",
+            price: 69.99,
+            image: "https://cdn.cloudflare.steamstatic.com/steam/apps/990080/header.jpg",
+        },
+        {
+            title: "Resident Evil 4 Remake",
+            category: "Terror",
+            releaseDate: "2023-03-24",
+            price: 59.99,
+            image: "https://cdn.cloudflare.steamstatic.com/steam/apps/2050650/header.jpg",
+        },
+        {
+            title: "Assassin's Creed Valhalla",
+            category: "Acción",
+            releaseDate: "2020-11-10",
+            price: 39.99,
+            image: "https://cdn.cloudflare.steamstatic.com/steam/apps/2208920/header.jpg",
+        },
+        {
+            title: "GTA V",
+            category: "Acción",
+            releaseDate: "2013-09-17",
+            price: 29.99,
+            image: "https://cdn.cloudflare.steamstatic.com/steam/apps/271590/header.jpg",
+        },
+        {
+            title: "Valorant",
+            category: "Shooter",
+            releaseDate: "2020-06-02",
+            price: 0.0,
+            image: "https://www.techrupt.pk/wp-content/uploads/2020/10/Valorant-image-696x344-1.png",
+        },
+        {
+            title: "League of Legends",
+            category: "MOBA",
+            releaseDate: "2009-10-27",
+            price: 0.0,
+            image: "https://img.redbull.com/images/c_fill,w_1200,h_630,g_auto,f_auto,q_auto/redbullcom/2022/8/1/ksfga6rlx2ugfhjd9vnk/league-of-legends",
+        },
+    ]);
 
-  const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFilters({ ...filters, [name]: name === "maxPrice" ? parseFloat(value) : value });
-  };
+    const [filteredGames, setFilteredGames] = useState(games);
 
-  const deleteGame = (id: number) => {
-    const updated = games.filter((g) => g.id !== id);
-    setGames(updated);
-  };
+    useEffect(() => {
+        const sidebar = document.querySelector(".sidebar");
+        const update = () => {
+            setSidebarWidth(sidebar?.classList.contains("collapsed") ? 60 : 220);
+        };
 
-  const updateGame = (updatedGame: Game) => {
-    const updated = games.map((g) => (g.id === updatedGame.id ? updatedGame : g));
-    setGames(updated);
-    setEditingGame(null);
-  };
+        if (sidebar) {
+            update();
+            const observer = new MutationObserver(update);
+            observer.observe(sidebar, { attributes: true, attributeFilter: ["class"] });
+            return () => observer.disconnect();
+        }
+    }, []);
 
-  return (
-    <div className={styles.adminContainer}>
-      <h1>Gestión de Juegos</h1>
+    useEffect(() => {
+        let result = [...games];
+        if (filters.category) result = result.filter((g) => g.category === filters.category);
+        if (filters.price === "low") result.sort((a, b) => a.price - b.price);
+        if (filters.price === "high") result.sort((a, b) => b.price - a.price);
+        if (filters.date === "new") result.sort((a, b) => b.releaseDate.localeCompare(a.releaseDate));
+        if (filters.date === "old") result.sort((a, b) => a.releaseDate.localeCompare(b.releaseDate));
+        setFilteredGames(result);
+    }, [filters, games]);
 
-      {/* Filtros + Agregar */}
-      <div className={styles.filtersRow}>
-        <select name="category" onChange={handleFilterChange}>
-          <option value="">Todas</option>
-          <option value="RPG">RPG</option>
-          <option value="Sports">Sports</option>
-          <option value="Shooter">Shooter</option>
-          <option value="Adventure">Adventure</option>
-          <option value="Simulation">Simulation</option>
-          <option value="Sandbox">Sandbox</option>
-          <option value="Racing">Racing</option>
-          <option value="Battle Royale">Battle Royale</option>
-        </select>
-        <input type="date" name="releaseDate" onChange={handleFilterChange} />
-        <div>
-          <label>Máx. Precio: ${filters.maxPrice}</label>
-          <input
-            type="text"
-            name="maxPrice"
-            value={filters.maxPrice}
-            onChange={handleFilterChange}
-            
-          />
+    const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setFilters({ ...filters, [e.target.name]: e.target.value });
+    };
+
+    return (
+        <div
+            className={styles.gamesContainer}
+            style={{ marginLeft: `${sidebarWidth}px`, transition: "margin-left 0.3s ease" }}
+        >
+            <h1 className={styles.title}>Gestión de Juegos</h1>
+            <p className={styles.description}>Desde aquí puedes visualizar, editar o eliminar juegos del sistema.</p>
+
+            <div className={styles.filters}>
+                <select name="category" onChange={handleFilterChange}>
+                    <option value="">Filtrar por categoría</option>
+                    <option value="RPG">RPG</option>
+                    <option value="Acción">Acción</option>
+                    <option value="Deportes">Deportes</option>
+                </select>
+                <select name="price" onChange={handleFilterChange}>
+                    <option value="">Ordenar por precio</option>
+                    <option value="low">Menor a mayor</option>
+                    <option value="high">Mayor a menor</option>
+                </select>
+                <select name="date" onChange={handleFilterChange}>
+                    <option value="">Ordenar por fecha</option>
+                    <option value="new">Más reciente</option>
+                    <option value="old">Más antiguo</option>
+                </select>
+                <button className={styles.addButton}>+ Agregar juego</button>
+            </div>
+
+            <div className={styles.gameGrid}>
+                {filteredGames.map((game, i) => (
+                    <div key={i} className={styles.gameCard}>
+                        <img src={game.image} alt={game.title} className={styles.gameImage} />
+                        <h3>{game.title}</h3>
+                        <p>{game.category} • {game.releaseDate}</p>
+                        <p>{game.price === 0 ? "Gratis" : `$${game.price.toFixed(2)}`}</p>
+                        <div className={styles.actions}>
+                            <button>Editar</button>
+                            <button>Eliminar</button>
+                            <button>Aplicar descuento</button>
+                        </div>
+                    </div>
+                ))}
+            </div>
         </div>
-        <button className={styles.addButton}>Agregar Juego</button>
-      </div>
-
-      {/* Tabla de juegos */}
-      <table className={styles.gamesTable}>
-        <thead>
-          <tr>
-            <th>Título</th>
-            <th>Categoría</th>
-            <th>Lanzamiento</th>
-            <th>Precio</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredGames.map((game) => (
-            <tr key={game.id} className={styles.gameRow}>
-              <td>{game.title}</td>
-              <td>{game.category}</td>
-              <td>{game.releaseDate}</td>
-              <td>${game.price.toFixed(2)}</td>
-              <td className={styles.actionsCell}>
-                <div className={styles.actions}>
-                  <button onClick={() => setEditingGame(game)}>✏️</button>
-                  <button onClick={() => deleteGame(game.id)}>🗑️</button>
-                </div>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      {/* Editor flotante */}
-      {editingGame && (
-        <AdminEditGameCard
-          game={editingGame}
-          onSave={updateGame}
-          onCancel={() => setEditingGame(null)}
-        />
-      )}
-    </div>
-  );
+    );
 }

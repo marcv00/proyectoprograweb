@@ -1,17 +1,135 @@
-/* Requerimento [26] */
-.navbar-admin {
-    width: 200px;
-    background-color: #f4f4f4;
-    padding: 1rem;
-}
-
-.navbar-admin-title {
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-}
-
-.navbar-admin-nav {
+/* Sidebar principal */
+.sidebar {
+    width: 220px;
+    height: 100vh;
+    background: rgb(67, 67, 67);
+    color: white;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    padding: 20px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+    transition: width 0.3s ease;
+}
+
+/* Sidebar colapsado */
+.sidebar.collapsed {
+    width: 60px;
+}
+
+/* Botón toggle */
+.toggle-button {
+    position: absolute;
+    top: 10px;
+    right: -20px;
+    width: 20px;
+    height: 40px;
+    background-color: #222;
+    border: none;
+    color: blueviolet;
+    border-radius: 0 6px 6px 0;
+    cursor: pointer;
+    z-index: 1001;
+    font-size: 18px;
+}
+
+/* Header */
+.sidebar-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+.sidebar.collapsed .sidebar-header {
+    align-items: center;
+}
+
+/* Logo */
+.sidebar-logo {
+    width: 80px;
+    height: auto;
+    transition: width 0.3s ease;
+}
+
+.sidebar.collapsed .sidebar-logo {
+    width: 40px;
+}
+
+/* Título */
+.sidebar-header h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.sidebar.collapsed .sidebar-header h2 {
+    display: none;
+}
+
+/* Navegación */
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex-grow: 1;
+    margin-top: 20px;
+    align-items: flex-start;
+}
+
+.sidebar-nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.2s;
+    padding-left: 5px;
+}
+
+.sidebar-nav a:hover {
+    color: cyan;
+}
+
+/* Footer */
+.sidebar-footer {
+    margin-top: auto;
+}
+
+.logout-button {
+    background-color: blueviolet;
+    color: white;
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+    display: block;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    margin-top: 20px;
+}
+
+.logout-button:hover {
+    background-color: darkviolet;
+}
+
+.sidebar.collapsed .logout-button {
+    display: none;
+}
+
+.sidebar.collapsed .sidebar-nav a {
+    font-size: 0;
+    padding-left: 0;
+}
+
+.sidebar.collapsed .sidebar-nav a::before {
+    content:icon;
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: white;
+    border-radius: 50%;
+    margin-left: 10px;
 }

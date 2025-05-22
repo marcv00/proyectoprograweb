@@ -1,133 +1,95 @@
-.adminContainer {
-  padding: 2rem;
-  background-color: #121212;
-  min-height: 100vh;
-  color: white;
+.gamesContainer {
+    padding: 30px;
+    background-color: #111;
+    color: white;
+    min-height: 100vh;
 }
 
-.adminContainer > h1 {
-  text-align: left;
+.title {
+    font-size: 2rem;
+    margin-bottom: 10px;
 }
 
-
-.filtersRow {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-  gap: 1rem;
+.description {
+    color: #ccc;
+    margin-bottom: 20px;
 }
 
-
-
-.filtersRow label {
-  display: flex;
-  flex-direction: column;
-  font-size: 0.9rem;
-  color: white;
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 25px;
 }
 
-.filtersRow select,
-.filtersRow input[type="date"],
-.filtersRow input[type="text"] {
-  background-color: #1e1e1e;
-  color: white;
-  border: 1px solid #333;
-  border-radius: 6px;
-  padding: 0.4rem 0.6rem;
-  margin-top: 0.4rem;
-  font-size: 0.95rem;
-}
-
-.gamesTable {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0 8px;
-  color: white;
-}
-
-.gamesTable th {
-  text-align: left;
-  padding: 0.75rem;
-  background: transparent;
-  color: gray;
-  font-weight: 500;
-  border: none;
-}
-
-.gamesTable td {
-  padding: 0.75rem;
-  background-color: #1e1e1e;
-  border: none;
-  border-radius: 6px;
-  transition: background-color 0.2s ease;
-}
-
-.gameRow:hover td {
-  background-color: #292929;
-}
-
-.selectedRow td {
-  background-color: #a855f7 !important;
-  color: white;
-}
-
-.actions {
-  display: flex;
-  align-items: center;
-}
-
-.actions button:first-child {
-  background-color: transparent;
-  color: white;
-  border: none;
-  cursor: pointer;
-  margin-right: 0.5rem;
-  font-size: 1rem;
-}
-
-.actions button:last-child {
-  background-color: #dc2626;
-  color: white;
-  border: none;
-  padding: 0.5rem 0.75rem;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.9rem;
+select {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #222;
+    color: white;
+    border: 1px solid #444;
 }
 
 .addButton {
-  padding: 0.6rem 1rem;
-  background-color: #22c55e;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-weight: bold;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
+    background-color: blueviolet;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
 }
 
 .addButton:hover {
-  background-color: #16a34a;
+    background-color: #9932cc;
 }
 
-.floatingAddButton {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  background-color: #22c55e;
-  color: white;
-  font-size: 1.5rem;
-  border: none;
-  border-radius: 50%;
-  width: 48px;
-  height: 48px;
-  cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-  transition: background-color 0.3s ease;
+.gameGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
 }
 
-.floatingAddButton:hover {
-  background-color: #16a34a;
+.gameCard {
+    background-color: #1e1e1e;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    transition: transform 0.2s;
+}
+
+.gameCard:hover {
+    transform: translateY(-4px);
+}
+
+.gameImage {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    object-fit: cover;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.actions button {
+    background-color: #444;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: white;
+    transition: background-color 0.2s;
+    font-size: 0.9rem;
+}
+
+.actions button:hover {
+    background-color: #666;
+
 }
