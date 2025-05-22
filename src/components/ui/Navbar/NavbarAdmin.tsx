@@ -8,7 +8,10 @@ export default function NavbarAdmin() {
 
     return (
         <div className={`sidebar ${isCollapsed ? "collapsed" : ""}`}>
-            <button className="toggle-button" onClick={() => setIsCollapsed(!isCollapsed)}>
+            <button
+                className="toggle-button"
+                onClick={() => setIsCollapsed(!isCollapsed)}
+            >
                 {isCollapsed ? "▶" : "◀"}
             </button>
 
@@ -21,7 +24,7 @@ export default function NavbarAdmin() {
                 <Link to="/admin/dashboard">Dashboard</Link>
                 <Link to="/admin/users">Usuarios</Link>
                 <Link to="/admin/games">Juegos</Link>
-                <Link to="/admin/settings">Configuración</Link>
+                <Link to="/admin/news">Noticias</Link>
             </nav>
 
             <div className="sidebar-footer">

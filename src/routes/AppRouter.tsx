@@ -15,6 +15,7 @@ import ExplorePage from "../pages/explore/ExplorePage";
 import BestSellingPage from "../pages/best/BestSellingPage";
 import BestReviewedPage from "../pages/best/BestReviewedPage";
 import GameDetailPage from "../pages/game/GameDetailPage";
+import NewsPage from "../pages/news/NewsPage";
 
 import CheckoutPage from "../pages/purchase/CheckoutPage";
 import PurchaseConfirmationPage from "../pages/purchase/PurchaseConfirmationPage";
@@ -34,7 +35,7 @@ export function AppRouter() {
                 <Route element={<UserLayout />}>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/explorar" element={<ExplorePage />} />
-                    <Route path="/noticias" element={<ExplorePage />} />
+                    <Route path="/noticias" element={<NewsPage />} />
                     <Route
                         path="/mejor-vendidos"
                         element={<BestSellingPage />}

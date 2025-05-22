@@ -78,14 +78,14 @@
   color: #595555;
 }
 
-.gamesTable {
+.newsTable {
   width: 100%;
   color: white;
   border-collapse: separate;
   border-spacing: 0 15px; /* Espacio vertical entre filas */
 }
 
-.gamesTable th {
+.newsTable th {
   text-align: left;
   padding-left: 0.75rem;
   background: transparent;
@@ -94,34 +94,34 @@
   border: none;
 }
 
-.gameRow {
+.newsRow {
   background-color: #303030;
   overflow: hidden;
 }
 
-.gameRow:hover,
-.gameRow:focus {
+.newsRow:hover,
+.newsRow:focus {
   background-color: var(--color-primary);
 }
 
-.gameRow:hover .actions button,
-.gameRow:focus .actions button{
+.newsRow:hover .actions button,
+.newsRow:focus .actions button{
   opacity: 1;
   pointer-events: auto;
 }
 
-.gameRow td {
+.newsRow td {
   font-weight: 400;
   font-size: 15px;
   padding: 5px 16px;
 }
 
-.gameRow td:first-child {
+.newsRow td:first-child {
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
 }
 
-.gameRow td:last-child {
+.newsRow td:last-child {
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
 }
