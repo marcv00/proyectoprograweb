@@ -1,1 +1,163 @@
-/* Requerimento [7] */
+.best-selling-page {
+  max-width: 20000px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.selling-page-header {
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.selling-page-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+  text-align: left;
+}
+
+.selling-page-header p {
+  font-size: 1rem;
+  color: #bbbbbb;
+  margin-top: 0.3rem;
+}
+
+.selling-container {
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  padding: 0.6rem 1.5rem;
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 0.5rem;
+  align-items: center;
+}
+
+.puesto {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  width: 2rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+}
+
+.selling-game-cover {
+  width: 140px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.selling-title-game {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.precio-grupo {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.selling-precio-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.2rem;
+}
+
+.precio-antiguo {
+  font-size: 0.75rem;
+  color: #aaa;
+  text-decoration: line-through;
+}
+
+.descuento-bloque {
+  display: flex;
+  height: 28px;
+}
+
+.selling-descuento {
+  background-color: #9C27B0;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 0.9rem;
+  padding: 0 0.5rem;
+  border-radius: 2px 0 0 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.precio-final {
+  background-color: #2a2d32;
+  color: #b7e17f;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0 0.6rem;
+  border-radius: 0 2px 2px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.selling-precio {
+  background-color: #2a2d32;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #cccccc;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.selling-tag-plataforma {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: white;
+  padding: 0.15rem 0.4rem;
+  border-radius: 2px;
+  margin-right: 0.3rem;
+  height: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.pc {
+  background-color: #5a5a5a;
+}
+
+.ps5 {
+  background-color: #003791;
+}
+
+.xbox {
+  background-color: #107C10;
+}
+
+.switch {
+  background-color: #E60012;
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .fila-juego {
+    grid-template-columns: 1fr;
+  }
+
+  .info-principal {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
