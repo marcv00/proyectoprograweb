@@ -1,26 +1,36 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import "./NavbarAdmin.css";
-import { useAuth } from "../../../context/AuthContext";
+import { Link } from "react-router-dom";
+import logo from "/logo.svg";
 
 export default function NavbarAdmin() {
-    const { logout } = useAuth();
-    const navigate = useNavigate();
-
-    const handleLogout = () => {
-        logout();
-        navigate("/"); // Redirige al home
-    };
+    const [isCollapsed, setIsCollapsed] = useState(false);
 
     return (
-        <aside className="navbar-admin">
-            <h2 className="navbar-admin-title">Admin</h2>
-            <nav className="navbar-admin-nav">
+        <div className={`sidebar ${isCollapsed ? "collapsed" : ""}`}>
+            <button className="toggle-button" onClick={() => setIsCollapsed(!isCollapsed)}>
+                {isCollapsed ? "▶" : "◀"}
+            </button>
+
+            <div className="sidebar-header">
+                <img src={logo} alt="Logo" className="sidebar-logo" />
+                {!isCollapsed && <h2>Bienvenido Administrador!</h2>}
+            </div>
+
+            <nav className="sidebar-nav">
+                <Link to="/admin/dashboard">Dashboard</Link>
                 <Link to="/admin/users">Usuarios</Link>
                 <Link to="/admin/games">Juegos</Link>
-                <Link to="/admin/news">Noticias</Link>
-                <Link to="/admin/stats">Estadisticas</Link>
+                <Link to="/admin/settings">Configuración</Link>
             </nav>
-            <button onClick={handleLogout}>Cerrar sesión</button>
-        </aside>
+
+            <div className="sidebar-footer">
+                {!isCollapsed && (
+                    <Link to="/" className="logout-button">
+                        Cerrar sesión
+                    </Link>
+                )}
+            </div>
+        </div>
     );
 }
