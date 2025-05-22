@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import "./LoginPage.css"; // Importa el archivo CSS para estilos
 import { Link } from "react-router-dom";
+import logo from "/logo.svg";
+
 
 export default function LoginPage() {
     const { login } = useAuth();
@@ -40,7 +42,7 @@ export default function LoginPage() {
         }
     };
 
-    return (
+return (
         // Requerimento [1]
         // Nota:
         // - Faltaria añadir estilos en LoginPage.css (ya esta importado)
@@ -51,16 +53,18 @@ export default function LoginPage() {
         // - Para ver como va quedando tu diseño, esta es la ruta:
         //   http://localhost:5173/proyectoprograweb/#/login
         // - Cualquier duda, no dudes en preguntar, diciendo que requerimento te toco.
-
-        <div>
-            <h1>Iniciar Sesion</h1>
-            <form onSubmit={handleSubmit}>
+        <div className="container">
+            <div className="card">
+                <img src={logo} alt="Logo" className="logo" />
+                <h1 className="title">Iniciar Sesión</h1>
+                <form onSubmit={handleSubmit} className="form">
                 <input
                     type="email"
                     placeholder="Correo Electrónico"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    className="input"
                 />
                 <input
                     type="password"
@@ -68,14 +72,23 @@ export default function LoginPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                />
-                <button type="submit">Ingresar</button>
-            </form>
-            <Link to="/forgot-password" className="forgot-password-link">
-                ¿Olvidaste tu contraseña?
-            </Link>
+                    className="input"
 
-            {error && <p style={{ color: "red" }}>{error}</p>}
+                />
+                <button 
+                    type="submit"
+                    className="input"
+                >Ingresar</button>
+
+                </form>
+                <Link to="/forgot-password" className="forgot-password-link">
+                ¿Olvidaste tu contraseña?
+                </Link>
+
+                {error && <p style={{ color: "red" }}>{error}</p>}
+            </div>
         </div>
+
     );
 }
+
