@@ -1,10 +1,14 @@
 .adminContainer {
   padding: 2rem;
-  font-family: sans-serif;
   background-color: #121212;
   min-height: 100vh;
   color: white;
 }
+
+.adminContainer > h1 {
+  text-align: left;
+}
+
 
 .filtersRow {
   display: flex;
@@ -13,6 +17,8 @@
   flex-wrap: wrap;
   gap: 1rem;
 }
+
+
 
 .filtersRow label {
   display: flex;
@@ -23,7 +29,7 @@
 
 .filtersRow select,
 .filtersRow input[type="date"],
-.filtersRow input[type="range"] {
+.filtersRow input[type="text"] {
   background-color: #1e1e1e;
   color: white;
   border: 1px solid #333;

@@ -84,15 +84,14 @@ export default function AdminGames() {
           <option value="Battle Royale">Battle Royale</option>
         </select>
         <input type="date" name="releaseDate" onChange={handleFilterChange} />
-        <div className={styles.sliderContainer}>
+        <div>
           <label>Máx. Precio: ${filters.maxPrice}</label>
           <input
-            type="range"
+            type="text"
             name="maxPrice"
-            min="0"
-            max="100"
             value={filters.maxPrice}
             onChange={handleFilterChange}
+            
           />
         </div>
         <button className={styles.addButton}>Agregar Juego</button>
