@@ -1,58 +1,84 @@
-.edit-profile-container {
+.edit-profile-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 20px;
+}
+
+.edit-profile-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    padding: 40px;
+    width: 100%;
     max-width: 500px;
-    margin: 40px auto;
-    padding: 30px;
-    border-radius: 10px;
-    background-color: #302f2f;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     color: white;
 }
 
-.edit-profile-container h2 {
-    text-align: center;
+.edit-profile-logo {
+    width: 100px;
+    margin-bottom: 1rem;
+}
+
+.edit-profile-title {
     margin-bottom: 20px;
-    color: white;
-}
-
-.edit-profile-icon {
-    display: block;
-    width: 150px;
-    height: 150px;
-    margin: 0 auto 16px auto;
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #ffffff;
 }
 
 .edit-profile-form {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 1rem;
 }
 
 .edit-profile-form label {
     display: flex;
     flex-direction: column;
-    font-weight: 500;
-    color: rgb(255, 255, 255);
+    font-size: 14px;
+    color: #ffffff;
 }
 
 .edit-profile-form input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 16px;
-    margin-top: 5px;
+    padding: 0.75rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 0.5rem;
+    font-size: 15px;
+    background: rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    margin-top: 0.3rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.edit-profile-form input::placeholder {
+    color: #e5e5e5;
+}
+
+.edit-profile-form input:focus {
+    border-color: #93c5fd;
 }
 
 .edit-profile-form button {
-    padding: 10px;
-    background-color:blueviolet;
+    background-color: #9D36D0;
     color: white;
-    font-size: 16px;
+    padding: 0.75rem 1rem;
     border: none;
-    border-radius: 6px;
+    border-radius: 0.5rem;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    font-size: 1rem;
+    transition: background-color 0.2s;
 }
 
 .edit-profile-form button:hover {
-    background-color: #0056b3;
+    background-color: #a24bcd;
 }
