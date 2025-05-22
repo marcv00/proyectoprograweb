@@ -71,7 +71,7 @@ export function AppRouter() {
                     <Route path="users" element={<AdminUsers />} />
                     <Route path="games" element={<AdminGames />} />
                     <Route path="news" element={<AdminNews />} />
-                    <Route path="stats" element={<AdminStats />} />
+                    <Route path="dashboard" element={<AdminStats />} />
                 </Route>
             </Routes>
         </HashRouter>

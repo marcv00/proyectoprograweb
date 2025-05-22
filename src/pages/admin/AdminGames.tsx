@@ -12,6 +12,7 @@ type Game = {
 };
 
 export default function AdminGames() {
+    const [sidebarWidth, setSidebarWidth] = useState(220); // Para guardar la anchura del sidebar (abierto y cerrado)
     const [games, setGames] = useState<Game[]>([]);
     const [filteredGames, setFilteredGames] = useState<Game[]>([]);
     const [filters, setFilters] = useState({
@@ -112,6 +113,32 @@ export default function AdminGames() {
         setFilteredGames(filtered);
     }, [filters, games]);
 
+    // Para detectar abrir y cerrar de sidebar
+    useEffect(() => {
+        const updateSidebarWidth = () => {
+            const sidebar = document.querySelector(".sidebar");
+            if (sidebar) {
+                const width = sidebar.classList.contains("collapsed")
+                    ? 60
+                    : 220;
+                setSidebarWidth(width);
+            }
+        };
+
+        const observer = new MutationObserver(updateSidebarWidth);
+        const target = document.querySelector(".sidebar");
+        if (target) {
+            observer.observe(target, {
+                attributes: true,
+                attributeFilter: ["class"],
+            });
+        }
+
+        updateSidebarWidth();
+
+        return () => observer.disconnect();
+    }, []);
+
     const handleFilterChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
     ) => {
@@ -144,7 +171,13 @@ export default function AdminGames() {
     };
 
     return (
-        <div className={styles.adminContainer}>
+        <div
+            className={styles.adminContainer}
+            style={{
+                marginLeft: `${sidebarWidth}px`,
+                transition: "margin-left 0.3s ease",
+            }}
+        >
             <h1>Gestión de Juegos</h1>
 
             {/* Filtros + Agregar */}
