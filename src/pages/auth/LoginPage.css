@@ -65,33 +65,25 @@
 }
 
 /* Botón de inicio */
-.button {
-    background-color: #3a3a3a;
-    color: #666;
+.login-card-submit {
+    background-color: var(--color-primary);
+    color: white;
     padding: 0.75rem 1rem;
     border: none;
     border-radius: 0.4rem;
-    cursor: not-allowed;
     font-size: 1rem;
     transition: background-color 0.2s;
-}
-
-.button.enabled {
-    background-color: #007bff;
-    color: white;
     cursor: pointer;
 }
 
-.button.enabled:hover {
-    background-color: #0056b3;
-}
+
 
 /* Enlace de olvido de contraseña */
 .forgot-password-link {
     color: #3a8ef6;
     text-decoration: none;
     font-size: 0.85rem;
-    margin-top: 0.25rem;
+    margin-top: 1.25rem;
     align-self: flex-end;
 }
 

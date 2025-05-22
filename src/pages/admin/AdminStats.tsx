@@ -32,11 +32,11 @@ const options = {
             data: [3200, 200, 1400, 2300, 4200],
             smooth: true,
             lineStyle: {
-                color: "#00bcd4",
+                color: "rgba(154, 150, 156, 0.842)",
                 width: 3,
             },
             areaStyle: {
-                color: "rgba(0, 188, 212, 0.2)",
+                color: "rgba(144, 20, 202, 0.662)",
             },
         },
     ],

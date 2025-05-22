@@ -1,5 +1,14 @@
 .admin-stats {
-  padding-inline: 2rem; /* o prueba 3rem si lo quieres un poco más centrado */
+  padding-inline: 2rem;
+  font-family: "Rubik", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 50px 30px;
+}
+
+.admin-stats h1 {
+    text-align: left;
+    letter-spacing: -.28px;
+    font-weight: 500;
+    margin-bottom: 2rem;
 }
 
 .grafico-layout {
@@ -21,14 +30,14 @@
 
 .stats-resumen .card {
   background-color: #2a2a2a;
-  padding: 1rem;
+  padding: 2rem 1rem;
   border-radius: 8px;
   color: white;
 }
 
 .stats-resumen .card h4 {
   font-size: 1rem;
-  color: #00bcd4;
+  color: var(--color-primary);
   margin-bottom: 0.5rem;
 }
 

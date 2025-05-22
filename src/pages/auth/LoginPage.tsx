@@ -6,7 +6,6 @@ import "./LoginPage.css"; // Importa el archivo CSS para estilos
 import { Link } from "react-router-dom";
 import logo from "/logo.svg";
 
-
 export default function LoginPage() {
     const { login } = useAuth();
     const navigate = useNavigate();
@@ -35,6 +34,8 @@ export default function LoginPage() {
                 } else {
                     navigate("/");
                 }
+            } else {
+                setError("Correo y/o contraseña incorrectos");
             }
         } catch (err) {
             console.error(err);
@@ -42,7 +43,7 @@ export default function LoginPage() {
         }
     };
 
-return (
+    return (
         // Requerimento [1]
         // Nota:
         // - Faltaria añadir estilos en LoginPage.css (ya esta importado)
@@ -58,37 +59,34 @@ return (
                 <img src={logo} alt="Logo" className="logo" />
                 <h1 className="title">Iniciar Sesión</h1>
                 <form onSubmit={handleSubmit} className="form">
-                <input
-                    type="email"
-                    placeholder="Correo Electrónico"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    className="input"
-                />
-                <input
-                    type="password"
-                    placeholder="Contraseña"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    className="input"
-
-                />
-                <button 
-                    type="submit"
-                    className="input"
-                >Ingresar</button>
-
+                    <input
+                        type="email"
+                        placeholder="Correo Electrónico"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        className="input"
+                    />
+                    <input
+                        type="password"
+                        placeholder="Contraseña"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                        className="input"
+                    />
+                    <button type="submit" className="login-card-submit">
+                        Ingresar
+                    </button>
                 </form>
                 <Link to="/forgot-password" className="forgot-password-link">
-                ¿Olvidaste tu contraseña?
+                    ¿Olvidaste tu contraseña?
                 </Link>
 
-                {error && <p style={{ color: "red" }}>{error}</p>}
+                {error && (
+                    <p style={{ color: "red", marginTop: "1rem" }}>{error}</p>
+                )}
             </div>
         </div>
-
     );
 }
-
