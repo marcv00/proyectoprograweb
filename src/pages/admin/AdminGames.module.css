@@ -1,133 +1,161 @@
 .adminContainer {
-  padding: 2rem;
+  padding: 3rem 2rem;
   background-color: #121212;
   min-height: 100vh;
   color: white;
+  max-width: var(--main-max-width-lg);
+  font-family: "Rubik", sans-serif;
 }
 
 .adminContainer > h1 {
   text-align: left;
+  letter-spacing: -.28px;
+  font-weight: 500;
+  margin-bottom: 2rem;
 }
-
 
 .filtersRow {
   display: flex;
   justify-content: space-between;
+  gap: 3rem;
   margin-bottom: 2rem;
   flex-wrap: wrap;
-  gap: 1rem;
 }
 
+.filterSection {
+  display: flex;
+  gap: 3rem;
+}
 
+.addButton {
+  align-self: flex-end;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border: none;
+  height: 40px;
+  padding: 0 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
 
-.filtersRow label {
+.addButton img {
+  width: 19px;
+  height: 19px;
+}
+
+.addButton:hover {
+  background-color: #e0e0e0;
+}
+
+.filterContainer{
   display: flex;
   flex-direction: column;
-  font-size: 0.9rem;
-  color: white;
+  align-items: flex-start;
+  gap: .5rem;
 }
 
-.filtersRow select,
-.filtersRow input[type="date"],
-.filtersRow input[type="text"] {
-  background-color: #1e1e1e;
+.filterContainer label {
+  font-size: 0.9rem;
+  color: #8c8c8c;
+  
+}
+
+.filterContainer input, 
+.filterContainer select {
+  width: 100%;
+  height: 40px;
+  padding: 0 1rem;
+  border-radius: 8px;
+  border: none;
+  background-color: #353535;
   color: white;
-  border: 1px solid #333;
-  border-radius: 6px;
-  padding: 0.4rem 0.6rem;
-  margin-top: 0.4rem;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  font-family: "Rubik", sans-serif;
+}
+
+.filterContainer input::placeholder {
+  color: #595555;
 }
 
 .gamesTable {
   width: 100%;
-  border-collapse: separate;
-  border-spacing: 0 8px;
   color: white;
+  border-collapse: separate;
+  border-spacing: 0 15px; /* Espacio vertical entre filas */
 }
 
 .gamesTable th {
   text-align: left;
-  padding: 0.75rem;
+  padding-left: 0.75rem;
   background: transparent;
   color: gray;
-  font-weight: 500;
+  font-weight: 400;
   border: none;
 }
 
-.gamesTable td {
-  padding: 0.75rem;
-  background-color: #1e1e1e;
-  border: none;
-  border-radius: 6px;
-  transition: background-color 0.2s ease;
+.gameRow {
+  background-color: #303030;
+  overflow: hidden;
 }
 
-.gameRow:hover td {
-  background-color: #292929;
+.gameRow:hover,
+.gameRow:focus {
+  background-color: var(--color-primary);
 }
 
-.selectedRow td {
-  background-color: #a855f7 !important;
-  color: white;
+.gameRow:hover .actions button,
+.gameRow:focus .actions button{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.gameRow td {
+  font-weight: 400;
+  font-size: 15px;
+  padding: 5px 16px;
+}
+
+.gameRow td:first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.gameRow td:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 
 .actions {
   display: flex;
   align-items: center;
+  gap: 2rem;
 }
 
-.actions button:first-child {
+.actions button {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    pointer-events: none;
+}
+
+.actions button img {
+  width: 20px;
+  height: 20px;
+}
+
+.editButton {
   background-color: transparent;
-  color: white;
   border: none;
   cursor: pointer;
-  margin-right: 0.5rem;
-  font-size: 1rem;
 }
 
-.actions button:last-child {
+.deleteButton {
   background-color: #dc2626;
-  color: white;
   border: none;
-  padding: 0.5rem 0.75rem;
+  padding: 0.5rem 1rem;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 0.9rem;
 }
 
-.addButton {
-  padding: 0.6rem 1rem;
-  background-color: #22c55e;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-weight: bold;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
 
-.addButton:hover {
-  background-color: #16a34a;
-}
-
-.floatingAddButton {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  background-color: #22c55e;
-  color: white;
-  font-size: 1.5rem;
-  border: none;
-  border-radius: 50%;
-  width: 48px;
-  height: 48px;
-  cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-  transition: background-color 0.3s ease;
-}
-
-.floatingAddButton:hover {
-  background-color: #16a34a;
-}
