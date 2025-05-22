@@ -1,1 +1,45 @@
-/* Requerimento [23] */
+.admin-stats {
+  padding-inline: 2rem; /* o prueba 3rem si lo quieres un poco más centrado */
+}
+
+.grafico-layout {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+
+}
+
+.stats-resumen {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 180px;
+  flex: 1;
+}
+
+.stats-resumen .card {
+  background-color: #2a2a2a;
+  padding: 1rem;
+  border-radius: 8px;
+  color: white;
+}
+
+.stats-resumen .card h4 {
+  font-size: 1rem;
+  color: #00bcd4;
+  margin-bottom: 0.5rem;
+}
+
+.stats-resumen .card p {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.grafico-container {
+  flex: 3;
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  padding: 1rem;
+}
