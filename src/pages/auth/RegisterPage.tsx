@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./RegisterPage.module.css";
 import logo from "/logo.svg";
 
@@ -30,7 +30,9 @@ export default function RegisterPage() {
     return (
         <div className={styles.container}>
             <div className={styles.card}>
-                <img src={logo} alt="Logo" className={styles.logo} />
+                <Link to="/">
+                    <img src={logo} alt="Logo" className={styles.logo} />
+                </Link>
                 <h1 className={styles.title}>Formulario de Registro</h1>
                 <form onSubmit={handleSubmit} className={styles.form}>
                     <input

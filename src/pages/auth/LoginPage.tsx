@@ -56,7 +56,9 @@ export default function LoginPage() {
         // - Cualquier duda, no dudes en preguntar, diciendo que requerimento te toco.
         <div className="container">
             <div className="card">
-                <img src={logo} alt="Logo" className="logo" />
+                <Link to="/">
+                    <img src={logo} alt="Logo" className="logo" />
+                </Link>
                 <h1 className="title">Iniciar Sesión</h1>
                 <form onSubmit={handleSubmit} className="form">
                     <input
@@ -81,6 +83,9 @@ export default function LoginPage() {
                 </form>
                 <Link to="/forgot-password" className="forgot-password-link">
                     ¿Olvidaste tu contraseña?
+                </Link>
+                <Link to="/register" className="forgot-password-link">
+                    Crea una cuenta
                 </Link>
 
                 {error && (
