@@ -1,0 +1,61 @@
+/* Requerimento [13] */
+.checkoutContainer {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #252525;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: white;
+    font-family: "Rubik", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--color-primary);
+    font-weight: 500;
+    text-align: left;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-top: 1rem;
+}
+
+.row {
+    display: flex;
+    gap: 10px;
+}
+
+.button {
+    padding: 12px;
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 2rem;
+}
+
+.button:hover {
+    background-color: #711cc1;
+}
+
+.presentationRow {
+    display: flex;
+    justify-content: space-between;
+}
+.storeLogo {
+    margin-bottom: 1rem;
+}
