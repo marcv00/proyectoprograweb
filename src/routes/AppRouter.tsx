@@ -10,6 +10,7 @@ import EditProfilePage from "../pages/config/EditProfilePage";
 
 import ConfirmationPage from "../pages/auth/ConfirmationPage";
 import ForgotPasswordPage from "../pages/auth/ForgotPasswordPage";
+import SetNewPasswordPage from "../pages/auth/SetNewPasswordPage";
 
 import ExplorePage from "../pages/explore/ExplorePage";
 import BestSellingPage from "../pages/best/BestSellingPage";
@@ -59,6 +60,10 @@ export function AppRouter() {
                 <Route
                     path="/forgot-password"
                     element={<ForgotPasswordPage />}
+                />
+                <Route
+                    path="/set-new-password"
+                    element={<SetNewPasswordPage />}
                 />
                 <Route
                     path="/purchase-confirmation"

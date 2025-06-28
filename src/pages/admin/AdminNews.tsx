@@ -23,6 +23,13 @@ export default function AdminNews() {
     const [editingNews, setEditingNews] = useState<News | null>(null);
     const [creatingNew, setCreatingNew] = useState(false);
 
+    // Estado para manejar el modal de confirmación
+    const [noticiaAEliminar, setNoticiaAEliminar] = useState<number | null>(
+        null
+    );
+    const [mostrarModalConfirmacion, setMostrarModalConfirmacion] =
+        useState(false);
+
     // Sidebar width watcher
     useEffect(() => {
         const updateSidebarWidth = () => {
@@ -121,6 +128,11 @@ export default function AdminNews() {
         setFilters({ ...filters, [name]: value });
     };
 
+    const confirmarEliminacion = (id: number) => {
+        setNoticiaAEliminar(id);
+        setMostrarModalConfirmacion(true);
+    };
+
     const deleteNews = (id: number) => {
         const updated = newsList.filter((n) => n.id !== id);
         setNewsList(updated);
@@ -213,7 +225,9 @@ export default function AdminNews() {
                                         />
                                     </button>
                                     <button
-                                        onClick={() => deleteNews(item.id)}
+                                        onClick={() =>
+                                            confirmarEliminacion(item.id)
+                                        }
                                         className={styles.deleteButton}
                                         aria-label={`Eliminar ${item.title}`}
                                     >
@@ -255,6 +269,35 @@ export default function AdminNews() {
                     onCancel={() => setCreatingNew(false)}
                     create={true}
                 />
+            )}
+
+            {mostrarModalConfirmacion && (
+                <div className={styles.modalOverlay}>
+                    <div className={styles.modalBox}>
+                        <p>¿Estás seguro que deseas eliminar esta noticia?</p>
+                        <div className={styles.modalActions}>
+                            <button
+                                onClick={() => {
+                                    if (noticiaAEliminar !== null) {
+                                        deleteNews(noticiaAEliminar);
+                                    }
+                                    setMostrarModalConfirmacion(false);
+                                    setNoticiaAEliminar(null);
+                                }}
+                            >
+                                Confirmar
+                            </button>
+                            <button
+                                onClick={() => {
+                                    setMostrarModalConfirmacion(false);
+                                    setNoticiaAEliminar(null);
+                                }}
+                            >
+                                Cancelar
+                            </button>
+                        </div>
+                    </div>
+                </div>
             )}
         </div>
     );

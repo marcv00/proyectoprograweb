@@ -12,9 +12,9 @@ export default function ForgotPasswordPage() {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         setMensaje(
-            "Te hemos enviando un enlace por el correo asignado para cambiar tu contraseña."
+            "Te hemos enviando un enlace por el correo asignado para cambiar tu contraseña. En breve seras redireccionado a la página en donde podrás ingresar tu nueva contraseña."
         );
-        setTimeout(() => navigate("/"), 3000);
+        setTimeout(() => navigate("/set-new-password"), 5000);
     };
 
     return (

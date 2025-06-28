@@ -23,6 +23,11 @@ export default function AdminGames() {
     const [editingGame, setEditingGame] = useState<Game | null>(null);
     const [creatingNewGame, setCreatingNewGame] = useState<boolean>(false);
 
+    // Estado para manejar el modal de confirmación
+    const [juegoAEliminar, setJuegoAEliminar] = useState<number | null>(null);
+    const [mostrarModalConfirmacion, setMostrarModalConfirmacion] =
+        useState(false);
+
     useEffect(() => {
         const fakeData: Game[] = [
             {
@@ -149,6 +154,11 @@ export default function AdminGames() {
         });
     };
 
+    const confirmarEliminacion = (id: number) => {
+        setJuegoAEliminar(id);
+        setMostrarModalConfirmacion(true);
+    };
+
     const deleteGame = (id: number) => {
         const updated = games.filter((g) => g.id !== id);
         setGames(updated);
@@ -266,9 +276,11 @@ export default function AdminGames() {
                                         />
                                     </button>
                                     <button
-                                        onClick={() => deleteGame(game.id)}
-                                        aria-label={`Eliminar ${game.title}`}
+                                        onClick={() =>
+                                            confirmarEliminacion(game.id)
+                                        }
                                         className={styles.deleteButton}
+                                        aria-label={`Eliminar ${game.title}`}
                                     >
                                         <img
                                             src="./trash-icon.svg"
@@ -307,6 +319,35 @@ export default function AdminGames() {
                     onCancel={() => setCreatingNewGame(false)}
                     create={true}
                 />
+            )}
+
+            {mostrarModalConfirmacion && (
+                <div className={styles.modalOverlay}>
+                    <div className={styles.modalBox}>
+                        <p>¿Estás seguro que deseas eliminar este juego?</p>
+                        <div className={styles.modalActions}>
+                            <button
+                                onClick={() => {
+                                    if (juegoAEliminar !== null) {
+                                        deleteGame(juegoAEliminar);
+                                    }
+                                    setMostrarModalConfirmacion(false);
+                                    setJuegoAEliminar(null);
+                                }}
+                            >
+                                Confirmar
+                            </button>
+                            <button
+                                onClick={() => {
+                                    setMostrarModalConfirmacion(false);
+                                    setJuegoAEliminar(null);
+                                }}
+                            >
+                                Cancelar
+                            </button>
+                        </div>
+                    </div>
+                </div>
             )}
         </div>
     );
