@@ -2,42 +2,41 @@ import { Link } from "react-router-dom";
 import styles from "./GameCard.module.css";
 import React from "react";
 
-type Game = {
-    title: string;
-    category: string[];
-    description: string;
-    price: number;
-    discount: number | null;
-    rating: number;
-    reviews: string[];
-    images: string[];
-    trailer: string;
+type GameCard = {
+    id: number;
+    titulo: string;
+    descripcion: string;
+    precio: number;
+    porcentajeOferta: number | null;
+    fotos: { url: string }[];
 };
 
 type GameCardProps = {
-    game: Game;
-    index: number;
+    game: GameCard;
 };
 
-export default function GameCard({ game, index }: GameCardProps) {
-    const hasDiscount = typeof game.discount === "number" && game.discount > 0;
+export default function GameCard({ game }: GameCardProps) {
+    const hasDiscount =
+        typeof game.porcentajeOferta === "number" && game.porcentajeOferta > 0;
     const discountedPrice = hasDiscount
-        ? (game.price * (1 - game.discount! / 100)).toFixed(2)
+        ? (game.precio * (1 - game.porcentajeOferta! / 100)).toFixed(2)
         : null;
 
     const handlePlusClick = (e: React.MouseEvent) => {
         e.preventDefault();
         e.stopPropagation();
-        console.log("Clicked + on", game.title);
+        console.log("Clicked + on", game.titulo);
     };
 
     return (
-        <Link to={`/game/${index}`} className={styles.card}>
+        <Link to={`/game/${game.id}`} className={styles.card}>
             <div className={styles.imageWrapper}>
                 <img
-                    src={game.images[0]}
-                    alt={game.title}
+                    src={game.fotos[0]?.url || "/logo.svg"}
+                    alt={game.titulo}
                     className={styles.image}
+                    crossOrigin="anonymous"
+                    referrerPolicy="no-referrer"
                 />
                 <button className={styles.plusButton} onClick={handlePlusClick}>
                     <img src="./plus.svg" alt="Add" />
@@ -45,17 +44,17 @@ export default function GameCard({ game, index }: GameCardProps) {
             </div>
             <div className={styles.details}>
                 <div className={styles.text}>
-                    <h3 className={styles.title}>{game.title}</h3>
-                    <p className={styles.description}>{game.description}</p>
+                    <h3 className={styles.title}>{game.titulo}</h3>
+                    <p className={styles.description}>{game.descripcion}</p>
                 </div>
                 <div className={styles.pricing}>
                     {hasDiscount ? (
                         <>
                             <span className={styles.discount}>
-                                -{game.discount}%
+                                -{game.porcentajeOferta}%
                             </span>
                             <span className={styles.oldPrice}>
-                                {game.price.toFixed(2)} PEN
+                                {game.precio.toFixed(2)} PEN
                             </span>
                             <span className={styles.newPrice}>
                                 {discountedPrice} PEN
@@ -63,7 +62,7 @@ export default function GameCard({ game, index }: GameCardProps) {
                         </>
                     ) : (
                         <span className={styles.newPrice}>
-                            {game.price.toFixed(2)} PEN
+                            {game.precio.toFixed(2)} PEN
                         </span>
                     )}
                 </div>

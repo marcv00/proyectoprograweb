@@ -3,16 +3,15 @@ import GameCard from "../../components/ui/GameCard/GameCard";
 import styles from "./HomePage.module.css";
 import NewsCarousel from "../../components/ui/NewsCarousel/NewsCarousel";
 
-type Game = {
-    title: string;
-    category: string[];
-    description: string;
-    price: number;
-    discount: number | null;
-    rating: number;
-    reviews: string[];
-    images: string[];
-    trailer: string;
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
+type GameCard = {
+    id: number;
+    titulo: string;
+    descripcion: string;
+    precio: number;
+    porcentajeOferta: number | null;
+    fotos: { url: string }[];
 };
 
 type News = {
@@ -25,7 +24,7 @@ type News = {
 };
 
 export default function HomePage() {
-    const [games, setGames] = useState<Game[] | null>(null);
+    const [games, setGames] = useState<GameCard[] | null>(null);
     const [news, setNews] = useState<News[] | null>(null);
     const [loading, setLoading] = useState(true);
     const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -34,16 +33,19 @@ export default function HomePage() {
     const sliderRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        fetch("./data/games.json")
-            .then((res) => res.json())
-            .then((data) => {
+        const httpObtenerJuegosRecientes = async () => {
+            try {
+                const response = await fetch(`${BACKEND_URL}/juegos/recientes`);
+                const data: GameCard[] = await response.json();
                 setGames(data);
+            } catch (err) {
+                console.error("Error fetching juegos recientes:", err);
+            } finally {
                 setLoading(false);
-            })
-            .catch((err) => {
-                console.error("Failed to fetch games.json:", err);
-                setLoading(false);
-            });
+            }
+        };
+
+        httpObtenerJuegosRecientes();
     }, []);
 
     useEffect(() => {
@@ -122,11 +124,7 @@ export default function HomePage() {
                         {loading && <p>Cargando juegos...</p>}
                         {!loading &&
                             games?.map((game, index) => (
-                                <GameCard
-                                    key={index}
-                                    game={game}
-                                    index={index}
-                                />
+                                <GameCard key={index} game={game} />
                             ))}
                     </div>
                     <div className={styles.rightOverlay} />
