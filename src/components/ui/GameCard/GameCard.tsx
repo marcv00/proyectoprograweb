@@ -35,8 +35,6 @@ export default function GameCard({ game }: GameCardProps) {
                     src={game.fotos[0]?.url || "/logo.svg"}
                     alt={game.titulo}
                     className={styles.image}
-                    crossOrigin="anonymous"
-                    referrerPolicy="no-referrer"
                 />
                 <button className={styles.plusButton} onClick={handlePlusClick}>
                     <img src="./plus.svg" alt="Add" />
