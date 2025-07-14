@@ -87,21 +87,27 @@
   align-items: center;
 }
 
-.pc {
+.tag-plataforma.pc {
   background-color: #5a5a5a;
 }
 
-.ps5 {
+.tag-plataforma.ps5 {
   background-color: #003791;
 }
 
-.xbox {
+.tag-plataforma.xbox {
   background-color: #107C10;
 }
 
-.switch {
+.tag-plataforma.switch {
   background-color: #E60012;
 }
+
+.tag-plataforma.ps4 {
+  background-color: #003791;
+  color: white;
+}
+
 
 .description {
   font-size: 0.88rem;

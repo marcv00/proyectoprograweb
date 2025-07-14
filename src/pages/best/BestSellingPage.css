@@ -149,6 +149,18 @@
   background-color: #E60012;
 }
 
+.selling-tag-plataforma.xbox-one {
+  background-color: #086108;
+}
+
+.selling-tag-plataforma.xbox-x {
+  background-color: #107C10;
+}
+
+.selling-tag-plataforma.ps4 {
+  background-color: #003791;
+}
+
 
 /* Responsive */
 @media (max-width: 768px) {
