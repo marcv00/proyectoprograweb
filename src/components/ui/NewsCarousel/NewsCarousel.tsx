@@ -4,11 +4,9 @@ import { useNavigate } from "react-router-dom";
 
 type News = {
     id: number;
-    title: string;
-    shortsummary: string;
-    text: string;
-    readingtime: string; // "4 minutos"
-    banner: string; // URL de imagen
+    titulo: string;
+    resumen: string;
+    foto: { url: string };
 };
 
 type Props = {
@@ -17,9 +15,13 @@ type Props = {
 
 function slugify(title: string) {
     return title
+        .normalize("NFD") // descompone caracteres con tilde: "á" → "a" + "~"
+        .replace(/[\u0300-\u036f]/g, "") // remueve los diacríticos
+        .replace(/ñ/g, "n") // convierte ñ explícitamente
+        .replace(/[^a-z0-9\s]/gi, "") // remueve cualquier otro símbolo
         .toLowerCase()
-        .replace(/[^a-z0-9\s]/g, "")
-        .replace(/\s+/g, "-");
+        .trim()
+        .replace(/\s+/g, "-"); // convierte espacios a guiones
 }
 
 export default function NewsCarousel({ news }: Props) {
@@ -34,7 +36,7 @@ export default function NewsCarousel({ news }: Props) {
     useEffect(() => {
         setProgress(0);
 
-        const duration = 10; // segundos
+        const duration = 6; // segundos
         const interval = setInterval(() => {
             setProgress((prev) => {
                 const nextProgress = prev + 100 / (duration * 10);
@@ -52,7 +54,7 @@ export default function NewsCarousel({ news }: Props) {
     const handleClick = (index: number) => {
         const item = news[index];
         if (item) {
-            const url = `/news/${slugify(item.title)}`;
+            const url = `/news/${slugify(item.titulo)}`;
             navigate(url);
         }
     };
@@ -73,12 +75,12 @@ export default function NewsCarousel({ news }: Props) {
         <div className={styles.container}>
             <div
                 className={styles.mainNews}
-                style={{ backgroundImage: `url(${visibleNews[0].banner})` }}
+                style={{ backgroundImage: `url(${visibleNews[0].foto.url})` }}
                 onClick={() => handleClick(currentIndex)}
             >
                 <div className={styles.overlay}>
-                    <h2>{visibleNews[0].title}</h2>
-                    <p>{visibleNews[0].shortsummary}</p>
+                    <h2>{visibleNews[0].titulo}</h2>
+                    <p>{visibleNews[0].resumen}</p>
                     <div className={styles.progressBar}>
                         <div
                             className={styles.progress}
@@ -93,7 +95,7 @@ export default function NewsCarousel({ news }: Props) {
                     <div
                         key={n.id}
                         className={styles.sideItem}
-                        style={{ backgroundImage: `url(${n.banner})` }}
+                        style={{ backgroundImage: `url(${n.foto.url})` }}
                         onClick={() => handleSideItemClick(i)}
                     />
                 ))}

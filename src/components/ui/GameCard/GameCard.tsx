@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./GameCard.module.css";
-import React from "react";
+import React, { useRef, useState } from "react";
+import STORELOGO from "/logo.svg";
 
 type GameCard = {
     id: number;
@@ -22,6 +23,25 @@ export default function GameCard({ game }: GameCardProps) {
         ? (game.precio * (1 - game.porcentajeOferta! / 100)).toFixed(2)
         : null;
 
+    const [imageSrc, setImageSrc] = useState<string>(
+        game.fotos[0]?.url || STORELOGO
+    );
+    const [retrying, setRetrying] = useState(false);
+    const imgRef = useRef<HTMLImageElement>(null);
+
+    const handleImageError = () => {
+        if (!retrying && imgRef.current) {
+            // Retry without CORS/referrerPolicy
+            setRetrying(true);
+            imgRef.current.removeAttribute("crossOrigin");
+            imgRef.current.removeAttribute("referrerPolicy");
+            imgRef.current.src = imageSrc; // retry with same src
+        } else {
+            // Final fallback
+            setImageSrc(STORELOGO);
+        }
+    };
+
     const handlePlusClick = (e: React.MouseEvent) => {
         e.preventDefault();
         e.stopPropagation();
@@ -32,9 +52,13 @@ export default function GameCard({ game }: GameCardProps) {
         <Link to={`/game/${game.id}`} className={styles.card}>
             <div className={styles.imageWrapper}>
                 <img
-                    src={game.fotos[0]?.url || "/logo.svg"}
+                    ref={imgRef}
+                    src={imageSrc}
                     alt={game.titulo}
                     className={styles.image}
+                    onError={handleImageError}
+                    crossOrigin="anonymous"
+                    referrerPolicy="no-referrer"
                 />
                 <button className={styles.plusButton} onClick={handlePlusClick}>
                     <img src="./plus.svg" alt="Add" />

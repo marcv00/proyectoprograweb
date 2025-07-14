@@ -16,11 +16,9 @@ type GameCard = {
 
 type News = {
     id: number;
-    title: string;
-    shortsummary: string;
-    text: string;
-    readingtime: string; // "4 minutos"
-    banner: string; // URL de imagen
+    titulo: string;
+    resumen: string;
+    foto: { url: string };
 };
 
 export default function HomePage() {
@@ -49,16 +47,21 @@ export default function HomePage() {
     }, []);
 
     useEffect(() => {
-        fetch("./data/news.json")
-            .then((res) => res.json())
-            .then((data) => {
+        const httpObtenerNoticiasCarousel = async () => {
+            try {
+                const response = await fetch(
+                    `${BACKEND_URL}/noticias/carousel`
+                );
+                const data: News[] = await response.json();
                 setNews(data);
+            } catch (err) {
+                console.error("Error fetching juegos recientes:", err);
+            } finally {
                 setLoading(false);
-            })
-            .catch((err) => {
-                console.error("Failed to fetch news.json:", err);
-                setLoading(false);
-            });
+            }
+        };
+
+        httpObtenerNoticiasCarousel();
     }, []);
 
     const updateScrollButtons = () => {
