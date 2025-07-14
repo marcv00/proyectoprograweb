@@ -1,58 +1,46 @@
-// http://localhost:5173/proyectoprograweb/#/admin/stats
 import { useEffect, useState } from "react";
 import "./AdminStats.css";
-
 import ReactECharts from "echarts-for-react";
 
-const options = {
-    title: {
-        text: "Ventas Mensuales",
-        textStyle: { color: "white" },
-        left: "center",
-    },
-    tooltip: {
-        trigger: "axis",
-    },
-    xAxis: {
-        type: "category",
-        data: ["Enero", "Febrero", "Marzo", "Abril", "Mayo"],
-        axisLabel: { color: "white" },
-        axisLine: { lineStyle: { color: "white" } },
-    },
-    yAxis: {
-        type: "value",
-        axisLabel: { color: "white" },
-        axisLine: { lineStyle: { color: "white" } },
-        splitLine: { lineStyle: { color: "#444" } },
-    },
-    series: [
-        {
-            name: "Ventas",
-            type: "line", // Cambia a 'bar' si quieres gráfico de barras
-            data: [3200, 200, 1400, 2300, 4200],
-            smooth: true,
-            lineStyle: {
-                color: "rgba(154, 150, 156, 0.842)",
-                width: 3,
-            },
-            areaStyle: {
-                color: "rgba(144, 20, 202, 0.662)",
-            },
-        },
-    ],
-    backgroundColor: "#1e1e1e",
-};
+// Tipado de respuesta del backend
+interface DatosMensuales {
+    mes: string;
+    total: number;
+}
+
+interface VentasResponse {
+    total: number;
+    promedioMensual: number;
+    mesConMasVentas: string;
+    datosMensuales: DatosMensuales[];
+}
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 
 export default function AdminStats() {
-    const [sidebarWidth, setSidebarWidth] = useState(220); // Para guardar la anchura del sidebar (abierto y cerrado)
-    // Para detectar abrir y cerrar de sidebar
+    const [sidebarWidth, setSidebarWidth] = useState(220);
+    const [ventasData, setVentasData] = useState<VentasResponse | null>(null);
+
     useEffect(() => {
+        const fetchVentas = async () => {
+            try {
+                const response = await fetch(`${BACKEND_URL}/juegos/ventas-mensuales`, {
+                    credentials: "include",
+                });
+                const data = await response.json();
+                setVentasData(data);
+            } catch (error) {
+                console.error("Error al cargar datos de ventas:", error);
+            }
+        };
+
+        fetchVentas();
+
         const updateSidebarWidth = () => {
             const sidebar = document.querySelector(".sidebar");
             if (sidebar) {
-                const width = sidebar.classList.contains("collapsed")
-                    ? 60
-                    : 220;
+                const width = sidebar.classList.contains("collapsed") ? 60 : 220;
                 setSidebarWidth(width);
             }
         };
@@ -67,9 +55,48 @@ export default function AdminStats() {
         }
 
         updateSidebarWidth();
-
         return () => observer.disconnect();
     }, []);
+
+    // Configuración del gráfico con datos reales
+    const options = {
+        title: {
+            text: "Ventas Mensuales",
+            textStyle: { color: "white" },
+            left: "center",
+        },
+        tooltip: {
+            trigger: "axis",
+        },
+        xAxis: {
+            type: "category",
+            data: ventasData?.datosMensuales.map((d) => d.mes) || [],
+            axisLabel: { color: "white" },
+            axisLine: { lineStyle: { color: "white" } },
+        },
+        yAxis: {
+            type: "value",
+            axisLabel: { color: "white" },
+            axisLine: { lineStyle: { color: "white" } },
+            splitLine: { lineStyle: { color: "#444" } },
+        },
+        series: [
+            {
+                name: "Ventas",
+                type: "line",
+                data: ventasData?.datosMensuales.map((d) => d.total) || [],
+                smooth: true,
+                lineStyle: {
+                    color: "rgba(154, 150, 156, 0.842)",
+                    width: 3,
+                },
+                areaStyle: {
+                    color: "rgba(144, 20, 202, 0.662)",
+                },
+            },
+        ],
+        backgroundColor: "#1e1e1e",
+    };
 
     return (
         <div
@@ -87,23 +114,32 @@ export default function AdminStats() {
                     <div className="stats-resumen">
                         <div className="card">
                             <h4>Total ventas</h4>
-                            <p>S/. 8,000</p>
+                            <p>
+                                {ventasData
+                                    ? `S/. ${ventasData.total.toFixed(2)}`
+                                    : "Cargando..."}
+                            </p>
                         </div>
                         <div className="card">
                             <h4>Mes con más ventas</h4>
-                            <p>Mayo</p>
+                            <p>
+                                {ventasData
+                                    ? ventasData.mesConMasVentas
+                                    : "Cargando..."}
+                            </p>
                         </div>
                         <div className="card">
                             <h4>Promedio mensual</h4>
-                            <p>S/. 1,600</p>
+                            <p>
+                                {ventasData
+                                    ? `S/. ${ventasData.promedioMensual.toFixed(2)}`
+                                    : "Cargando..."}
+                            </p>
                         </div>
                     </div>
 
                     <div className="grafico-container">
-                        <ReactECharts
-                            option={options}
-                            style={{ height: 400 }}
-                        />
+                        <ReactECharts option={options} style={{ height: 400 }} />
                     </div>
                 </div>
             </div>
