@@ -44,7 +44,7 @@ export default function NewsCarousel({ news }: Props) {
     const handleClick = (index: number) => {
         const item = news[index];
         if (item) {
-            const url = `/news/${item.slug}`;
+            const url = `/noticias/${item.slug}`;
             navigate(url);
         }
     };
