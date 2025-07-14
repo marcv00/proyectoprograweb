@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import styles from "./ExplorePage.module.css";
 
 type Juego = {
+
+
     id: number;
     titulo: string;
     descripcion: string;
@@ -11,6 +13,7 @@ type Juego = {
     categorias: string[];
     plataformas: string[];
 };
+
 
 export default function ExplorePage() {
     const [juegos, setJuegos] = useState<Juego[]>([]);
