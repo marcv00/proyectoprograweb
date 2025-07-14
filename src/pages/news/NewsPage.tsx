@@ -9,6 +9,7 @@ type News = {
     titulo: string;
     resumen: string;
     tiempoLectura: number;
+    slug: string;
     foto: {
         url: string;
     };
@@ -19,12 +20,6 @@ type Categoria = {
     id: number;
     nombre: string;
 };
-
-const slugify = (text: string) =>
-    text
-        .toLowerCase()
-        .replace(/\s+/g, "-")
-        .replace(/[^\w-]+/g, "");
 
 export default function NewsPage() {
     const [news, setNews] = useState<News[] | null>(null);
@@ -87,10 +82,7 @@ export default function NewsPage() {
     return (
         <div className={styles.container}>
             {/* Featured News */}
-            <Link
-                to={`${slugify(featured.titulo)}`}
-                className={styles.featuredCard}
-            >
+            <Link to={`${featured.slug}`} className={styles.featuredCard}>
                 <img
                     src={featured.foto.url}
                     alt="Banner"
@@ -126,7 +118,7 @@ export default function NewsPage() {
                 {remainingNews.map((item) => (
                     <Link
                         key={item.id}
-                        to={`${slugify(item.titulo)}`}
+                        to={`${item.slug}`}
                         className={styles.card}
                     >
                         <img

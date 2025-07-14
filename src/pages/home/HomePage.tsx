@@ -18,6 +18,7 @@ type News = {
     id: number;
     titulo: string;
     resumen: string;
+    slug: string;
     foto: { url: string };
 };
 

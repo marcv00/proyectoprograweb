@@ -6,23 +6,13 @@ type News = {
     id: number;
     titulo: string;
     resumen: string;
+    slug: string;
     foto: { url: string };
 };
 
 type Props = {
     news: News[];
 };
-
-function slugify(title: string) {
-    return title
-        .normalize("NFD") // descompone caracteres con tilde: "á" → "a" + "~"
-        .replace(/[\u0300-\u036f]/g, "") // remueve los diacríticos
-        .replace(/ñ/g, "n") // convierte ñ explícitamente
-        .replace(/[^a-z0-9\s]/gi, "") // remueve cualquier otro símbolo
-        .toLowerCase()
-        .trim()
-        .replace(/\s+/g, "-"); // convierte espacios a guiones
-}
 
 export default function NewsCarousel({ news }: Props) {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -54,7 +44,7 @@ export default function NewsCarousel({ news }: Props) {
     const handleClick = (index: number) => {
         const item = news[index];
         if (item) {
-            const url = `/news/${slugify(item.titulo)}`;
+            const url = `/news/${item.slug}`;
             navigate(url);
         }
     };
