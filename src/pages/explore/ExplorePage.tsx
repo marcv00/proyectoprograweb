@@ -3,12 +3,14 @@ import STORELOGO from "/logo.svg";
 import styles from "./ExplorePage.module.css";
 import { useCart } from "../../context/CartContext";
 import PLUSICON from "/plus.svg";
+import { Link } from "react-router-dom";
 
 type Juego = {
     id: number;
     titulo: string;
     descripcion: string;
     precio: number;
+    slug: string;
     porcentajeOferta: number | null;
     fotos: { url: string }[];
     categorias: string[];
@@ -52,9 +54,6 @@ function RetryImage({ src, alt }: { src?: string; alt: string }) {
 
 export default function ExplorePage() {
     const [juegos, setJuegos] = useState<Juego[]>([]);
-    const [juegoSeleccionado, setJuegoSeleccionado] = useState<Juego | null>(
-        null
-    );
     const [filtroCategoria, setFiltroCategoria] = useState("");
     const [filtroOferta, setFiltroOferta] = useState(false);
     const [filtroPlataforma, setFiltroPlataforma] = useState("");
@@ -62,21 +61,10 @@ export default function ExplorePage() {
     const [categoriasDisponibles, setCategoriasDisponibles] = useState<
         Categoria[]
     >([]);
-
     const [plataformasDisponibles, setPlataformasDisponibles] = useState<
         Plataforma[]
     >([]);
-    const abrirDetalle = (juego: Juego) => setJuegoSeleccionado(juego);
-    const cerrarDetalle = () => setJuegoSeleccionado(null);
     const { addToCart } = useCart();
-
-    useEffect(() => {
-        const handleKey = (e: KeyboardEvent) => {
-            if (e.key === "Escape") cerrarDetalle();
-        };
-        window.addEventListener("keydown", handleKey);
-        return () => window.removeEventListener("keydown", handleKey);
-    }, []);
 
     useEffect(() => {
         const fetchJuegos = async () => {
@@ -111,7 +99,7 @@ export default function ExplorePage() {
                 const data = await res.json();
                 setPlataformasDisponibles(data);
             } catch (error) {
-                console.error("Error al cargar categorías:", error);
+                console.error("Error al cargar plataformas:", error);
             }
         };
 
@@ -199,15 +187,9 @@ export default function ExplorePage() {
 
             <div className={styles.juegosGrid}>
                 {juegosFiltrados.map((juego) => {
-                    const handlePlusClick = (e: React.MouseEvent) => {
-                        e.stopPropagation(); // previene que abra el modal
-                        addToCart(juego);
-                    };
-
                     const hasDiscount =
                         typeof juego.porcentajeOferta === "number" &&
                         juego.porcentajeOferta > 0;
-
                     const discountedPrice = hasDiscount
                         ? (
                               juego.precio *
@@ -216,10 +198,10 @@ export default function ExplorePage() {
                         : null;
 
                     return (
-                        <div
+                        <Link
+                            to={`/game/${juego.slug}`}
                             key={juego.id}
                             className={styles.juegoCard}
-                            onClick={() => abrirDetalle(juego)}
                         >
                             <div className={styles.imageWrapper}>
                                 <RetryImage
@@ -228,7 +210,10 @@ export default function ExplorePage() {
                                 />
                                 <button
                                     className={styles.plusButton}
-                                    onClick={handlePlusClick}
+                                    onClick={(e) => {
+                                        e.preventDefault(); // no navega al hacer click
+                                        addToCart(juego);
+                                    }}
                                     aria-label="Agregar al carrito"
                                 >
                                     <img src={PLUSICON} alt="+" />
@@ -261,52 +246,10 @@ export default function ExplorePage() {
                                     </span>
                                 )}
                             </div>
-                        </div>
+                        </Link>
                     );
                 })}
             </div>
-
-            {juegoSeleccionado && (
-                <div className={styles.modal} onClick={cerrarDetalle}>
-                    <div
-                        className={styles.modalContent}
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <span className={styles.cerrar} onClick={cerrarDetalle}>
-                            &times;
-                        </span>
-                        <h2>{juegoSeleccionado.titulo}</h2>
-                        <div className={styles.galeria}>
-                            {juegoSeleccionado.fotos.map((foto, i) => (
-                                <img
-                                    key={i}
-                                    src={foto.url}
-                                    alt={`${juegoSeleccionado.titulo} ${i}`}
-                                />
-                            ))}
-                        </div>
-                        <p>{juegoSeleccionado.descripcion}</p>
-                        <p>
-                            <strong>Categorías:</strong>{" "}
-                            {juegoSeleccionado.categorias.join(", ")}
-                        </p>
-                        <p>
-                            <strong>Plataformas:</strong>{" "}
-                            {juegoSeleccionado.plataformas.join(", ")}
-                        </p>
-                        <p>
-                            <strong>Precio:</strong> S/{" "}
-                            {juegoSeleccionado.precio.toFixed(2)}
-                        </p>
-                        {juegoSeleccionado.porcentajeOferta !== null && (
-                            <p className={styles.etiquetaOferta}>
-                                ¡Oferta del {juegoSeleccionado.porcentajeOferta}
-                                %!
-                            </p>
-                        )}
-                    </div>
-                </div>
-            )}
         </div>
     );
 }

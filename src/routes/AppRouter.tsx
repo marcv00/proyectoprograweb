@@ -17,6 +17,7 @@ import BestSellingPage from "../pages/best/BestSellingPage";
 import BestReviewedPage from "../pages/best/BestReviewedPage";
 import GameDetailPage from "../pages/game/GameDetailPage";
 import NewsPage from "../pages/news/NewsPage";
+import NewsSinglePage from "../pages/news/NewsSinglePage";
 
 import CheckoutPage from "../pages/purchase/CheckoutPage";
 import PurchaseConfirmationPage from "../pages/purchase/PurchaseConfirmationPage";
@@ -38,6 +39,10 @@ export function AppRouter() {
                     <Route path="/explorar" element={<ExplorePage />} />
                     <Route path="/noticias" element={<NewsPage />} />
                     <Route
+                        path="/noticias/:slug"
+                        element={<NewsSinglePage />}
+                    />
+                    <Route
                         path="/mejor-vendidos"
                         element={<BestSellingPage />}
                     />
@@ -46,6 +51,7 @@ export function AppRouter() {
                         element={<BestReviewedPage />}
                     />
                     <Route path="/mis-juegos" element={<GameDetailPage />} />
+                    <Route path="/game/:slug" element={<GameDetailPage />} />
                     <Route path="/checkout" element={<CheckoutPage />} />
                     <Route
                         path="/config/editar-perfil"
@@ -69,7 +75,6 @@ export function AppRouter() {
                     path="/purchase-confirmation"
                     element={<PurchaseConfirmationPage />}
                 />
-
                 <Route path="*" element={<NotFoundPage />} />
 
                 {/* Layout para administrador */}

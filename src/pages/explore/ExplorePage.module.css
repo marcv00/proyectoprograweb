@@ -135,7 +135,7 @@
 .juegoCard {
   background-color: transparent;
   border-radius: 12px;
-  
+  text-decoration: none;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   cursor: pointer;
   position: relative;
@@ -175,6 +175,7 @@
   margin-top: 12px;
   margin-bottom: 18px;
   font-size: 16px;
+  color: white;
 }
 
 .plataformas {

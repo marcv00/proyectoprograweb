@@ -10,6 +10,7 @@ type GameCard = {
     id: number;
     titulo: string;
     descripcion: string;
+    slug: string;
     precio: number;
     porcentajeOferta: number | null;
     fotos: { url: string }[];
@@ -70,7 +71,6 @@ export default function HomePage() {
     const handleAddToCart = async (game: GameCard) => {
         await addToCart(game);
     };
-
 
     const updateScrollButtons = () => {
         const el = sliderRef.current;
@@ -135,7 +135,11 @@ export default function HomePage() {
                         {loading && <p>Cargando juegos...</p>}
                         {!loading &&
                             games?.map((game, index) => (
-                                <GameCard key={index} game={game} onAddToCart={handleAddToCart}/>
+                                <GameCard
+                                    key={index}
+                                    game={game}
+                                    onAddToCart={handleAddToCart}
+                                />
                             ))}
                     </div>
                     <div className={styles.rightOverlay} />

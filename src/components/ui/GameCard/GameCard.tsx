@@ -8,6 +8,7 @@ type GameCard = {
     titulo: string;
     descripcion: string;
     precio: number;
+    slug: string;
     porcentajeOferta: number | null;
     fotos: { url: string }[];
 };
@@ -16,7 +17,6 @@ type GameCardProps = {
     game: GameCard;
     onAddToCart?: (game: GameCard) => void;
 };
-
 
 export default function GameCard({ game, onAddToCart }: GameCardProps) {
     const hasDiscount =
@@ -54,7 +54,7 @@ export default function GameCard({ game, onAddToCart }: GameCardProps) {
     };
 
     return (
-        <Link to={`/game/${game.id}`} className={styles.card}>
+        <Link to={`/game/${game.slug}`} className={styles.card}>
             <div className={styles.imageWrapper}>
                 <img
                     ref={imgRef}
