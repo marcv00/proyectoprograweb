@@ -1,11 +1,13 @@
 // src/context/CartContext.tsx
 import { createContext, useContext, useState, useEffect } from "react";
 import type { ReactNode } from "react";
+import { useAuth } from "./AuthContext";
 
 interface Game {
     id: number;
     titulo: string;
     precio: number;
+    porcentajeOferta: number | null;
     fotos: { url: string }[];
 }
 
@@ -16,26 +18,37 @@ interface CartContextType {
     closeCart: () => void;
     cartItems: Game[];
     addToCart: (game: Game) => Promise<void>;
-    removeFromCart: (juegoId: number) => Promise<void>; // ← NUEVO
+    removeFromCart: (juegoId: number) => Promise<void>;
     reloadCart: () => Promise<void>;
 }
 
-
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
-const usuarioId = 1; // ← Este puedes adaptarlo si luego tienes login real
-
 export function CartProvider({ children }: { children: ReactNode }) {
+    const { token } = useAuth(); // 👈 traemos el token del contexto
+    console.log(token);
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [cartItems, setCartItems] = useState<Game[]>([]);
+    const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
+    const getAuthHeader = (): Record<string, string> => ({
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        "Content-Type": "application/json",
+    });
 
     const toggleCart = () => setIsCartOpen((prev) => !prev);
     const openCart = () => setIsCartOpen(true);
     const closeCart = () => setIsCartOpen(false);
 
     const reloadCart = async () => {
+        if (!token) return;
         try {
-            const res = await fetch(`http://localhost:5000/usuarios/carrito/${usuarioId}`);
+            const res = await fetch(`${BACKEND_URL}/usuarios/carrito`, {
+                headers: getAuthHeader(),
+            });
+
+            if (!res.ok) throw new Error("Fallo la carga del carrito");
+
             const data = await res.json();
             setCartItems(data);
         } catch (error) {
@@ -43,68 +56,69 @@ export function CartProvider({ children }: { children: ReactNode }) {
         }
     };
 
-
-
     const addToCart = async (game: Game) => {
-        if (cartItems.some(item => item.id === game.id)) {
+        if (!token) {
+            alert("Debes iniciar sesión para agregar al carrito");
+            return;
+        }
+
+        if (cartItems.some((item) => item.id === game.id)) {
             alert("El juego ya está en el carrito");
             return;
         }
 
         try {
-            const response = await fetch("http://localhost:5000/usuarios/agregar-a-carrito", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    usuarioId,
-                    juegoId: game.id
-                })
-            });
+            const response = await fetch(
+                `${BACKEND_URL}/usuarios/agregar-a-carrito`,
+                {
+                    method: "POST",
+                    headers: getAuthHeader(),
+                    body: JSON.stringify({ juegoId: game.id }),
+                }
+            );
 
             const data = await response.json();
 
             if (!response.ok) {
                 alert(data.error || "Error al agregar al carrito");
             } else {
-                await reloadCart(); // actualizar después de agregar
+                await reloadCart();
             }
         } catch (error) {
             alert("No se pudo conectar con el servidor");
             console.error("Error al agregar al carrito:", error);
         }
     };
-const removeFromCart = async (juegoId: number) => {
-    try {
-        const response = await fetch("http://localhost:5000/usuarios/eliminar-del-carrito", {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                usuarioId: 1,
-                juegoId: juegoId,
-            }),
-        });
 
-        const data = await response.json();
+    const removeFromCart = async (juegoId: number) => {
+        if (!token) return;
 
-        if (!response.ok) {
-            alert(data.error || "Error al eliminar del carrito");
-        } else {
-            await reloadCart();
+        try {
+            const response = await fetch(
+                `${BACKEND_URL}/usuarios/eliminar-del-carrito`,
+                {
+                    method: "DELETE",
+                    headers: getAuthHeader(),
+                    body: JSON.stringify({ juegoId }),
+                }
+            );
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                alert(data.error || "Error al eliminar del carrito");
+            } else {
+                await reloadCart();
+            }
+        } catch (error) {
+            console.error("Error al eliminar del carrito:", error);
+            alert("No se pudo conectar con el servidor");
         }
-    } catch (error) {
-        console.error("Error al eliminar del carrito:", error);
-        alert("No se pudo conectar con el servidor");
-    }
-};
-
-
-
+    };
 
     useEffect(() => {
-        reloadCart();
-    }, []);
+        if (token) reloadCart(); // 👈 se recarga si hay token válido
+    }, [token]);
 
     return (
         <CartContext.Provider
@@ -116,7 +130,7 @@ const removeFromCart = async (juegoId: number) => {
                 cartItems,
                 addToCart,
                 removeFromCart,
-                reloadCart
+                reloadCart,
             }}
         >
             {children}

@@ -7,8 +7,6 @@ import CtaButton from "../Buttons/CtaButon/CtaButton";
 import { useCart } from "../../../context/CartContext";
 import { useEffect, useState, useRef } from "react";
 
-
-
 export default function Navbar() {
     const { role, logout, name } = useAuth();
     const location = useLocation();
@@ -129,7 +127,6 @@ export default function Navbar() {
                                         alt="Editar perfil"
                                     />
                                     Editar mi perfil
-                                    
                                 </Link>
                                 <button
                                     onClick={logout}

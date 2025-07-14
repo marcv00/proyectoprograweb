@@ -16,30 +16,45 @@ export default function LoginPage() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setError("");
 
         try {
-            const res = await fetch("./data/users.json");
-            const users = await res.json();
-
-            const matchedUser = users.find(
-                (user: any) =>
-                    user.email === email && user.password === password
+            const res = await fetch(
+                `${import.meta.env.VITE_BACKEND_URL}/usuarios/login`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        correo: email,
+                        contrasena: password,
+                    }),
+                }
             );
 
-            if (matchedUser) {
-                login(matchedUser.role, matchedUser.name);
+            const data = await res.json();
 
-                if (matchedUser.role === "admin") {
-                    navigate("/admin");
-                } else {
-                    navigate("/");
-                }
-            } else {
-                setError("Correo y/o contraseña incorrectos");
+            if (!res.ok) {
+                throw new Error(data.error || "Error al iniciar sesión");
             }
-        } catch (err) {
-            console.error(err);
-            setError("Error al verificar credenciales.");
+
+            const { token, usuario } = data;
+
+            // Guarda el token para futuras peticiones protegidas
+            localStorage.setItem("token", token);
+
+            // Llama a tu context con rol y nombre
+            login(usuario.rol.toLowerCase(), usuario.nombre, token);
+
+            if (usuario.rol === "ADMIN") {
+                navigate("/admin");
+            } else {
+                navigate("/");
+            }
+        } catch (err: any) {
+            console.error("Login error:", err);
+            setError(err.message || "Error al iniciar sesión");
         }
     };
 
