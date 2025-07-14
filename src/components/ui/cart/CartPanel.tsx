@@ -20,7 +20,6 @@ export default function CartPanel() {
         await removeFromCart(juegoId);
     };
 
-
     const getTotal = () => {
         return cartItems.reduce((acc, item) => acc + item.precio, 0);
     };
@@ -52,7 +51,7 @@ export default function CartPanel() {
                         <h3 style={{ marginBottom: "10px" }}>
                             Juegos seleccionados:
                         </h3>
-                        {cartItems.map((item, index) => (
+                        {cartItems.map((item) => (
                             <div key={item.id} className="cartItem">
                                 <img
                                     src={item.fotos[0]?.url}
@@ -63,7 +62,9 @@ export default function CartPanel() {
                                     <p>{item.precio.toFixed(2)} PEN</p>
                                     {
                                         <button
-                                            onClick={() => handleRemove(item.id)}
+                                            onClick={() =>
+                                                handleRemove(item.id)
+                                            }
                                             className="removeBtn"
                                         >
                                             Eliminar
