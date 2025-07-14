@@ -43,7 +43,7 @@ export default function BestSellingPage() {
             imagen: juego.fotos[0]?.url ?? "", // Asegúrate de que haya al menos una foto
             precio: `S/. ${precioNum.toFixed(2)}`,
             precioAntes: precioAntes ? `S/. ${precioAntes}` : undefined,
-            descuento: descuento > 0 ? `-${Math.round(descuento * 100)}%` : undefined,
+            descuento: descuento > 0 ? `-${Math.round(descuento)}%` : undefined,
             plataforma: juego.plataformas,
           };
         });
