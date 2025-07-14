@@ -1,81 +1,71 @@
-import "./ForgotPasswordPage.css";
-import { useState } from "react";
-import ForgotPasswordIcon from "/ForgotPasswordIcon.svg";
-import { useNavigate } from "react-router-dom";
-import "../auth/LoginPage.css";
+import React, { useState } from 'react'
 
-export default function SetNewPasswordPage() {
-    const navigate = useNavigate();
-    const [password, setPassword] = useState("");
-    const [passwordRepeat, setPasswordRepeat] = useState("");
-    const [mensaje, setMensaje] = useState("");
-    const [mensajeTipo, setMensajeTipo] = useState(""); // "exito" | "error"
-    const [bloqueado, setBloqueado] = useState(false);
+const SetNewPasswordPage = () => {
+  const [correo, setCorreo] = useState('')
+  const [nuevaContrasena, setNuevaContrasena] = useState('')
+  const [mensaje, setMensaje] = useState('')
+  const [error, setError] = useState('')
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
 
-        if (password.length < 8) {
-            setMensaje("La contraseña debe tener al menos 8 caracteres.");
-            setMensajeTipo("error");
-            return;
-        }
+    try {
+      const response = await fetch('http://localhost:5000/usuarios/reestablecer', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ correo, nuevaContrasena }),
+      })
 
-        if (password === passwordRepeat) {
-            setMensaje(
-                "Seras redireccionado a la pagina de Login para que puedas ingresar con tu nueva contraseña."
-            );
-            setMensajeTipo("exito");
-            setBloqueado(true);
-            setTimeout(() => navigate("/login"), 3000);
-        } else {
-            setMensaje(
-                "Las contraseñas no coinciden. Por favor, verifica e intenta nuevamente."
-            );
-            setMensajeTipo("error");
-        }
-    };
+      const data = await response.json()
 
-    return (
-        <div className="login-container">
-            <img
-                src={ForgotPasswordIcon}
-                alt="ForgotPassword"
-                className="forgot-password-icon"
-            />
-            <h2>Actualizacion de contraseña</h2>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="password"
-                    placeholder="Ingresa una nueva contraseña"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-                <input
-                    type="password"
-                    placeholder="Confirma tu nueva contraseña"
-                    value={passwordRepeat}
-                    onChange={(e) => setPasswordRepeat(e.target.value)}
-                    required
-                />
-                <button type="submit" disabled={bloqueado}>
-                    Confirmar
-                </button>
-            </form>
-            {mensaje && (
-                <p
-                    style={{
-                        color: mensajeTipo === "exito" ? "green" : "red",
-                        marginTop: "10px",
-                    }}
-                >
-                    {mensaje}
-                </p>
-            )}
+      if (response.ok) {
+        setMensaje(data.mensaje)
+        setError('')
+      } else {
+        setMensaje('')
+        setError(data.error || 'Error al actualizar la contraseña')
+      }
+    } catch (err) {
+      setMensaje('')
+      setError('No se pudo conectar con el servidor')
+    }
+  }
+
+  return (
+    <div style={{ maxWidth: '400px', margin: 'auto' }}>
+      <h2>Restablecer contraseña</h2>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Correo:</label>
+          <input
+            type="email"
+            value={correo}
+            onChange={(e) => setCorreo(e.target.value)}
+            required
+          />
         </div>
-    );
+        <div>
+          <label>Nueva contraseña:</label>
+          <input
+            type="password"
+            value={nuevaContrasena}
+            onChange={(e) => setNuevaContrasena(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit">Actualizar contraseña</button>
+      </form>
+
+      {mensaje && <p style={{ color: 'green' }}>{mensaje}</p>}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+    </div>
+  )
 }
+
+export default SetNewPasswordPage
+
 
 // Nota:
 // - Para ver como va quedando tu diseño, esta es la ruta:
