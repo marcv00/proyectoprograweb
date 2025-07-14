@@ -1,5 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import STORELOGO from "/logo.svg";
 import styles from "./ExplorePage.module.css";
+import { useCart } from "../../context/CartContext";
+import PLUSICON from "/plus.svg";
 
 type Juego = {
     id: number;
@@ -12,16 +15,60 @@ type Juego = {
     plataformas: string[];
 };
 
+type Categoria = {
+    id: number;
+    nombre: string;
+};
+
+type Plataforma = {
+    id: number;
+    nombre: string;
+};
+
+function RetryImage({ src, alt }: { src?: string; alt: string }) {
+    const [imageSrc, setImageSrc] = useState(src || STORELOGO);
+    const [retrying, setRetrying] = useState(false);
+    const imgRef = useRef<HTMLImageElement>(null);
+
+    const handleImageError = () => {
+        if (!retrying && imgRef.current) {
+            setRetrying(true);
+            imgRef.current.src = imageSrc;
+        } else {
+            setImageSrc(STORELOGO);
+        }
+    };
+
+    return (
+        <img
+            ref={imgRef}
+            src={imageSrc}
+            alt={alt}
+            className={styles.image}
+            onError={handleImageError}
+        />
+    );
+}
+
 export default function ExplorePage() {
     const [juegos, setJuegos] = useState<Juego[]>([]);
-    const [juegoSeleccionado, setJuegoSeleccionado] = useState<Juego | null>(null);
+    const [juegoSeleccionado, setJuegoSeleccionado] = useState<Juego | null>(
+        null
+    );
     const [filtroCategoria, setFiltroCategoria] = useState("");
     const [filtroOferta, setFiltroOferta] = useState(false);
     const [filtroPlataforma, setFiltroPlataforma] = useState("");
     const [rangoPrecio, setRangoPrecio] = useState<[number, number]>([0, 70]);
+    const [categoriasDisponibles, setCategoriasDisponibles] = useState<
+        Categoria[]
+    >([]);
 
+    const [plataformasDisponibles, setPlataformasDisponibles] = useState<
+        Plataforma[]
+    >([]);
     const abrirDetalle = (juego: Juego) => setJuegoSeleccionado(juego);
     const cerrarDetalle = () => setJuegoSeleccionado(null);
+    const { addToCart } = useCart();
 
     useEffect(() => {
         const handleKey = (e: KeyboardEvent) => {
@@ -34,7 +81,9 @@ export default function ExplorePage() {
     useEffect(() => {
         const fetchJuegos = async () => {
             try {
-                const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/juegos/explorar`);
+                const res = await fetch(
+                    `${import.meta.env.VITE_BACKEND_URL}/juegos/explorar`
+                );
                 const data = await res.json();
                 setJuegos(data);
             } catch (error) {
@@ -42,23 +91,51 @@ export default function ExplorePage() {
             }
         };
 
+        const fetchCategorias = async () => {
+            try {
+                const res = await fetch(
+                    `${import.meta.env.VITE_BACKEND_URL}/categorias/juegos`
+                );
+                const data = await res.json();
+                setCategoriasDisponibles(data);
+            } catch (error) {
+                console.error("Error al cargar categorías:", error);
+            }
+        };
+
+        const fetchPlataformas = async () => {
+            try {
+                const res = await fetch(
+                    `${import.meta.env.VITE_BACKEND_URL}/plataformas`
+                );
+                const data = await res.json();
+                setPlataformasDisponibles(data);
+            } catch (error) {
+                console.error("Error al cargar categorías:", error);
+            }
+        };
+
         fetchJuegos();
+        fetchCategorias();
+        fetchPlataformas();
     }, []);
 
     const juegosFiltrados = juegos.filter((juego) => {
         const cumpleCategoria = filtroCategoria
-            ? juego.categorias.some((cat) =>
-                  cat.toLowerCase().includes(filtroCategoria.toLowerCase())
-              )
+            ? juego.categorias.includes(filtroCategoria)
             : true;
-        const cumpleOferta = filtroOferta ? juego.porcentajeOferta !== null : true;
+        const cumpleOferta = filtroOferta
+            ? juego.porcentajeOferta !== null
+            : true;
         const cumplePlataforma = filtroPlataforma
             ? juego.plataformas.includes(filtroPlataforma)
             : true;
         const cumplePrecio =
             juego.precio >= rangoPrecio[0] && juego.precio <= rangoPrecio[1];
 
-        return cumpleCategoria && cumpleOferta && cumplePlataforma && cumplePrecio;
+        return (
+            cumpleCategoria && cumpleOferta && cumplePlataforma && cumplePrecio
+        );
     });
 
     return (
@@ -68,12 +145,17 @@ export default function ExplorePage() {
             <div className={styles.filtros}>
                 <label>
                     Categoría:
-                    <input
-                        type="text"
-                        placeholder="Ej: Aventura"
+                    <select
                         value={filtroCategoria}
                         onChange={(e) => setFiltroCategoria(e.target.value)}
-                    />
+                    >
+                        <option value="">Todas</option>
+                        {categoriasDisponibles.map((cat) => (
+                            <option key={cat.id} value={cat.nombre}>
+                                {cat.nombre}
+                            </option>
+                        ))}
+                    </select>
                 </label>
 
                 <label>
@@ -83,13 +165,11 @@ export default function ExplorePage() {
                         onChange={(e) => setFiltroPlataforma(e.target.value)}
                     >
                         <option value="">Todas</option>
-                        <option value="PC">Windows</option>
-                        <option value="PS4">PS4</option>
-                        <option value="PS5">PS5</option>
-                        <option value="Xbox">Xbox</option>
-                        <option value="Switch">Switch</option>
-                        <option value="Móvil">Móvil</option>
-                        <option value="macOS">macOS</option>
+                        {plataformasDisponibles.map((plat) => (
+                            <option key={plat.id} value={plat.nombre}>
+                                {plat.nombre}
+                            </option>
+                        ))}
                     </select>
                 </label>
 
@@ -104,42 +184,86 @@ export default function ExplorePage() {
 
                 <label>
                     Rango de Precio: S/{rangoPrecio[0]} - S/{rangoPrecio[1]}
+                    <input
+                        type="range"
+                        min="0"
+                        max="70"
+                        step="1"
+                        value={rangoPrecio[1]}
+                        onChange={(e) =>
+                            setRangoPrecio([0, Number(e.target.value)])
+                        }
+                    />
                 </label>
-                <input
-                    type="range"
-                    min="0"
-                    max="70"
-                    step="1"
-                    value={rangoPrecio[1]}
-                    onChange={(e) =>
-                        setRangoPrecio([0, Number(e.target.value)])
-                    }
-                />
             </div>
 
             <div className={styles.juegosGrid}>
-                {juegosFiltrados.map((juego) => (
-                    <div
-                        key={juego.id}
-                        className={styles.juegoCard}
-                        onClick={() => abrirDetalle(juego)}
-                    >
-                        <img src={juego.fotos[0]?.url} alt={juego.titulo} />
-                        <h3>{juego.titulo}</h3>
-                        <p>{juego.categorias.join(", ")}</p>
-                        <span className={styles.plataformas}>
-                            {juego.plataformas.join(", ")}
-                        </span>
-                        <p className={styles.precio}>
-                            S/ {juego.precio.toFixed(2)}
-                        </p>
-                        {juego.porcentajeOferta !== null && (
-                            <span className={styles.etiquetaOferta}>
-                                ¡Oferta!
+                {juegosFiltrados.map((juego) => {
+                    const handlePlusClick = (e: React.MouseEvent) => {
+                        e.stopPropagation(); // previene que abra el modal
+                        addToCart(juego);
+                    };
+
+                    const hasDiscount =
+                        typeof juego.porcentajeOferta === "number" &&
+                        juego.porcentajeOferta > 0;
+
+                    const discountedPrice = hasDiscount
+                        ? (
+                              juego.precio *
+                              (1 - juego.porcentajeOferta! / 100)
+                          ).toFixed(2)
+                        : null;
+
+                    return (
+                        <div
+                            key={juego.id}
+                            className={styles.juegoCard}
+                            onClick={() => abrirDetalle(juego)}
+                        >
+                            <div className={styles.imageWrapper}>
+                                <RetryImage
+                                    src={juego.fotos[0]?.url}
+                                    alt={juego.titulo}
+                                />
+                                <button
+                                    className={styles.plusButton}
+                                    onClick={handlePlusClick}
+                                    aria-label="Agregar al carrito"
+                                >
+                                    <img src={PLUSICON} alt="+" />
+                                </button>
+                            </div>
+
+                            <h3>{juego.titulo}</h3>
+                            <p className={styles.categorias}>
+                                {juego.categorias.join(", ")}
+                            </p>
+                            <span className={styles.plataformas}>
+                                {juego.plataformas.join(", ")}
                             </span>
-                        )}
-                    </div>
-                ))}
+                            <div className={styles.precio}>
+                                {hasDiscount ? (
+                                    <>
+                                        <span className={styles.discount}>
+                                            -{juego.porcentajeOferta}%
+                                        </span>
+                                        <span className={styles.oldPrice}>
+                                            {juego.precio.toFixed(2)} PEN
+                                        </span>
+                                        <span className={styles.newPrice}>
+                                            {discountedPrice} PEN
+                                        </span>
+                                    </>
+                                ) : (
+                                    <span className={styles.newPrice}>
+                                        S/ {juego.precio.toFixed(2)}
+                                    </span>
+                                )}
+                            </div>
+                        </div>
+                    );
+                })}
             </div>
 
             {juegoSeleccionado && (
@@ -176,7 +300,8 @@ export default function ExplorePage() {
                         </p>
                         {juegoSeleccionado.porcentajeOferta !== null && (
                             <p className={styles.etiquetaOferta}>
-                                ¡Oferta del {juegoSeleccionado.porcentajeOferta}%!
+                                ¡Oferta del {juegoSeleccionado.porcentajeOferta}
+                                %!
                             </p>
                         )}
                     </div>

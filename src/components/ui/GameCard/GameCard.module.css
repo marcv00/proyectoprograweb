@@ -94,6 +94,7 @@
   padding: 6px;
   border-radius: 50%;
   opacity: 0;
+  pointer-events: none;
   transition: opacity 0.2s ease, transform 0.2s ease-in-out;
   z-index: 2;
   cursor: pointer;
@@ -106,28 +107,12 @@
 
 .card:hover .plusButton {
   opacity: 1;
+  pointer-events: all;
 }
 
 .plusButton:hover {
   transform: scale(1.2);
 }
-
-.buyButton {
-  margin-top: 10px;
-  padding: 8px 16px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-}
-
-.buyButton:hover {
-  background-color: #0056b3;
-}
-
 
 .details {
   display: flex;
