@@ -13,9 +13,11 @@ type GameCard = {
 
 type GameCardProps = {
     game: GameCard;
+    onAddToCart?: (game: GameCard) => void;
 };
 
-export default function GameCard({ game }: GameCardProps) {
+
+export default function GameCard({ game, onAddToCart }: GameCardProps) {
     const hasDiscount =
         typeof game.porcentajeOferta === "number" && game.porcentajeOferta > 0;
     const discountedPrice = hasDiscount
@@ -26,6 +28,9 @@ export default function GameCard({ game }: GameCardProps) {
         e.preventDefault();
         e.stopPropagation();
         console.log("Clicked + on", game.titulo);
+        if (onAddToCart) {
+            onAddToCart(game); // ← Aquí se dispara lo que venga desde HomePage.tsx
+        }
     };
 
     return (

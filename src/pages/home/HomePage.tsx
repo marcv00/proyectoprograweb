@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import GameCard from "../../components/ui/GameCard/GameCard";
 import styles from "./HomePage.module.css";
 import NewsCarousel from "../../components/ui/NewsCarousel/NewsCarousel";
+import { useCart } from "../../context/CartContext";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -60,6 +61,12 @@ export default function HomePage() {
                 setLoading(false);
             });
     }, []);
+    const { addToCart } = useCart();
+
+    const handleAddToCart = async (game: GameCard) => {
+        await addToCart(game);
+    };
+
 
     const updateScrollButtons = () => {
         const el = sliderRef.current;
@@ -124,7 +131,7 @@ export default function HomePage() {
                         {loading && <p>Cargando juegos...</p>}
                         {!loading &&
                             games?.map((game, index) => (
-                                <GameCard key={index} game={game} />
+                                <GameCard key={index} game={game} onAddToCart={handleAddToCart}/>
                             ))}
                     </div>
                     <div className={styles.rightOverlay} />
