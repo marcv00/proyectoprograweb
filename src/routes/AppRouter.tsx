@@ -11,6 +11,7 @@ import EditProfilePage from "../pages/config/EditProfilePage";
 import ConfirmationPage from "../pages/auth/ConfirmationPage";
 import ForgotPasswordPage from "../pages/auth/ForgotPasswordPage";
 import SetNewPasswordPage from "../pages/auth/SetNewPasswordPage";
+import MisJuegosPage from "../pages/game/MisJuegosPage";
 
 import ExplorePage from "../pages/explore/ExplorePage";
 import BestSellingPage from "../pages/best/BestSellingPage";
@@ -50,7 +51,7 @@ export function AppRouter() {
                         path="/mejor-valorados"
                         element={<BestReviewedPage />}
                     />
-                    <Route path="/mis-juegos" element={<GameDetailPage />} />
+                    <Route path="/mis-juegos" element={<MisJuegosPage />} />
                     <Route path="/game/:slug" element={<GameDetailPage />} />
                     <Route path="/checkout" element={<CheckoutPage />} />
                     <Route
