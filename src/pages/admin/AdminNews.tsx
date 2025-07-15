@@ -16,28 +16,19 @@ export default function AdminNews() {
     const [sidebarWidth, setSidebarWidth] = useState(220);
     const [newsList, setNewsList] = useState<News[]>([]);
     const [filteredNews, setFilteredNews] = useState<News[]>([]);
-    const [filters, setFilters] = useState({
-        title: "",
-        date: "",
-    });
+    const [filters, setFilters] = useState({ title: "", date: "" });
     const [editingNews, setEditingNews] = useState<News | null>(null);
     const [creatingNew, setCreatingNew] = useState(false);
+    const [noticiaAEliminar, setNoticiaAEliminar] = useState<number | null>(null);
+    const [mostrarModalConfirmacion, setMostrarModalConfirmacion] = useState(false);
 
-    // Estado para manejar el modal de confirmación
-    const [noticiaAEliminar, setNoticiaAEliminar] = useState<number | null>(
-        null
-    );
-    const [mostrarModalConfirmacion, setMostrarModalConfirmacion] =
-        useState(false);
+    const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-    // Sidebar width watcher
     useEffect(() => {
         const updateSidebarWidth = () => {
             const sidebar = document.querySelector(".sidebar");
             if (sidebar) {
-                const width = sidebar.classList.contains("collapsed")
-                    ? 60
-                    : 220;
+                const width = sidebar.classList.contains("collapsed") ? 60 : 220;
                 setSidebarWidth(width);
             }
         };
@@ -52,74 +43,49 @@ export default function AdminNews() {
         }
 
         updateSidebarWidth();
-
         return () => observer.disconnect();
     }, []);
 
-    // Simular carga de noticias
     useEffect(() => {
-        const fakeNews: News[] = [
-            {
-                id: 1,
-                title: "Nuevo juego anunciado",
-                shortsummary: "Una gran sorpresa llega a los fans.",
-                text: "Texto completo de la noticia...",
-                readingtime: "3 min",
-                banner: "/banners/news1.jpg",
-                date: "2024-05-20",
-            },
-            {
-                id: 2,
-                title: "Actualización de Elden Ring",
-                shortsummary: "Se añade un nuevo jefe al DLC.",
-                text: "Texto completo de la noticia...",
-                readingtime: "2 min",
-                banner: "/banners/news2.jpg",
-                date: "2024-05-15",
-            },
-            {
-                id: 3,
-                title: "Actualización de Elden Ring",
-                shortsummary: "Se añade un nuevo jefe al DLC.",
-                text: "Texto completo de la noticia...",
-                readingtime: "2 min",
-                banner: "/banners/news2.jpg",
-                date: "2024-05-15",
-            },
-            {
-                id: 4,
-                title: "Actualización de Elden Ring",
-                shortsummary: "Se añade un nuevo jefe al DLC.",
-                text: "Texto completo de la noticia...",
-                readingtime: "2 min",
-                banner: "/banners/news2.jpg",
-                date: "2024-05-15",
-            },
-            {
-                id: 5,
-                title: "Actualización de Elden Ring",
-                shortsummary: "Se añade un nuevo jefe al DLC.",
-                text: "Texto completo de la noticia...",
-                readingtime: "2 min",
-                banner: "/banners/news2.jpg",
-                date: "2024-05-15",
-            },
-            // más noticias...
-        ];
-        setNewsList(fakeNews);
-        setFilteredNews(fakeNews);
-    }, []);
+        const fetchNews = async () => {
+            try {
+                const response = await fetch(`${BACKEND_URL}/noticias/admin`);
+                if (!response.ok) throw new Error("Error al obtener noticias");
+
+                const data = await response.json();
+
+                const parsed: News[] = data.map((n: any) => ({
+                    id: n.id,
+                    title: n.titulo,
+                    shortsummary: n.resumen,
+                    text: n.texto,
+                    readingtime: `${n.tiempoLectura} min`,
+                    banner: n.foto?.url ?? "",
+                    date: n.fechaPub ? n.fechaPub.substring(0, 10) : ""
+                }));
+
+                setNewsList(parsed);
+                setFilteredNews(parsed);
+            } catch (error) {
+                console.error("❌ Error al cargar noticias admin:", error);
+            }
+        };
+
+        fetchNews();
+    }, [BACKEND_URL]);
 
     useEffect(() => {
         const filtered = newsList.filter((n) => {
-            return (
-                (filters.title === "" ||
-                    n.title
-                        .toLowerCase()
-                        .includes(filters.title.toLowerCase())) &&
-                (filters.date === "" || n.date >= filters.date)
-            );
+            const pasaTitulo =
+                filters.title === "" ||
+                n.title.toLowerCase().includes(filters.title.toLowerCase());
+
+            const pasaFecha =
+                filters.date === "" || (n.date && n.date >= filters.date);
+
+            return pasaTitulo && pasaFecha;
         });
+
         setFilteredNews(filtered);
     }, [filters, newsList]);
 
@@ -133,25 +99,93 @@ export default function AdminNews() {
         setMostrarModalConfirmacion(true);
     };
 
-    const deleteNews = (id: number) => {
-        const updated = newsList.filter((n) => n.id !== id);
-        setNewsList(updated);
+    const deleteNews = async (id: number) => {
+        try {
+            const response = await fetch(`${BACKEND_URL}/noticias/${id}`, {
+                method: "DELETE",
+            });
+
+            if (response.ok) {
+                const updated = newsList.filter((n) => n.id !== id);
+                setNewsList(updated);
+            } else {
+                console.error("Error al eliminar noticia");
+            }
+        } catch (error) {
+            console.error("Error al eliminar noticia:", error);
+        }
     };
 
-    const updateNews = (updatedItem: News) => {
-        const updated = newsList.map((n) =>
-            n.id === updatedItem.id ? updatedItem : n
-        );
-        setNewsList(updated);
-        setEditingNews(null);
+    const updateNews = async (updatedItem: News) => {
+        try {
+            const body = {
+                titulo: updatedItem.title,
+                resumen: updatedItem.shortsummary,
+                texto: updatedItem.text,
+                slug: updatedItem.title.toLowerCase().replace(/\s+/g, "-"),
+                tiempoLectura: parseInt(updatedItem.readingtime),
+                fechaPub: updatedItem.date,
+                fotoUrl: updatedItem.banner,
+            };
+
+            const response = await fetch(`${BACKEND_URL}/noticias/${updatedItem.id}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body),
+            });
+
+            if (response.ok) {
+                const updated = newsList.map((n) =>
+                    n.id === updatedItem.id ? updatedItem : n
+                );
+                setNewsList(updated);
+                setEditingNews(null);
+            } else {
+                console.error("Error al actualizar noticia");
+            }
+        } catch (error) {
+            console.error("Error al actualizar noticia:", error);
+        }
     };
 
-    const createNews = (newItem: News) => {
-        const newId = Math.max(...newsList.map((n) => n.id), 0) + 1;
-        const withId = { ...newItem, id: newId };
-        const updated = [...newsList, withId];
-        setNewsList(updated);
-        setCreatingNew(false);
+    const createNews = async (newItem: News) => {
+        try {
+            const body = {
+                titulo: newItem.title,
+                resumen: newItem.shortsummary,
+                texto: newItem.text,
+                slug: newItem.title.toLowerCase().replace(/\s+/g, "-"),
+                tiempoLectura: parseInt(newItem.readingtime),
+                fechaPub: newItem.date,
+                fotoUrl: newItem.banner,
+            };
+
+            const response = await fetch(`${BACKEND_URL}/noticias`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body),
+            });
+
+            if (response.ok) {
+                const nueva = await response.json();
+                const nuevaNews: News = {
+                    id: nueva.id,
+                    title: nueva.titulo,
+                    shortsummary: nueva.resumen,
+                    text: nueva.texto,
+                    readingtime: `${nueva.tiempoLectura} min`,
+                    banner: nueva.foto.url,
+                    date: nueva.fechaPub.substring(0, 10),
+                };
+
+                setNewsList([...newsList, nuevaNews]);
+                setCreatingNew(false);
+            } else {
+                console.error("Error al crear noticia");
+            }
+        } catch (error) {
+            console.error("Error al crear noticia:", error);
+        }
     };
 
     return (
@@ -164,7 +198,6 @@ export default function AdminNews() {
         >
             <h1>Gestión de Noticias</h1>
 
-            {/* Filtros + Agregar */}
             <div className={styles.filtersRow}>
                 <div className={styles.filterSection}>
                     <div className={styles.filterContainer}>
@@ -196,14 +229,13 @@ export default function AdminNews() {
                 </button>
             </div>
 
-            {/* Tabla */}
             <table className={styles.newsTable}>
                 <thead>
                     <tr>
                         <th>Título</th>
                         <th>Fecha</th>
                         <th>Tiempo de Lectura</th>
-                        <th></th> {/* Para los botones de acción */}
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -219,22 +251,14 @@ export default function AdminNews() {
                                         className={styles.editButton}
                                         aria-label={`Editar ${item.title}`}
                                     >
-                                        <img
-                                            src="./pencil.svg"
-                                            alt="Editar icon"
-                                        />
+                                        <img src="./pencil.svg" alt="Editar icon" />
                                     </button>
                                     <button
-                                        onClick={() =>
-                                            confirmarEliminacion(item.id)
-                                        }
+                                        onClick={() => confirmarEliminacion(item.id)}
                                         className={styles.deleteButton}
                                         aria-label={`Eliminar ${item.title}`}
                                     >
-                                        <img
-                                            src="./trash-icon.svg"
-                                            alt="Basura icon"
-                                        />
+                                        <img src="./trash-icon.svg" alt="Basura icon" />
                                     </button>
                                 </div>
                             </td>
@@ -243,7 +267,6 @@ export default function AdminNews() {
                 </tbody>
             </table>
 
-            {/* Editor flotante para editar */}
             {editingNews && (
                 <AdminEditNewsCard
                     news={editingNews}
@@ -253,7 +276,6 @@ export default function AdminNews() {
                 />
             )}
 
-            {/* Editor flotante para crear */}
             {creatingNew && (
                 <AdminEditNewsCard
                     news={{
@@ -261,7 +283,7 @@ export default function AdminNews() {
                         title: "",
                         shortsummary: "",
                         text: "",
-                        readingtime: "1 min",
+                        readingtime: "1",
                         banner: "",
                         date: new Date().toISOString().split("T")[0],
                     }}
