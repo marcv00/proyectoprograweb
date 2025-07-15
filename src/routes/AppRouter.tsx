@@ -53,7 +53,8 @@ export function AppRouter() {
                     />
                     <Route path="/mis-juegos" element={<MisJuegosPage />} />
                     <Route path="/game/:slug" element={<GameDetailPage />} />
-                    <Route path="/checkout" element={<CheckoutPage />} />
+                    <Route path="/pago" element={<CheckoutPage />} />
+                    <Route path="/checkout" element={<PurchaseConfirmationPage />} />
                     <Route
                         path="/config/editar-perfil"
                         element={<EditProfilePage />}
@@ -72,10 +73,7 @@ export function AppRouter() {
                     path="/set-new-password"
                     element={<SetNewPasswordPage />}
                 />
-                <Route
-                    path="/purchase-confirmation"
-                    element={<PurchaseConfirmationPage />}
-                />
+                
                 <Route path="*" element={<NotFoundPage />} />
 
                 {/* Layout para administrador */}
