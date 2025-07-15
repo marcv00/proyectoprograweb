@@ -27,6 +27,7 @@ import AdminUsers from "../pages/admin/AdminUsers";
 import AdminGames from "../pages/admin/AdminGames";
 import AdminNews from "../pages/admin/AdminNews";
 import AdminStats from "../pages/admin/AdminStats";
+import AgregarResenaPage from "../pages/game/AgregarResenaPage";
 
 import NotFoundPage from "../pages/NotFoundPage";
 
@@ -55,6 +56,7 @@ export function AppRouter() {
                     <Route path="/game/:slug" element={<GameDetailPage />} />
                     <Route path="/pago" element={<CheckoutPage />} />
                     <Route path="/checkout" element={<PurchaseConfirmationPage />} />
+                    <Route path="/game/:slug/agregar-resena" element={<AgregarResenaPage />} />
                     <Route
                         path="/config/editar-perfil"
                         element={<EditProfilePage />}
