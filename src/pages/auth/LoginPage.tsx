@@ -43,6 +43,7 @@ export default function LoginPage() {
 
             // Guarda el token para futuras peticiones protegidas
             localStorage.setItem("token", token);
+            localStorage.setItem("usuarioId", usuario.id.toString());
 
             // Llama a tu context con rol y nombre
             login(usuario.rol.toLowerCase(), usuario.nombre, token);

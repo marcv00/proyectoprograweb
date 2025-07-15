@@ -51,7 +51,7 @@ export default function MisJuegosPage() {
     if (cargando) return <p className={styles.estado}>Cargando juegos...</p>;
 
     if (juegos.length === 0)
-        return <p className={styles.estado}>No tenes juegos registrados.</p>;
+        return <p className={styles.estado}>No tenés juegos registrados.</p>;
 
     return (
         <div className={styles.container}>
@@ -69,37 +69,37 @@ export default function MisJuegosPage() {
                         : null;
 
                     return (
-                        <Link
-                            to={`/game/${juego.slug}`}
-                            key={juego.id}
-                            className={styles.card}
-                        >
-                            <img
-                                src={juego.fotos[0]?.url || "/placeholder.jpg"}
-                                alt={juego.titulo}
-                                className={styles.imagen}
-                            />
-                            <h3 className={styles.nombre}>{juego.titulo}</h3>
-                            <p className={styles.precio}>
-                                {tieneDescuento ? (
-                                    <>
-                                        <span className={styles.oldPrice}>
-                                            S/ {juego.precio.toFixed(2)}
-                                        </span>{" "}
-                                        <span
-                                            className={styles.discountedPrice}
-                                        >
-                                            S/ {precioDescontado}
-                                        </span>
-                                    </>
-                                ) : (
-                                    <>S/ {juego.precio.toFixed(2)}</>
-                                )}
-                            </p>
-                                <Link to={`/game/${juego.slug}/agregar-resena`} className={styles.botonResena}>
+                        <div key={juego.id} className={styles.card}>
+                            <Link to={`/game/${juego.slug}`}>
+                                <img
+                                    src={juego.fotos[0]?.url || "/placeholder.jpg"}
+                                    alt={juego.titulo}
+                                    className={styles.imagen}
+                                />
+                                <h3 className={styles.nombre}>{juego.titulo}</h3>
+                                <p className={styles.precio}>
+                                    {tieneDescuento ? (
+                                        <>
+                                            <span className={styles.oldPrice}>
+                                                S/ {juego.precio.toFixed(2)}
+                                            </span>{" "}
+                                            <span className={styles.discountedPrice}>
+                                                S/ {precioDescontado}
+                                            </span>
+                                        </>
+                                    ) : (
+                                        <>S/ {juego.precio.toFixed(2)}</>
+                                    )}
+                                </p>
+                            </Link>
+
+                            <Link
+                                to={`/game/${juego.slug}/agregar-resena`}
+                                className={styles.botonResena}
+                            >
                                 Agregar Reseña
                             </Link>
-                        </Link>
+                        </div>
                     );
                 })}
             </div>
