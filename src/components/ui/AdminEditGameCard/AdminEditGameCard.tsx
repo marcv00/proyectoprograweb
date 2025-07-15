@@ -5,6 +5,7 @@ type Game = {
     id: number;
     title: string;
     description: string;
+    urlTrailer?: string; // Optional field for game trailer URL
     category: string;
     releaseDate: string;
     price: number;
@@ -22,6 +23,7 @@ const defaultNewGame: Game = {
     id: Date.now(),
     title: "",
     description: "",
+    urlTrailer: "", // Default empty string for trailer URL
     category: "RPG",
     releaseDate: new Date().toISOString().split("T")[0],
     price: 0,
@@ -39,7 +41,9 @@ export default function AdminEditGameCard({
     );
 
     const handleChange = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+        e: React.ChangeEvent<
+            HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+        >
     ) => {
         const { name, value } = e.target;
         setFormData((prev) => ({
@@ -97,7 +101,14 @@ export default function AdminEditGameCard({
                         <option value="Multijugador">Multijugador</option>
                     </select>
                 </label>
-
+                <label>
+                    Url del trailer:
+                    <input
+                        name="urlTrailer"
+                        value={formData.urlTrailer}
+                        onChange={handleChange}
+                    />
+                </label>
                 <label>
                     Fecha de lanzamiento:
                     <input

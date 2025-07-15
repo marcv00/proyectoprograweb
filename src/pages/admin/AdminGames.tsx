@@ -6,6 +6,7 @@ type Game = {
     id: number;
     title: string;
     description: string;
+    urlTrailer?: string;
     category: string;
     releaseDate: string;
     price: number;
@@ -24,7 +25,8 @@ export default function AdminGames() {
     const [editingGame, setEditingGame] = useState<Game | null>(null);
     const [creatingNewGame, setCreatingNewGame] = useState<boolean>(false);
     const [juegoAEliminar, setJuegoAEliminar] = useState<number | null>(null);
-    const [mostrarModalConfirmacion, setMostrarModalConfirmacion] = useState(false);
+    const [mostrarModalConfirmacion, setMostrarModalConfirmacion] =
+        useState(false);
 
     const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -45,8 +47,10 @@ export default function AdminGames() {
     useEffect(() => {
         const filtered = games.filter((game) => {
             return (
-                (filters.category === "" || game.category === filters.category) &&
-                (filters.releaseDate === "" || game.releaseDate >= filters.releaseDate) &&
+                (filters.category === "" ||
+                    game.category === filters.category) &&
+                (filters.releaseDate === "" ||
+                    game.releaseDate >= filters.releaseDate) &&
                 game.price <= filters.maxPrice
             );
         });
@@ -57,7 +61,9 @@ export default function AdminGames() {
         const updateSidebarWidth = () => {
             const sidebar = document.querySelector(".sidebar");
             if (sidebar) {
-                const width = sidebar.classList.contains("collapsed") ? 60 : 220;
+                const width = sidebar.classList.contains("collapsed")
+                    ? 60
+                    : 220;
                 setSidebarWidth(width);
             }
         };
@@ -112,15 +118,19 @@ export default function AdminGames() {
                 title: updatedGame.title,
                 description: updatedGame.description,
                 price: updatedGame.price,
+                urlTrailer: updatedGame.urlTrailer,
                 releaseDate: updatedGame.releaseDate,
                 discount: updatedGame.discount ?? 0,
                 category: updatedGame.category,
             };
-            const response = await fetch(`${BACKEND_URL}/juegos/admin/${updatedGame.id}`, {
-                method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(body),
-            });
+            const response = await fetch(
+                `${BACKEND_URL}/juegos/admin/${updatedGame.id}`,
+                {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(body),
+                }
+            );
 
             if (response.ok) {
                 const updated = games.map((g) =>
@@ -142,6 +152,7 @@ export default function AdminGames() {
                 title: newGame.title,
                 description: newGame.description,
                 price: newGame.price,
+                urlTrailer: newGame.urlTrailer,
                 releaseDate: newGame.releaseDate,
                 discount: newGame.discount ?? 0,
                 category: newGame.category,
@@ -187,7 +198,11 @@ export default function AdminGames() {
                 <div className={styles.filterSection}>
                     <div className={styles.filterContainer}>
                         <label htmlFor="category">Categoría:</label>
-                        <select name="category" onChange={handleFilterChange} id="category">
+                        <select
+                            name="category"
+                            onChange={handleFilterChange}
+                            id="category"
+                        >
                             <option value="">Todos</option>
                             <option value="Aventura">Aventura</option>
                             <option value="Acción">Acción</option>
@@ -204,8 +219,14 @@ export default function AdminGames() {
                         </select>
                     </div>
                     <div className={styles.filterContainer}>
-                        <label htmlFor="releaseDate">Fecha de Lanzamiento</label>
-                        <input type="date" name="releaseDate" onChange={handleFilterChange} />
+                        <label htmlFor="releaseDate">
+                            Fecha de Lanzamiento
+                        </label>
+                        <input
+                            type="date"
+                            name="releaseDate"
+                            onChange={handleFilterChange}
+                        />
                     </div>
                     <div className={styles.filterContainer}>
                         <label htmlFor="maxPrice">Precio Máximo $</label>
@@ -238,7 +259,11 @@ export default function AdminGames() {
                 </thead>
                 <tbody>
                     {filteredGames.map((game) => (
-                        <tr key={game.id} className={styles.gameRow} tabIndex={0}>
+                        <tr
+                            key={game.id}
+                            className={styles.gameRow}
+                            tabIndex={0}
+                        >
                             <td>{game.title}</td>
                             <td>{game.category}</td>
                             <td>{game.releaseDate}</td>
@@ -250,14 +275,22 @@ export default function AdminGames() {
                                         className={styles.editButton}
                                         aria-label={`Editar ${game.title}`}
                                     >
-                                        <img src="./pencil.svg" alt="Editar icon" />
+                                        <img
+                                            src="./pencil.svg"
+                                            alt="Editar icon"
+                                        />
                                     </button>
                                     <button
-                                        onClick={() => confirmarEliminacion(game.id)}
+                                        onClick={() =>
+                                            confirmarEliminacion(game.id)
+                                        }
                                         className={styles.deleteButton}
                                         aria-label={`Eliminar ${game.title}`}
                                     >
-                                        <img src="./trash-icon.svg" alt="Basura icon" />
+                                        <img
+                                            src="./trash-icon.svg"
+                                            alt="Basura icon"
+                                        />
                                     </button>
                                 </div>
                             </td>
