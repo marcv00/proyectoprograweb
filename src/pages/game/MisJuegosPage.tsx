@@ -96,6 +96,9 @@ export default function MisJuegosPage() {
                                     <>S/ {juego.precio.toFixed(2)}</>
                                 )}
                             </p>
+                                <Link to={`/game/${juego.slug}/agregar-resena`} className={styles.botonResena}>
+                                Agregar Reseña
+                            </Link>
                         </Link>
                     );
                 })}
