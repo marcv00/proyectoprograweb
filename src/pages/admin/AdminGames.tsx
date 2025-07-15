@@ -5,6 +5,7 @@ import AdminEditGameCard from "../../components/ui/AdminEditGameCard/AdminEditGa
 type Game = {
     id: number;
     title: string;
+    description: string;
     category: string;
     releaseDate: string;
     price: number;
@@ -12,120 +13,51 @@ type Game = {
 };
 
 export default function AdminGames() {
-    const [sidebarWidth, setSidebarWidth] = useState(220); // Para guardar la anchura del sidebar (abierto y cerrado)
+    const [sidebarWidth, setSidebarWidth] = useState(220);
     const [games, setGames] = useState<Game[]>([]);
     const [filteredGames, setFilteredGames] = useState<Game[]>([]);
     const [filters, setFilters] = useState({
         category: "",
         releaseDate: "",
-        maxPrice: 100,
+        maxPrice: 300,
     });
     const [editingGame, setEditingGame] = useState<Game | null>(null);
     const [creatingNewGame, setCreatingNewGame] = useState<boolean>(false);
-
-    // Estado para manejar el modal de confirmación
     const [juegoAEliminar, setJuegoAEliminar] = useState<number | null>(null);
-    const [mostrarModalConfirmacion, setMostrarModalConfirmacion] =
-        useState(false);
+    const [mostrarModalConfirmacion, setMostrarModalConfirmacion] = useState(false);
+
+    const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
     useEffect(() => {
-        const fakeData: Game[] = [
-            {
-                id: 1,
-                title: "Elden Ring",
-                category: "RPG",
-                releaseDate: "2022-02-25",
-                price: 59.99,
-            },
-            {
-                id: 2,
-                title: "FIFA 24",
-                category: "Sports",
-                releaseDate: "2023-09-29",
-                price: 69.99,
-            },
-            {
-                id: 3,
-                title: "The Witcher 3",
-                category: "RPG",
-                releaseDate: "2015-05-19",
-                price: 39.99,
-            },
-            {
-                id: 4,
-                title: "Call of Duty: Modern Warfare II",
-                category: "Shooter",
-                releaseDate: "2022-10-28",
-                price: 69.99,
-            },
-            {
-                id: 5,
-                title: "Minecraft",
-                category: "Sandbox",
-                releaseDate: "2011-11-18",
-                price: 26.95,
-            },
-            {
-                id: 6,
-                title: "Cyberpunk 2077",
-                category: "RPG",
-                releaseDate: "2020-12-10",
-                price: 49.99,
-            },
-            {
-                id: 7,
-                title: "Hogwarts Legacy",
-                category: "Adventure",
-                releaseDate: "2023-02-10",
-                price: 59.99,
-            },
-            {
-                id: 8,
-                title: "Gran Turismo 7",
-                category: "Racing",
-                releaseDate: "2022-03-04",
-                price: 69.99,
-            },
-            {
-                id: 9,
-                title: "Animal Crossing: New Horizons",
-                category: "Simulation",
-                releaseDate: "2020-03-20",
-                price: 59.99,
-            },
-            {
-                id: 10,
-                title: "Fortnite",
-                category: "Battle Royale",
-                releaseDate: "2017-07-21",
-                price: 0.0,
-            },
-        ];
-        setGames(fakeData);
-        setFilteredGames(fakeData);
-    }, []);
+        const fetchGames = async () => {
+            try {
+                const response = await fetch(`${BACKEND_URL}/juegos/admin`);
+                const data = await response.json();
+                setGames(data);
+                setFilteredGames(data);
+            } catch (error) {
+                console.error("Error al cargar juegos:", error);
+            }
+        };
+        fetchGames();
+    }, [BACKEND_URL]);
 
     useEffect(() => {
         const filtered = games.filter((game) => {
             return (
-                (filters.category === "" ||
-                    game.category === filters.category) &&
-                (filters.releaseDate === "" ||
-                    game.releaseDate >= filters.releaseDate) &&
+                (filters.category === "" || game.category === filters.category) &&
+                (filters.releaseDate === "" || game.releaseDate >= filters.releaseDate) &&
                 game.price <= filters.maxPrice
             );
         });
         setFilteredGames(filtered);
     }, [filters, games]);
 
-    // Para detectar abrir y cerrar de sidebar
     useEffect(() => {
         const updateSidebarWidth = () => {
             const sidebar = document.querySelector(".sidebar");
             if (sidebar) {
-                const width = sidebar.classList.contains("collapsed")
-                    ? 60
-                    : 220;
+                const width = sidebar.classList.contains("collapsed") ? 60 : 220;
                 setSidebarWidth(width);
             }
         };
@@ -140,7 +72,6 @@ export default function AdminGames() {
         }
 
         updateSidebarWidth();
-
         return () => observer.disconnect();
     }, []);
 
@@ -159,25 +90,87 @@ export default function AdminGames() {
         setMostrarModalConfirmacion(true);
     };
 
-    const deleteGame = (id: number) => {
-        const updated = games.filter((g) => g.id !== id);
-        setGames(updated);
+    const deleteGame = async (id: number) => {
+        try {
+            const response = await fetch(`${BACKEND_URL}/juegos/admin/${id}`, {
+                method: "DELETE",
+            });
+            if (response.ok) {
+                const updated = games.filter((g) => g.id !== id);
+                setGames(updated);
+            } else {
+                console.error("Error al eliminar juego");
+            }
+        } catch (error) {
+            console.error("Error al eliminar juego:", error);
+        }
     };
 
-    const updateGame = (updatedGame: Game) => {
-        const updated = games.map((g) =>
-            g.id === updatedGame.id ? updatedGame : g
-        );
-        setGames(updated);
-        setEditingGame(null);
+    const updateGame = async (updatedGame: Game) => {
+        try {
+            const body = {
+                title: updatedGame.title,
+                description: updatedGame.description,
+                price: updatedGame.price,
+                releaseDate: updatedGame.releaseDate,
+                discount: updatedGame.discount ?? 0,
+                category: updatedGame.category,
+            };
+            const response = await fetch(`${BACKEND_URL}/juegos/admin/${updatedGame.id}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body),
+            });
+
+            if (response.ok) {
+                const updated = games.map((g) =>
+                    g.id === updatedGame.id ? updatedGame : g
+                );
+                setGames(updated);
+                setEditingGame(null);
+            } else {
+                console.error("Error al actualizar juego");
+            }
+        } catch (error) {
+            console.error("Error al actualizar juego:", error);
+        }
     };
 
-    const createGame = (newGame: Game) => {
-        const newId = Math.max(...games.map((g) => g.id), 0) + 1;
-        const gameWithId = { ...newGame, id: newId };
-        const updated = [...games, gameWithId];
-        setGames(updated);
-        setCreatingNewGame(false);
+    const createGame = async (newGame: Game) => {
+        try {
+            const body = {
+                title: newGame.title,
+                description: newGame.description,
+                price: newGame.price,
+                releaseDate: newGame.releaseDate,
+                discount: newGame.discount ?? 0,
+                category: newGame.category,
+            };
+            const response = await fetch(`${BACKEND_URL}/juegos/admin`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body),
+            });
+
+            if (response.ok) {
+                const nuevo = await response.json();
+                const nuevoJuego: Game = {
+                    id: nuevo.id,
+                    title: nuevo.titulo,
+                    description: nuevo.descripcion,
+                    price: nuevo.precio,
+                    discount: nuevo.porcentajeOferta ?? 0,
+                    releaseDate: nuevo.fechaLanzamiento.substring(0, 10),
+                    category: newGame.category,
+                };
+                setGames([...games, nuevoJuego]);
+                setCreatingNewGame(false);
+            } else {
+                console.error("Error al crear juego");
+            }
+        } catch (error) {
+            console.error("Error al crear juego:", error);
+        }
     };
 
     return (
@@ -190,46 +183,37 @@ export default function AdminGames() {
         >
             <h1>Gestión de Juegos</h1>
 
-            {/* Filtros + Agregar */}
             <div className={styles.filtersRow}>
                 <div className={styles.filterSection}>
                     <div className={styles.filterContainer}>
                         <label htmlFor="category">Categoría:</label>
-                        <select
-                            name="category"
-                            onChange={handleFilterChange}
-                            id="category"
-                        >
+                        <select name="category" onChange={handleFilterChange} id="category">
                             <option value="">Todos</option>
+                            <option value="Aventura">Aventura</option>
+                            <option value="Acción">Acción</option>
+                            <option value="Estrategia">Estrategia</option>
                             <option value="RPG">RPG</option>
-                            <option value="Sports">Sports</option>
+                            <option value="Simulación">Simulación</option>
+                            <option value="Deportes">Deportes</option>
+                            <option value="Terror">Terror</option>
+                            <option value="Indie">Indie</option>
+                            <option value="Puzzle">Puzzle</option>
                             <option value="Shooter">Shooter</option>
-                            <option value="Adventure">Adventure</option>
-                            <option value="Simulation">Simulation</option>
-                            <option value="Sandbox">Sandbox</option>
-                            <option value="Racing">Racing</option>
-                            <option value="Battle Royale">Battle Royale</option>
+                            <option value="Supervivencia">Supervivencia</option>
+                            <option value="Multijugador">Multijugador</option>
                         </select>
                     </div>
                     <div className={styles.filterContainer}>
-                        <label htmlFor="releaseDate">
-                            Fecha de Lanzamiento
-                        </label>
-                        <input
-                            type="date"
-                            name="releaseDate"
-                            onChange={handleFilterChange}
-                            id="releaseDate"
-                        />
+                        <label htmlFor="releaseDate">Fecha de Lanzamiento</label>
+                        <input type="date" name="releaseDate" onChange={handleFilterChange} />
                     </div>
                     <div className={styles.filterContainer}>
                         <label htmlFor="maxPrice">Precio Máximo $</label>
                         <input
-                            type="text"
+                            type="number"
                             name="maxPrice"
                             placeholder="100"
                             onChange={handleFilterChange}
-                            id="maxPrice"
                         />
                     </div>
                 </div>
@@ -242,7 +226,6 @@ export default function AdminGames() {
                 </button>
             </div>
 
-            {/* Tabla de juegos */}
             <table className={styles.gamesTable}>
                 <thead>
                     <tr>
@@ -250,15 +233,12 @@ export default function AdminGames() {
                         <th>Categoría</th>
                         <th>Lanzamiento</th>
                         <th>Precio</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     {filteredGames.map((game) => (
-                        <tr
-                            key={game.id}
-                            className={styles.gameRow}
-                            tabIndex={0}
-                        >
+                        <tr key={game.id} className={styles.gameRow} tabIndex={0}>
                             <td>{game.title}</td>
                             <td>{game.category}</td>
                             <td>{game.releaseDate}</td>
@@ -267,25 +247,17 @@ export default function AdminGames() {
                                 <div className={styles.actions}>
                                     <button
                                         onClick={() => setEditingGame(game)}
-                                        aria-label={`Editar ${game.title}`}
                                         className={styles.editButton}
+                                        aria-label={`Editar ${game.title}`}
                                     >
-                                        <img
-                                            src="./pencil.svg"
-                                            alt="Editar icon"
-                                        />
+                                        <img src="./pencil.svg" alt="Editar icon" />
                                     </button>
                                     <button
-                                        onClick={() =>
-                                            confirmarEliminacion(game.id)
-                                        }
+                                        onClick={() => confirmarEliminacion(game.id)}
                                         className={styles.deleteButton}
                                         aria-label={`Eliminar ${game.title}`}
                                     >
-                                        <img
-                                            src="./trash-icon.svg"
-                                            alt="Basura icon"
-                                        />
+                                        <img src="./trash-icon.svg" alt="Basura icon" />
                                     </button>
                                 </div>
                             </td>
@@ -294,7 +266,6 @@ export default function AdminGames() {
                 </tbody>
             </table>
 
-            {/* Editor flotante para editar */}
             {editingGame && (
                 <AdminEditGameCard
                     game={editingGame}
@@ -304,12 +275,12 @@ export default function AdminGames() {
                 />
             )}
 
-            {/* Editor flotante para crear */}
             {creatingNewGame && (
                 <AdminEditGameCard
                     game={{
                         id: 0,
                         title: "",
+                        description: "",
                         category: "RPG",
                         releaseDate: new Date().toISOString().split("T")[0],
                         price: 0,

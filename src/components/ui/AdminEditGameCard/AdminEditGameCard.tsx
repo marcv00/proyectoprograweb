@@ -1,32 +1,31 @@
 import { useState } from "react";
 import styles from "./AdminEditGameCard.module.css";
 
-// Definimos el tipo 'Game' con las propiedades que va a tener un juego
 type Game = {
     id: number;
     title: string;
+    description: string;
     category: string;
     releaseDate: string;
     price: number;
-    discount?: number; // Opcional, puede no estar presente
+    discount?: number;
 };
 
-// Props que espera el componente
 type Props = {
-    game: Game; // Juego original (para editar)
-    onSave: (updatedGame: Game) => void; // Función a ejecutar al guardar
-    onCancel: () => void; // Función a ejecutar al cancelar
-    create: boolean | null; // Indica si estamos creando un nuevo juego o editando uno existente
+    game: Game;
+    onSave: (updatedGame: Game) => void;
+    onCancel: () => void;
+    create: boolean | null;
 };
 
-// Este objeto es el modelo base para un juego nuevo
 const defaultNewGame: Game = {
-    id: Date.now(), // ID temporal generado con la hora actual (esto normalmente lo maneja el backend)
-    title: "", // Campo vacío al inicio
-    category: "RPG", // Categoría por defecto
-    releaseDate: new Date().toISOString().split("T")[0], // Fecha actual en formato YYYY-MM-DD
-    price: 0, // Precio inicial en 0
-    discount: 0, // Sin descuento al principio
+    id: Date.now(),
+    title: "",
+    description: "",
+    category: "RPG",
+    releaseDate: new Date().toISOString().split("T")[0],
+    price: 0,
+    discount: 0,
 };
 
 export default function AdminEditGameCard({
@@ -35,21 +34,16 @@ export default function AdminEditGameCard({
     onCancel,
     create,
 }: Props) {
-    // Estado del formulario, depende si estamos creando o editando
     const [formData, setFormData] = useState<Game>(
         create ? defaultNewGame : { ...game }
     );
 
-    // Esta función se ejecuta cuando el usuario cambia cualquier campo del formulario
     const handleChange = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+        e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
     ) => {
         const { name, value } = e.target;
-
-        // Actualizamos el estado del formulario
         setFormData((prev) => ({
             ...prev,
-            // Convertimos los campos numéricos a número real (float)
             [name]:
                 name === "price" || name === "discount"
                     ? parseFloat(value)
@@ -57,13 +51,11 @@ export default function AdminEditGameCard({
         }));
     };
 
-    // Renderizado del formulario
     return (
         <div className={styles.overlay}>
             <div className={styles.card}>
                 <h2>{create ? "Crear Juego" : "Editar Juego"}</h2>
 
-                {/* Campo: Título del juego */}
                 <label>
                     Título:
                     <input
@@ -73,7 +65,17 @@ export default function AdminEditGameCard({
                     />
                 </label>
 
-                {/* Campo: Categoría del juego */}
+                <label>
+                    Descripción:
+                    <textarea
+                        name="description"
+                        value={formData.description}
+                        onChange={handleChange}
+                        rows={4}
+                        placeholder="Agrega una descripción del juego"
+                    />
+                </label>
+
                 <label>
                     Categoría:
                     <select
@@ -81,14 +83,18 @@ export default function AdminEditGameCard({
                         value={formData.category}
                         onChange={handleChange}
                     >
+                        <option value="Aventura">Aventura</option>
+                        <option value="Acción">Acción</option>
+                        <option value="Estrategia">Estrategia</option>
                         <option value="RPG">RPG</option>
-                        <option value="Sports">Sports</option>
+                        <option value="Simulación">Simulación</option>
+                        <option value="Deportes">Deportes</option>
+                        <option value="Terror">Terror</option>
+                        <option value="Indie">Indie</option>
+                        <option value="Puzzle">Puzzle</option>
                         <option value="Shooter">Shooter</option>
-                        <option value="Adventure">Adventure</option>
-                        <option value="Simulation">Simulation</option>
-                        <option value="Racing">Racing</option>
-                        <option value="Sandbox">Sandbox</option>
-                        <option value="Battle Royale">Battle Royale</option>
+                        <option value="Supervivencia">Supervivencia</option>
+                        <option value="Multijugador">Multijugador</option>
                     </select>
                 </label>
 
@@ -102,7 +108,6 @@ export default function AdminEditGameCard({
                     />
                 </label>
 
-                {/* Campo: Precio del juego */}
                 <label>
                     Precio:
                     <input
@@ -113,7 +118,6 @@ export default function AdminEditGameCard({
                     />
                 </label>
 
-                {/* Campo: Descuento del juego (opcional) */}
                 <label>
                     Descuento (%):
                     <input
@@ -126,7 +130,6 @@ export default function AdminEditGameCard({
                     />
                 </label>
 
-                {/* Botones de acción: Guardar o Cancelar */}
                 <div className={styles.actions}>
                     <button onClick={() => onSave(formData)}>
                         {create ? "Crear" : "Guardar"}
